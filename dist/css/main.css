@@ -1,0 +1,224 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+body {
+  font-family: 'Press Start 2P', cursive;
+  background: wheat; }
+
+.btn {
+  width: 200px;
+  height: 50px;
+  background: white;
+  border: 3px black solid;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 2;
+  box-shadow: 2px 3px 3px;
+  cursor: pointer;
+  box-sizing: border-box;
+  border-radius: 5px;
+  top: 0;
+  left: 0; }
+  .btn:active {
+    background: chocolate;
+    box-shadow: none; }
+
+.field-button {
+  border: 3px black solid;
+  border-radius: 5px;
+  padding: 0.5rem;
+  background: white;
+  box-shadow: 2px 3px 3px; }
+  .field-button:hover {
+    background: navajowhite; }
+  .field-button:active {
+    box-shadow: none;
+    background: chocolate; }
+
+.menu-box {
+  box-sizing: border-box;
+  border: 2px black solid;
+  border-radius: 5px;
+  background: white; }
+
+.flex-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.flex-row {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center; }
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center; }
+
+@keyframes flashing {
+  50% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+#main-container {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  justify-content: center; }
+  #main-container #main-content {
+    width: 60%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 5fr 2fr; }
+
+#battle-box {
+  background: gainsboro;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  #battle-box #hp-and-name-box {
+    display: flex;
+    justify-content: space-between;
+    width: 600px;
+    font-size: 1rem; }
+    #battle-box #hp-and-name-box #hero-hp-mp-box {
+      display: flex; }
+    #battle-box #hp-and-name-box #enemy-hp-name-box {
+      display: flex; }
+  #battle-box #battle-field {
+    width: 600px;
+    height: 200px;
+    display: flex;
+    justify-content: space-between; }
+    #battle-box #battle-field #player-box {
+      background: steelblue;
+      width: 200px;
+      height: 100%;
+      position: relative; }
+      #battle-box #battle-field #player-box div {
+        background: black; }
+      #battle-box #battle-field #player-box #left-eye {
+        position: absolute;
+        height: 10px;
+        width: 10px;
+        top: 60px;
+        left: 60px; }
+    #battle-box #battle-field #enemy-box {
+      background: wheat;
+      width: 200px;
+      height: 100%;
+      position: relative; }
+      #battle-box #battle-field #enemy-box div {
+        background: black; }
+    #battle-box #battle-field .right-eye {
+      position: absolute;
+      height: 10px;
+      width: 10px;
+      top: 60px;
+      right: 60px; }
+    #battle-box #battle-field .left-eye {
+      position: absolute;
+      height: 10px;
+      width: 10px;
+      top: 60px;
+      left: 60px; }
+    #battle-box #battle-field .mouth {
+      position: absolute;
+      height: 10px;
+      width: 80px;
+      top: 120px;
+      left: 60px; }
+
+#message-box {
+  background: slategray;
+  display: flex;
+  border: 5px black solid;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  position: relative; }
+  #message-box #message {
+    color: black;
+    font-size: 1.5rem; }
+  #message-box #skip-arrow {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    animation-name: flashing;
+    animation-iteration-count: infinite;
+    animation-duration: 1s; }
+    #message-box #skip-arrow:hover {
+      cursor: pointer; }
+    #message-box #skip-arrow i {
+      width: 100%;
+      height: 100%;
+      font-size: 2.5rem; }
+  #message-box #command-list {
+    height: 100%;
+    width: 100%;
+    display: none;
+    align-items: center;
+    justify-content: space-around; }
+  #message-box #enemy-turn {
+    width: 400px;
+    display: none; }
+
+#field-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: wheat; }
+  #field-container #menu-screen {
+    width: 550px;
+    height: 550px;
+    box-sizing: border-box;
+    background: white;
+    border: 3px black solid;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(1, 3fr 2fr);
+    grid-template-rows: repeat(1, 3fr 2fr); }
+    #field-container #menu-screen #menu-item-box {
+      grid-column: 1 / span 2; }
+    #field-container #menu-screen #menu-hero-box #hero-img {
+      background: red;
+      width: 15rem;
+      height: 15rem; }
+    #field-container #menu-screen #menu-status-box {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr 2fr);
+      font-size: 0.8rem; }
+  #field-container #field {
+    background: slategray;
+    width: 550px;
+    height: 550px;
+    position: relative;
+    display: none; }
+    #field-container #field #character {
+      width: 50px;
+      height: 50px;
+      background: brown;
+      top: 500px;
+      left: 250px;
+      position: absolute;
+      transition: all 0.3s linear; }
+    #field-container #field #event-field {
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%; }
+  #field-container #field-menu-button {
+    margin-top: 1rem;
+    width: 550px;
+    height: 50px; }

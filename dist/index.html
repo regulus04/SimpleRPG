@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/dist/css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <title>RPG(simple ver.)</title>
+</head>
+<body> 
+  <!-- Battle -------------------------------->
+  <div id="main-container">
+    <div id="main-content">
+      <div id="battle-box">
+        <div id="hp-and-name-box">
+          <div id="hero-hp-mp-box">HP:<div id="hero-hp">100</div>MP:<div id="hero-mp">20</div></div>
+          <div id="enemy-hp-name-box">Name:<div id="enemy-name">?</div>HP:<div id="enemy-hp">?</div></div>
+        </div>
+        <!-- Battle Field -->
+        <div id="battle-field">
+          <!-- Battle-hero-Box -->
+          <div id="player-box">
+            <div class="left-eye"></div>
+            <div class="right-eye"></div>
+            <div class="mouth"></div>
+          </div>
+          <!-- Battle-Enemy-Box -->
+          <div id="enemy-box">
+            <div class="left-eye"></div>
+            <div class="right-eye"></div>
+            <div class="mouth"></div>
+          </div>
+
+        </div>
+      </div>
+      <!-- Message Box -->
+      <div id="message-box">
+        <div id="message">Message</div>
+        <div id="skip-arrow" class="flex-center">
+          <i class="fas fa-sort-down"></i>
+        </div>
+        <div id="command-list">
+          <div id="action-attack" class="btn">Attack</div>
+          <div id="action-defend" class="btn">Defend</div>
+          <div id="action-item" class="btn">Item</div>
+          <div id="action-run" class="btn">Run</div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Field ---------------------------------------->
+  <div id="field-container">
+    <!-- Menu Screen -->
+    <div id="menu-screen">
+      <!-- Menu char img -->
+      <div id="menu-hero-box" class="menu-box flex-center">
+        <div id="hero-img"></div>
+        <div id="menu-hero-name">Hero</div>
+      </div>
+      <!-- Menu Status -->
+      <div id="menu-status-box" class="menu-box">
+        <div id="menu-status-label" class="flex-column">
+          <div id="menu-label-lv">LV</div>
+          <div id="menu-label-hp">HP</div>
+          <div id="menu-label-mp">MP</div>
+          <div id="menu-label-atk">ATK</div>
+          <div id="menu-label-def">DEF</div>
+          <div id="menu-label-exp">EXP</div>
+        </div>
+        <div id="menu-status-parameter" class="flex-column">
+          <div id="menu-status-lv">1</div>
+          <div id="menu-status-hp">100 / 100</div>
+          <div id="menu-status-mp">20 / 20</div>
+          <div id="menu-status-atk">5</div>
+          <div id="menu-status-def">5</div>
+          <div id="menu-status-exp">0</div>
+        </div>
+      </div>
+      <div id="menu-item-box" class="menu-box"></div>
+    </div>
+    <!-- Field Area -->
+    <div id="field">
+      <div id="character"></div>
+      <div id="event-field"></div>
+    </div>
+    <!-- Field Button -->
+    <div id="field-menu-button" class="flex-row">
+      <div id="cmd-menu" class="field-button">Menu</div>
+      <!-- <div id="cmd-save" class="field-button">Save</div>
+      <div id="cmd-load" class="field-button">Load</div> -->
+    </div>
+
+  </div>
+
+
+  <!-- <script src="/js/battleUIM.js" type="module"></script> -->
+  <script src="./js/main.js" type="module"></script>
+  <script src="./js/switch.js"></script>
+</body>
+</html>

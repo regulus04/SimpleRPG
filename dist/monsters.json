@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "hp": 10,
+    "name": "Goomba",
+    "attack": 2,
+    "color": "saddlebrown"
+  },
+  {
+    "id": 2,
+    "hp": 20,
+    "name": "Koopa",
+    "attack": 5,
+    "color": "seagreen"
+  },
+  {
+    "id": 3,
+    "hp": 30,
+    "name": "Patapata",
+    "attack": 10,
+    "color": "crimson"
+  },
+  {
+    "id": 4,
+    "hp": 40,
+    "name": "Bowser",
+    "attack": 20,
+    "color": "green"
+  }
+]
