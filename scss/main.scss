@@ -1,3 +1,5 @@
+@import './animation';
+
 * {
   margin: 0;
   padding: 0;
@@ -70,16 +72,6 @@ body {
 }
 // Utility End///////////////
 
-// Animation ///////////
-@keyframes flashing{
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 #main-container {
   width: 100vw;
   height: 100vh;
@@ -127,6 +119,12 @@ body {
       width: 200px;
       height: 100%;
       position: relative;
+      animation-name: flashing;
+      animation-iteration-count: infinite;
+      animation-duration: 0.6s;
+      animation-timing-function: linear;
+      animation-play-state: paused;
+
 
       div {
         background: black;
@@ -146,6 +144,11 @@ body {
       width: 200px;
       height: 100%;
       position: relative;
+      animation-name: flashing;
+      animation-iteration-count: infinite;
+      animation-duration: 0.6s;
+      animation-timing-function: linear;
+      animation-play-state: paused;
 
       div {
         background: black;
@@ -184,6 +187,7 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
+  overflow: scroll;
 
   #message {
     color: black;
@@ -217,10 +221,51 @@ body {
     align-items: center;
     justify-content: space-around;
   }
-
-  #enemy-turn {
-    width: 400px;
+  #attack-list {
+    height: 100%;
+    width: 100%;
     display: none;
+    align-items: center;
+    justify-content: space-around;
+  }
+  #command-item-list {
+    height: 100%;
+    width: 100%;
+    display: none;
+    align-items: center;
+    justify-content: space-around;
+    overflow: scroll;
+    div {
+      &:first-child {
+        margin-top: 2.5rem;
+      }
+      display: inline-block;
+      margin: 0 1rem;
+      font-size: 1.2rem;
+      line-height: 2;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  #back-arrow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    display: none;
+    animation-name: flashing;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    i {
+      font-size: 2.5rem;
+    }
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
@@ -234,6 +279,7 @@ body {
   align-items: center;
   background: wheat;
 
+  // Menu screen ////////
   #menu-screen {
     width: 550px;
     height: 550px;
@@ -242,6 +288,7 @@ body {
     border: 3px black solid;
     border-radius: 10px;
     display: grid;
+    display: none;
     grid-template-columns: repeat(1, 3fr 2fr);
     grid-template-rows: repeat(1, 3fr 2fr);
 
@@ -262,15 +309,42 @@ body {
       font-size: 0.8rem;
 
     }
+    #menu-item-box {
+      display: flex;
+      flex-direction: column;
+      overflow: scroll;
+
+      #menu-item-title {
+        font-size: 1.2rem;
+        padding: 0.5rem;
+        height: 20px;
+        width: 100%;
+        background: white;
+        border-bottom: 3px black solid;
+        text-align: center;
+      }
+      #menu-item-list-box {
+        width: 100%;
+        overflow: scroll;
+
+        #menu-item-list {
+          width: 100%;
+          div {
+            display: inline-block;
+            margin: 0.5rem;
+          }
+        }
+      }
+    }
   }
   
-  
+  // Field Field //////////
   #field {
     background: slategray;
     width: 550px;
     height: 550px;
     position: relative;
-    display: none;
+    // display: none;
 
     #character {
       width: 50px;

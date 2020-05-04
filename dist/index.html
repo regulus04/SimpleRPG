@@ -9,9 +9,9 @@
   <title>RPG(simple ver.)</title>
 </head>
 <body> 
-  <!-- Battle -------------------------------->
   <div id="main-container">
     <div id="main-content">
+      <!-- Battle -------------------------------->
       <div id="battle-box">
         <div id="hp-and-name-box">
           <div id="hero-hp-mp-box">HP:<div id="hero-hp">100</div>MP:<div id="hero-mp">20</div></div>
@@ -40,12 +40,25 @@
         <div id="skip-arrow" class="flex-center">
           <i class="fas fa-sort-down"></i>
         </div>
+        <!-- Action Command -->
         <div id="command-list">
           <div id="action-attack" class="btn">Attack</div>
           <div id="action-defend" class="btn">Defend</div>
-          <div id="action-item" class="btn">Item</div>
+          <div id="action-item" class="btn">Items</div>
           <div id="action-run" class="btn">Run</div>
         </div>
+        <!-- Attack Command -->
+        <div id="attack-list">
+          <div id="attack-punch" class="btn">Punch</div>
+          <div id="attack-kick" class="btn">Kick</div>
+          <div id="attack-fire" class="btn">Fire</div>
+          <div id="attack-thunder" class="btn">Thunder</div>
+        </div>
+        <!-- Item Command -->
+        <div id="command-item-list"></div>
+
+        <!-- Back Arrow -->
+        <div id="back-arrow"><i class="fas fa-angle-double-left"></i></div>
         
       </div>
     </div>
@@ -53,7 +66,7 @@
 
   <!-- Field ---------------------------------------->
   <div id="field-container">
-    <!-- Menu Screen -->
+    <!-- Menu Screen ----------------------->
     <div id="menu-screen">
       <!-- Menu char img -->
       <div id="menu-hero-box" class="menu-box flex-center">
@@ -68,6 +81,7 @@
           <div id="menu-label-mp">MP</div>
           <div id="menu-label-atk">ATK</div>
           <div id="menu-label-def">DEF</div>
+          <div id="menu-label-spd">SPD</div>
           <div id="menu-label-exp">EXP</div>
         </div>
         <div id="menu-status-parameter" class="flex-column">
@@ -76,21 +90,29 @@
           <div id="menu-status-mp">20 / 20</div>
           <div id="menu-status-atk">5</div>
           <div id="menu-status-def">5</div>
+          <div id="menu-status-spd">5</div>
           <div id="menu-status-exp">0</div>
         </div>
       </div>
-      <div id="menu-item-box" class="menu-box"></div>
+      <div id="menu-item-box" class="menu-box">
+        <div id="menu-item-title">Items</div>
+        <div id="menu-item-list-box">
+          <div id="menu-item-list">
+            <!-- Items -->
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- Field Area -->
+    <!-- Field Area ---------------------->
     <div id="field">
       <div id="character"></div>
       <div id="event-field"></div>
     </div>
-    <!-- Field Button -->
+    <!-- Field Button -------------------->
     <div id="field-menu-button" class="flex-row">
       <div id="cmd-menu" class="field-button">Menu</div>
-      <!-- <div id="cmd-save" class="field-button">Save</div>
-      <div id="cmd-load" class="field-button">Load</div> -->
+      <div id="cmd-save" class="field-button">Save</div>
+      <div id="cmd-load" class="field-button">Load</div>
     </div>
 
   </div>

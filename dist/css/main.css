@@ -1,3 +1,9 @@
+@keyframes flashing {
+  50% {
+    opacity: 0.2; }
+  100% {
+    opacity: 1; } }
+
 * {
   margin: 0;
   padding: 0; }
@@ -59,12 +65,6 @@ body {
   justify-content: space-evenly;
   align-items: center; }
 
-@keyframes flashing {
-  50% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
-
 #main-container {
   width: 100vw;
   height: 100vh;
@@ -100,7 +100,12 @@ body {
       background: steelblue;
       width: 200px;
       height: 100%;
-      position: relative; }
+      position: relative;
+      animation-name: flashing;
+      animation-iteration-count: infinite;
+      animation-duration: 0.6s;
+      animation-timing-function: linear;
+      animation-play-state: paused; }
       #battle-box #battle-field #player-box div {
         background: black; }
       #battle-box #battle-field #player-box #left-eye {
@@ -113,7 +118,12 @@ body {
       background: wheat;
       width: 200px;
       height: 100%;
-      position: relative; }
+      position: relative;
+      animation-name: flashing;
+      animation-iteration-count: infinite;
+      animation-duration: 0.6s;
+      animation-timing-function: linear;
+      animation-play-state: paused; }
       #battle-box #battle-field #enemy-box div {
         background: black; }
     #battle-box #battle-field .right-eye {
@@ -142,7 +152,8 @@ body {
   border-radius: 10px;
   justify-content: center;
   align-items: center;
-  position: relative; }
+  position: relative;
+  overflow: scroll; }
   #message-box #message {
     color: black;
     font-size: 1.5rem; }
@@ -167,9 +178,42 @@ body {
     display: none;
     align-items: center;
     justify-content: space-around; }
-  #message-box #enemy-turn {
-    width: 400px;
-    display: none; }
+  #message-box #attack-list {
+    height: 100%;
+    width: 100%;
+    display: none;
+    align-items: center;
+    justify-content: space-around; }
+  #message-box #command-item-list {
+    height: 100%;
+    width: 100%;
+    display: none;
+    align-items: center;
+    justify-content: space-around;
+    overflow: scroll; }
+    #message-box #command-item-list div {
+      display: inline-block;
+      margin: 0 1rem;
+      font-size: 1.2rem;
+      line-height: 2; }
+      #message-box #command-item-list div:first-child {
+        margin-top: 2.5rem; }
+      #message-box #command-item-list div:hover {
+        cursor: pointer; }
+  #message-box #back-arrow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    display: none;
+    animation-name: flashing;
+    animation-iteration-count: infinite;
+    animation-duration: 1s; }
+    #message-box #back-arrow i {
+      font-size: 2.5rem; }
+    #message-box #back-arrow:hover {
+      cursor: pointer; }
 
 #field-container {
   width: 100vw;
@@ -187,6 +231,7 @@ body {
     border: 3px black solid;
     border-radius: 10px;
     display: grid;
+    display: none;
     grid-template-columns: repeat(1, 3fr 2fr);
     grid-template-rows: repeat(1, 3fr 2fr); }
     #field-container #menu-screen #menu-item-box {
@@ -199,12 +244,31 @@ body {
       display: grid;
       grid-template-columns: repeat(1, 1fr 2fr);
       font-size: 0.8rem; }
+    #field-container #menu-screen #menu-item-box {
+      display: flex;
+      flex-direction: column;
+      overflow: scroll; }
+      #field-container #menu-screen #menu-item-box #menu-item-title {
+        font-size: 1.2rem;
+        padding: 0.5rem;
+        height: 20px;
+        width: 100%;
+        background: white;
+        border-bottom: 3px black solid;
+        text-align: center; }
+      #field-container #menu-screen #menu-item-box #menu-item-list-box {
+        width: 100%;
+        overflow: scroll; }
+        #field-container #menu-screen #menu-item-box #menu-item-list-box #menu-item-list {
+          width: 100%; }
+          #field-container #menu-screen #menu-item-box #menu-item-list-box #menu-item-list div {
+            display: inline-block;
+            margin: 0.5rem; }
   #field-container #field {
     background: slategray;
     width: 550px;
     height: 550px;
-    position: relative;
-    display: none; }
+    position: relative; }
     #field-container #field #character {
       width: 50px;
       height: 50px;
