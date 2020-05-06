@@ -2,6 +2,8 @@ import { Monster } from './Monsters.js';
 import { Hero } from './Hero.js';
 import { Items } from './Items.js';
 import { BattleSystem } from './BattleSystem.js';
+import { FieldSystem } from './FieldSystem.js';
+import { FieldObject } from './FieldObject.js';
 
 // Field 
 const fieldContainer = document.querySelector('#field-container');
@@ -52,9 +54,17 @@ let hero = new Hero;
 let monster;
 let items = new Items;
 let bs = new BattleSystem;
-
+let fs = new FieldSystem;
+let fo = new FieldObject;
+// Field 
+let direction;
+let charX, charY;
+// Battle 
 let heroAction;
 let monsterAction;
+
+// If movabele == 1, character can move on the field
+let movable = 1;
 
 
 class UI{
@@ -62,37 +72,58 @@ class UI{
   // Hero on the field move ////
   moveHero(count, direction, heroX, heroY){
     clearInterval(animation);
-    var move = function(){
-      count -= 1;
-      switch(direction){
-        case "right":
-          heroX = heroX + 50;
-          heroOnField.style.left = heroX + 'px';
-          break;
-        case "left":
-          heroX = heroX - 50;
-          heroOnField.style.left = heroX + 'px';    
-          break;
-        case "up":
-          heroY = heroY - 50;
-          heroOnField.style.top = heroY + 'px';    
-          break;
-        case "down":
-          heroY = heroY + 50;
-          heroOnField.style.top = heroY + 'px';
-          break;
-      }
-    }
+    
     var animation = setInterval(() => {
       movable = 2;
+     
+      var move = function(){
+        console.log(count);
+        count -= 1;
+        
+        switch(direction){
+          case "right":
+            heroX = heroX + 50;
+            heroOnField.style.left = heroX + 'px';
+            break;
+          case "left":
+            heroX = heroX - 50;
+            heroOnField.style.left = heroX + 'px';    
+            break;
+          case "up":
+            heroY = heroY - 50;
+            heroOnField.style.top = heroY + 'px';    
+            break;
+          case "down":
+            heroY = heroY + 50;
+            heroOnField.style.top = heroY + 'px';
+            break;
+        }
+      }
       move();
-      encount();
-      if(count < 0){
+      // console.log(direction);
+      // console.log(heroX, heroY);
+      if(fs.encount() == true){
         clearInterval(animation);
-        movable = 1;
+    
+        // When it goes back to field, set char in these positions
+        charX = heroX;
+        charY = heroY;
+        console.log(charX, charY);
+        setTimeout(function(){
+          startButtle();
+        }, 500);
+      }else if(count < 0){
+        clearInterval(animation);
         // adjust some error px
         this.adjustP(direction);
+        movable = 1;
+      }else if(fo.charStop(heroX, heroY, direction) == 'stop'){
+        clearInterval(animation);
+        // adjust some error px
+        this.adjustP(direction);
+        movable = 1;
       }
+      
     }, 300);
   }
   // Adjust Distances //////
@@ -102,20 +133,42 @@ class UI{
     heroY = heroOnField.getBoundingClientRect().y - mouseMoveArea.getBoundingClientRect().y;
     errGapX = heroX -  Math.floor(heroX / 50) * 50;
     errGapY = heroY -  Math.floor(heroY / 50) * 50;
-    switch(direction){
-      case "right":
-        heroOnField.style.left = heroX + 50 - errGapX + 'px';
-        break;
-      case "left":
-        heroOnField.style.left = heroX - errGapX + 'px';
-        break;
-      case "up":
-        heroOnField.style.top = heroY - errGapY + 'px';
-        break;
-      case "down":
-        heroOnField.style.top = heroY + 50 - errGapY + 'px';
-        break;
+
+    if(fo.charStop(heroX, heroY, direction) == 'stop'){
+      switch(direction){
+        case "right":
+          heroOnField.style.left = heroX - errGapX + 'px';
+          break;
+        case "left":
+          heroOnField.style.left = heroX - errGapX + 'px';
+          break;
+        case "up":
+          heroOnField.style.top = heroY - errGapY + 'px';
+          break;
+        case "down":
+          heroOnField.style.top = heroY  - errGapY + 'px';
+          break;
+      }
+    }else{
+      switch(direction){
+        case "right":
+          heroOnField.style.left = heroX + 50 - errGapX + 'px';
+          break;
+        case "left":
+          heroOnField.style.left = heroX - errGapX + 'px';
+          break;
+        case "up":
+          heroOnField.style.top = heroY - errGapY + 'px';
+          break;
+        case "down":
+          heroOnField.style.top = heroY + 50 - errGapY + 'px';
+          break;
+      }
     }
+  }
+  setChar(charX, charY){
+    heroOnField.style.left = charX + 'px';
+    heroOnField.style.top = charY + 'px';
   }
   openMenu(){
     menuScreen.style.display = 'grid';
@@ -135,8 +188,10 @@ class UI{
   }
   // Switch scene ///////////
   battleEnd(){
+    this.setChar(charX, charY);
     fieldContainer.style.display = "flex";
     battleField.style.display = "none";
+    movable = 1;
   }
   battleStart(){
     fieldContainer.style.display = "none";
@@ -254,14 +309,11 @@ function runMenu(){
   }
 }
 
-// Move character function ///////////////////
+// Move character function ///////////////////////////////////////
 mouseMoveArea.addEventListener('click', runMoveChar);
 // this number let disable runmovechar while they are moving
-let movable; 
-movable = 1;
 function runMoveChar(e){
   if(movable == 1){
-    // var ui = new UI();
 
     // mouse position
     let mouseX, mouseY;
@@ -274,49 +326,59 @@ function runMoveChar(e){
     let gapX, gapY;
     gapX = mouseX - heroX;
     gapY = mouseY - heroY;
+  
     // Calculate move times 
     let moveCountX = Math.floor(Math.abs(gapX) / 50) - 1;
     let moveCountY = Math.floor(Math.abs(gapY) / 50) - 1;
+    if(gapX < 0 && gapX > -50){
+      moveCountX = 0;
+    }else if(gapY < 0 && gapY > -50){
+      moveCountY = 0;
+    }
+
     if(heroX <= mouseX && mouseX <= heroX + 50){
       if(heroY < mouseY){
-        ui.moveHero(moveCountY, "down", heroX, heroY);
+        direction = 'down';
+        ui.moveHero(moveCountY, direction, heroX, heroY);
+        // if(fo.charStop(heroX, heroY, direction) != 'stop'){
+        // }
       }else{
-        moveCountY += 2;
+        moveCountY += 1;
+        direction = 'up';
         ui.moveHero(moveCountY, "up", heroX, heroY);
       }
     }else if(heroY <= mouseY && mouseY <= heroY + 50){
       if(heroX < mouseX){
+        direction = 'right';
         ui.moveHero(moveCountX, "right", heroX, heroY);
       }else{
-        moveCountX += 2;
+        moveCountX += 1;
+        direction = 'left';
         ui.moveHero(moveCountX, "left", heroX, heroY);
       }
     }else if(Math.abs(gapX) > Math.abs(gapY)){
       if(gapX > 0){
+        direction = 'right';
         ui.moveHero(moveCountX, "right", heroX, heroY);
       }else{
-        moveCountX += 2;
+        moveCountX += 1;
+        direction = 'left';
         ui.moveHero(moveCountX, "left", heroX, heroY);  
       }
     }else{
       if(gapY > 0){
+        direction = 'down';
         ui.moveHero(moveCountY, "down", heroX, heroY);
       }else{
-        moveCountY += 2;
+        moveCountY += 1;
+        direction = 'up';
         ui.moveHero(moveCountY, "up", heroX, heroY);
       }
     }
   }
 }
 
-// Encount ///////////////
-function encount(){
-  let encountNum = Math.floor(Math.random() * 20 + 1);
-  
-  if(encountNum == 20){
-    startButtle();
-  }
-}
+
 function startButtle(){
   // UI
   ui.battleStart();
@@ -329,11 +391,11 @@ function startButtle(){
   ui.messageOn(`${monster.name} sprang out!!!`);
 }
 
-// Battle //////////////////////////////////
-// switch (temporary)
+
+
+// Battle ///////////////////////////////////////////////
 // startButtle();
 // Experiment zone////////////////////
-
 
 // Back arrow ////////////
 backArrow.addEventListener('click', runBack);
