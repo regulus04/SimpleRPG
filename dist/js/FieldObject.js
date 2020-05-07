@@ -8,13 +8,13 @@ export class FieldObject {
   charStop(charX, charY, direction){
     let order = 0;
     this.obstaclesPosition.forEach(function(each){
-      if(charX >= each['left'] && charX <= each['left'] + 5 && direction == 'left' && charY <= each['top'] + 5 && charY >= each['top'] - 5){
+      if(charX >= each['left'] && charX <= each['left'] + 55 && direction == 'left' && charY <= each['top'] + 5 && charY >= each['top'] - 5){
         order = 'stop';
       }else if(charY <= each['top'] && charY >= each['top'] - 55 && direction == 'down' && charX <= each['left'] + 5 && charX >= each['left'] - 5){
         order = 'stop';
       }else if(charX <= each['left'] && charX >= each['left'] - 55 && direction == 'right' && charY <= each['top'] + 5 && charY >= each['top'] - 5){
         order = 'stop';
-      }else if(charY >= each['top'] && charY <= each['top'] + 5 && direction == 'up' && charX <= each['left'] + 5 && charX >= each['left'] - 5){
+      }else if(charY >= each['top'] && charY <= each['top'] + 55 && direction == 'up' && charX <= each['left'] + 5 && charX >= each['left'] - 5){
         order = 'stop';
       }
     });

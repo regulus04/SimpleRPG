@@ -9,7 +9,6 @@ export class BattleSystem {
     }
   }
 
-
   compareSp(hero, monster){
     if(hero.spd >= monster.spd){
       return 1;

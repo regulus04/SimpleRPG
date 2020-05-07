@@ -11,6 +11,32 @@ export class Hero {
     this.spd = 5;
     this.exp = 99;
     this.maxExp = 100;
+    this.xOnField = 250;
+    this.yOnField = 500;
+  }
+
+  getXOnField(char, field){
+    this.xOnField = char.getBoundingClientRect().x - field.getBoundingClientRect().x;
+  }
+  getYOnField(char, field){
+    this.yOnField = char.getBoundingClientRect().y - field.getBoundingClientRect().y;
+  }
+
+  moveOnField(direction){
+    switch(direction){
+      case 'up' :
+        this.yOnField -= 50;
+        break;
+      case 'down' :
+        this.yOnField += 50;
+        break;
+      case 'left' :
+        this.xOnField -= 50;
+        break;
+      case 'right' :
+        this.xOnField += 50;
+        break;
+    }
   }
 
   recieveExp(monsterExp){

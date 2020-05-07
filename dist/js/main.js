@@ -57,8 +57,8 @@ let bs = new BattleSystem;
 let fs = new FieldSystem;
 let fo = new FieldObject;
 // Field 
-let direction;
-let charX, charY;
+// let direction;
+// let charX, charY;
 // Battle 
 let heroAction;
 let monsterAction;
@@ -69,106 +69,9 @@ let movable = 1;
 
 class UI{
   // Field UI /////////////////////////////
-  // Hero on the field move ////
-  moveHero(count, direction, heroX, heroY){
-    clearInterval(animation);
-    
-    var animation = setInterval(() => {
-      movable = 2;
-     
-      var move = function(){
-        console.log(count);
-        count -= 1;
-        
-        switch(direction){
-          case "right":
-            heroX = heroX + 50;
-            heroOnField.style.left = heroX + 'px';
-            break;
-          case "left":
-            heroX = heroX - 50;
-            heroOnField.style.left = heroX + 'px';    
-            break;
-          case "up":
-            heroY = heroY - 50;
-            heroOnField.style.top = heroY + 'px';    
-            break;
-          case "down":
-            heroY = heroY + 50;
-            heroOnField.style.top = heroY + 'px';
-            break;
-        }
-      }
-      move();
-      // console.log(direction);
-      // console.log(heroX, heroY);
-      if(fs.encount() == true){
-        clearInterval(animation);
-    
-        // When it goes back to field, set char in these positions
-        charX = heroX;
-        charY = heroY;
-        console.log(charX, charY);
-        setTimeout(function(){
-          startButtle();
-        }, 500);
-      }else if(count < 0){
-        clearInterval(animation);
-        // adjust some error px
-        this.adjustP(direction);
-        movable = 1;
-      }else if(fo.charStop(heroX, heroY, direction) == 'stop'){
-        clearInterval(animation);
-        // adjust some error px
-        this.adjustP(direction);
-        movable = 1;
-      }
-      
-    }, 300);
-  }
-  // Adjust Distances //////
-  adjustP(direction) {
-    let heroX, heroY, errGapX, errGapY;
-    heroX = heroOnField.getBoundingClientRect().x - mouseMoveArea.getBoundingClientRect().x;
-    heroY = heroOnField.getBoundingClientRect().y - mouseMoveArea.getBoundingClientRect().y;
-    errGapX = heroX -  Math.floor(heroX / 50) * 50;
-    errGapY = heroY -  Math.floor(heroY / 50) * 50;
-
-    if(fo.charStop(heroX, heroY, direction) == 'stop'){
-      switch(direction){
-        case "right":
-          heroOnField.style.left = heroX - errGapX + 'px';
-          break;
-        case "left":
-          heroOnField.style.left = heroX - errGapX + 'px';
-          break;
-        case "up":
-          heroOnField.style.top = heroY - errGapY + 'px';
-          break;
-        case "down":
-          heroOnField.style.top = heroY  - errGapY + 'px';
-          break;
-      }
-    }else{
-      switch(direction){
-        case "right":
-          heroOnField.style.left = heroX + 50 - errGapX + 'px';
-          break;
-        case "left":
-          heroOnField.style.left = heroX - errGapX + 'px';
-          break;
-        case "up":
-          heroOnField.style.top = heroY - errGapY + 'px';
-          break;
-        case "down":
-          heroOnField.style.top = heroY + 50 - errGapY + 'px';
-          break;
-      }
-    }
-  }
-  setChar(charX, charY){
-    heroOnField.style.left = charX + 'px';
-    heroOnField.style.top = charY + 'px';
+  moveChar(char, xTo, yTo){
+    char.style.top = yTo + 'px';
+    char.style.left = xTo + 'px';
   }
   openMenu(){
     menuScreen.style.display = 'grid';
@@ -188,7 +91,7 @@ class UI{
   }
   // Switch scene ///////////
   battleEnd(){
-    this.setChar(charX, charY);
+    // this.setChar(charX, charY);
     fieldContainer.style.display = "flex";
     battleField.style.display = "none";
     movable = 1;
@@ -311,75 +214,55 @@ function runMenu(){
 
 // Move character function ///////////////////////////////////////
 mouseMoveArea.addEventListener('click', runMoveChar);
-// this number let disable runmovechar while they are moving
 function runMoveChar(e){
   if(movable == 1){
-
-    // mouse position
-    let mouseX, mouseY;
-    mouseX = e.offsetX;
-    mouseY = e.offsetY;
-    // Get Hero's position in the field
-    let heroX, heroY;
-    heroX = heroOnField.getBoundingClientRect().x - field.getBoundingClientRect().x;
-    heroY = heroOnField.getBoundingClientRect().y - field.getBoundingClientRect().y;
-    let gapX, gapY;
-    gapX = mouseX - heroX;
-    gapY = mouseY - heroY;
+    movable = 2;
+    // let charX = fs.getCharX(char, mouseMoveArea);
+    // let charY = fs.getCharY(char, mouseMoveArea);
+    let charX = hero.xOnField;
+    let charY = hero.yOnField;
+    let mouseX = e.offsetX;
+    let mouseY = e.offsetY;
+    let moveCount;
+    // console.log(`charX = ${charX}, charY = ${charY}, mouseX = ${e.offsetX}, mouseY = ${e.offsetY}`);
+    let direction = fs.getDirection(mouseX, mouseY, charX, charY);
+    moveCount = fs.moveCount(mouseX, mouseY, charX, charY, direction);
   
-    // Calculate move times 
-    let moveCountX = Math.floor(Math.abs(gapX) / 50) - 1;
-    let moveCountY = Math.floor(Math.abs(gapY) / 50) - 1;
-    if(gapX < 0 && gapX > -50){
-      moveCountX = 0;
-    }else if(gapY < 0 && gapY > -50){
-      moveCountY = 0;
-    }
+    // Actually char moving here
+    var animation = setInterval(() => {
 
-    if(heroX <= mouseX && mouseX <= heroX + 50){
-      if(heroY < mouseY){
-        direction = 'down';
-        ui.moveHero(moveCountY, direction, heroX, heroY);
-        // if(fo.charStop(heroX, heroY, direction) != 'stop'){
-        // }
+      // Check if its not next to obstacles
+      let charX = hero.xOnField;
+      let charY = hero.yOnField;
+      if(fo.charStop(charX, charY, direction) == 'stop'){
+        clearInterval(animation);
+        setTimeout(() => {movable = 1}, 500);
+        console.log('stop');
       }else{
-        moveCountY += 1;
-        direction = 'up';
-        ui.moveHero(moveCountY, "up", heroX, heroY);
+        hero.moveOnField(direction);
+        ui.moveChar(heroOnField, hero.xOnField, hero.yOnField);
       }
-    }else if(heroY <= mouseY && mouseY <= heroY + 50){
-      if(heroX < mouseX){
-        direction = 'right';
-        ui.moveHero(moveCountX, "right", heroX, heroY);
-      }else{
-        moveCountX += 1;
-        direction = 'left';
-        ui.moveHero(moveCountX, "left", heroX, heroY);
+      // Run out of count
+      moveCount -= 1;
+      if(moveCount <= 0){
+        clearInterval(animation);
+        console.log(moveCount);
+        movable = 1;
       }
-    }else if(Math.abs(gapX) > Math.abs(gapY)){
-      if(gapX > 0){
-        direction = 'right';
-        ui.moveHero(moveCountX, "right", heroX, heroY);
-      }else{
-        moveCountX += 1;
-        direction = 'left';
-        ui.moveHero(moveCountX, "left", heroX, heroY);  
+      // Encount
+      if(fs.encount() == true){
+        clearInterval(animation);
+        setTimeout(() => { startBattle() }, 1000);
+        setTimeout(() => { movable = 1 }, 2000);
       }
-    }else{
-      if(gapY > 0){
-        direction = 'down';
-        ui.moveHero(moveCountY, "down", heroX, heroY);
-      }else{
-        moveCountY += 1;
-        direction = 'up';
-        ui.moveHero(moveCountY, "up", heroX, heroY);
-      }
-    }
+    }, 350); 
+
+    
   }
+
 }
 
-
-function startButtle(){
+function startBattle(){
   // UI
   ui.battleStart();
   let enemyNum;
