@@ -37,7 +37,8 @@ body {
   background: white;
   box-shadow: 2px 3px 3px; }
   .field-button:hover {
-    background: navajowhite; }
+    background: navajowhite;
+    cursor: pointer; }
   .field-button:active {
     box-shadow: none;
     background: chocolate; }
@@ -282,13 +283,56 @@ body {
       left: 0;
       height: 100%;
       width: 100%; }
-    #field-container #field #obstacle {
+    #field-container #field #boss {
       position: absolute;
-      top: 400px;
-      left: 200px;
+      top: 0px;
+      left: 250px;
       width: 50px;
       height: 50px;
       background: blue; }
+    #field-container #field #field-message-box {
+      position: absolute;
+      top: 0px;
+      left: 330px;
+      width: 200px;
+      height: 150px;
+      background: white;
+      border: 3px black solid;
+      border-radius: 20px;
+      display: none; }
+      #field-container #field #field-message-box #left-triangle {
+        position: absolute;
+        top: 30px;
+        left: 191px;
+        width: 20px;
+        height: 20px;
+        background: white;
+        display: none;
+        border-top: 3px black solid;
+        border-right: 3px black solid;
+        transform: rotateZ(45deg); }
+      #field-container #field #field-message-box #right-triangle {
+        position: absolute;
+        top: 30px;
+        left: -14px;
+        width: 20px;
+        height: 20px;
+        background: white;
+        display: none;
+        border-top: 3px black solid;
+        border-right: 3px black solid;
+        transform: rotateZ(-135deg); }
+      #field-container #field #field-message-box #field-message {
+        margin: 10px;
+        line-height: 2; }
+      #field-container #field #field-message-box #answer-box {
+        width: 150px;
+        height: 50px;
+        position: absolute;
+        top: 90px;
+        left: 25px; }
+        #field-container #field #field-message-box #answer-box div {
+          padding: 0.3rem; }
   #field-container #field-menu-button {
     margin-top: 1rem;
     width: 550px;

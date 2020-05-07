@@ -83,4 +83,14 @@ export class FieldSystem {
       return false;
     }
   }
+
+  fieldMessagePosition(char){
+    let position;
+    if(char.xOnField == 200){
+      position = 'right';
+    }else{
+      position = 'left';
+    }
+    return position;
+  }
 }

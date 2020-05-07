@@ -38,6 +38,8 @@ export class Monster {
         this.item = 'Shuriken';
         break;
     }
+    this.message = 'sprang out!!!';
+    this.event = 'none';
   }
 
   attack(hero){

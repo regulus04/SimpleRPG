@@ -4,16 +4,29 @@ import { Items } from './Items.js';
 import { BattleSystem } from './BattleSystem.js';
 import { FieldSystem } from './FieldSystem.js';
 import { FieldObject } from './FieldObject.js';
+import { SecondFieldObject } from './SecondFieldObject.js';
+import { FirstBoss } from './FirstBoss.js';
+
+// Functions I want to add later 
+// 1. typing message(by array and foreach)
 
 // Field 
 const fieldContainer = document.querySelector('#field-container');
 const mouseMoveArea = document.querySelector('#event-field');
 const field = document.querySelector('#field');
 const heroOnField = document.querySelector('#character');
+// Field Character and Obstacles
+const boss = document.querySelector('#boss');
 // Field Menu
 const menuBtn = document.querySelector('#cmd-menu');
 const saveBtn = document.querySelector('#cmd-save');
 const loadBtn = document.querySelector('#cmd-load');
+// Field Message
+const fieldMessage = document.querySelector('#field-message-box');
+const leftTriangle = document.querySelector('#left-triangle');
+const rightTriangle = document.querySelector('#right-triangle');
+const yesBox = document.querySelector('#yes-box');
+const noBox = document.querySelector('#no-box');
 // Menu
 const menuScreen = document.querySelector('#menu-screen');
 const menuItemList = document.querySelector('#menu-item-list');
@@ -56,16 +69,17 @@ let items = new Items;
 let bs = new BattleSystem;
 let fs = new FieldSystem;
 let fo = new FieldObject;
-// Field 
-// let direction;
-// let charX, charY;
+
+
+// Boss status 
+let firstBoss = 'alive';
+
 // Battle 
 let heroAction;
 let monsterAction;
 
 // If movabele == 1, character can move on the field
 let movable = 1;
-
 
 class UI{
   // Field UI /////////////////////////////
@@ -100,6 +114,32 @@ class UI{
     fieldContainer.style.display = "none";
     battleField.style.display = "flex";
     backArrow.style.display = 'none';
+  }
+  messageLeftOnField(){
+    movable = 2;
+    fieldMessage.style.display = 'block';
+    fieldMessage.style.top = 0;
+    fieldMessage.style.left = 10 + 'px';
+    leftTriangle.style.display = 'block';
+    rightTriangle.style.display = 'none';
+  }
+  messageRightOnField(){
+    movable = 2;
+    fieldMessage.style.display = 'block';
+    fieldMessage.style.top = 0;
+    fieldMessage.style.left = 330 + 'px';
+    leftTriangle.style.display = 'none';
+    rightTriangle.style.display = 'block';
+  }
+  messageOffOnField(){
+    movable = 1;
+    fieldMessage.style.display = 'none';
+  }
+  afterBossBattle(){
+    if(fo.name == 'first floor'){
+      firstBoss = 'dead';
+    }
+    boss.style.background = 'black';
   }
   // Buttle UI /////////////////
   arrowOn(){
@@ -198,7 +238,7 @@ class UI{
 // Generate UI instance
 const ui = new UI();
 
-// Field //////////////////////////
+// Field ////////////////////////////////////////////////////////////
 // Menu ////////
 menuBtn.addEventListener('click', runMenu);
 let menuNum = 0;
@@ -210,6 +250,39 @@ function runMenu(){
     ui.closeMenu();
     menuNum = 0;
   }
+}
+
+// Talk people on field /////////////
+boss.addEventListener('click', runTalk);
+function runTalk(){
+  let talkable;
+  talkable = fo.checkIfNext(hero.xOnField, hero.yOnField, 'boss');
+  if(checkBoss() == 'talk'){
+    if(talkable == true){
+      let position = fs.fieldMessagePosition(hero);
+      if(position == 'right'){
+        ui.messageRightOnField();
+      }else{
+        ui.messageLeftOnField();
+      }
+    }
+  }else if(checkBoss() == 'stair'){
+  // Stairs
+    console.log('stair');
+  }
+}
+// Answering the question
+yesBox.addEventListener('click', runYes);
+function runYes(){
+  ui.messageOffOnField();
+  if(fo.name == 'first floor'){
+    encountFirstBoss();
+  }
+  startBattle();
+}
+noBox.addEventListener('click', runNo);
+function runNo(){
+  ui.messageOffOnField();
 }
 
 // Move character function ///////////////////////////////////////
@@ -237,7 +310,7 @@ function runMoveChar(e){
       if(fo.charStop(charX, charY, direction) == 'stop'){
         clearInterval(animation);
         setTimeout(() => {movable = 1}, 500);
-        console.log('stop');
+        
       }else{
         hero.moveOnField(direction);
         ui.moveChar(heroOnField, hero.xOnField, hero.yOnField);
@@ -246,12 +319,13 @@ function runMoveChar(e){
       moveCount -= 1;
       if(moveCount <= 0){
         clearInterval(animation);
-        console.log(moveCount);
+        
         movable = 1;
       }
       // Encount
       if(fs.encount() == true){
         clearInterval(animation);
+        encountMonster();
         setTimeout(() => { startBattle() }, 1000);
         setTimeout(() => { movable = 1 }, 2000);
       }
@@ -262,21 +336,46 @@ function runMoveChar(e){
 
 }
 
+// Start Battle against encount monsters
 function startBattle(){
   // UI
   ui.battleStart();
+  // Enemy's UI
+  ui.applyEnemy(monster.name, monster.hp, monster.color);
+  ui.messageOn(`${monster.name} ${monster.message}`);
+}
+function encountMonster(){
   let enemyNum;
   enemyNum = Math.floor(Math.random() * 4) + 1;
   // Load Monster's data
   monster = new Monster(enemyNum);
-  // Enemy's UI
-  ui.applyEnemy(monster.name, monster.hp, monster.color);
-  ui.messageOn(`${monster.name} sprang out!!!`);
+}
+// Start Battle against Boss Monsters
+function encountFirstBoss() {
+  monster = new FirstBoss;
+}
+// Events after battle
+function eventAfterBattle(){
+  if(monster.event == 'stairs'){
+    ui.afterBossBattle();
+  }
+}
+// Select Boss
+function checkBoss(){
+  let result;
+  switch(fo.name){
+    case 'first floor':
+      if(firstBoss == 'alive'){
+        result = 'talk';
+      }else{
+        result = 'stair';
+      }
+      break;
+  }
+  return result;
 }
 
-
-
-// Battle ///////////////////////////////////////////////
+// Battle ///////////////////////////////////////////////////////////////////
 // startButtle();
 // Experiment zone////////////////////
 
@@ -306,6 +405,7 @@ function runNext(){
     case 'battle end' :
       ui.backArrowOff();
       ui.battleEnd();
+      eventAfterBattle();
       skipNum = 'battle start';
       break;
     case 'second hero' :
@@ -357,7 +457,6 @@ function runNext(){
       break;
     case 'get item' :
       let item = monster.itemDrop();
-      console.log(item);
       if(item == 0){
         ui.battleEnd();
         skipNum = 'battle start';

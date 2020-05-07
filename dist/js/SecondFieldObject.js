@@ -1,12 +1,10 @@
-export class FieldObject {
+export class SecondFieldObject {
   constructor(){
-    this.name = 'first floor';
+    this.name = 'second floor';
     this.obstaclesPosition = [
-      {name: 'boss', top: 0, left: 250}
+      {name: 'boss', top: 0, left: 250},
+      {name: 'treasure', top: 100, left: 200}
     ];
-  }
-  deadConfirm(){
-    this.obstaclesPosition[0].status = 'dead';
   }
 
   charStop(charX, charY, direction){

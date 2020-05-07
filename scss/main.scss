@@ -39,6 +39,7 @@ body {
 
   &:hover {
     background: navajowhite;
+    cursor: pointer;
   }
   &:active {
     box-shadow: none;
@@ -365,15 +366,71 @@ body {
       // background: red;
     }
 
-    #obstacle {
+    #boss {
       position: absolute;
-      top: 400px;
-      left: 200px;
+      top: 0px;
+      left: 250px;
       width: 50px;
       height: 50px;
       background: blue;
     }
+
+    #field-message-box {
+      position: absolute;
+      top: 0px;
+      left: 330px;
+      width: 200px;
+      height: 150px;
+      background: white;
+      border: 3px black solid;
+      border-radius: 20px;
+      display: none;
+
+      #left-triangle {
+        position: absolute;
+        top: 30px;
+        left: 191px;
+        width: 20px;
+        height: 20px;
+        background: white;
+        display: none;
+        border-top: 3px black solid;
+        border-right: 3px black solid;
+        transform: rotateZ(45deg);
+      }
+      #right-triangle {
+        position: absolute;
+        top: 30px;
+        left: -14px;
+        width: 20px;
+        height: 20px;
+        background: white;
+        display: none;
+        border-top: 3px black solid;
+        border-right: 3px black solid;
+        transform: rotateZ(-135deg);
+      }
+
+      #field-message {
+        margin: 10px;
+        line-height: 2;
+      }
+
+      #answer-box{
+        width: 150px;
+        height: 50px;
+        position: absolute;
+        top: 90px;
+        left: 25px;
+
+        div {
+          padding: 0.3rem;
+        }
+      }
+    }
   }
+
+  
   #field-menu-button {
     margin-top: 1rem;
     width: 550px;
