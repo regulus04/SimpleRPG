@@ -4,6 +4,14 @@
   100% {
     opacity: 1; } }
 
+@keyframes fadeInOut {
+  40% {
+    opacity: 1; }
+  60% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
 * {
   margin: 0;
   padding: 0; }
@@ -267,6 +275,7 @@ body {
             margin: 0.5rem; }
   #field-container #field {
     background: slategray;
+    background: url(../img/punching.png) center center/cover;
     width: 550px;
     height: 550px;
     position: relative; }
@@ -277,7 +286,8 @@ body {
       top: 500px;
       left: 250px;
       position: absolute;
-      transition: all 0.3s linear; }
+      transition: all 0.3s linear;
+      z-index: 1; }
     #field-container #field #event-field {
       top: 0;
       left: 0;
@@ -337,3 +347,14 @@ body {
     margin-top: 1rem;
     width: 550px;
     height: 50px; }
+
+#black-fade {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  opacity: 0;
+  display: none;
+  z-index: 99;
+  animation-name: fadeInOut;
+  animation-duration: 2s; }

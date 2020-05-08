@@ -1,16 +1,16 @@
-export class FirstBoss {
+export class SecondBoss {
   constructor(){
     this.hp = 1;
-    this.name = 'The Devil';
+    this.name = 'Fire Devil';
     this.atk = 10;
-    this.color = "white";
+    this.color = "crimson";
     this.spd = 1;
     this.exp = 150;
     this.item = 'Shuriken';
     // this.firstMessage = 'Wanna fight me???';
     this.message = 'looks strong!!!';
     this.event = 'stairs';
-    this.background = '../dist/img/guard.png';
+    this.background = '../dist/img/shuriken.png';
   }
 
   attack(hero){

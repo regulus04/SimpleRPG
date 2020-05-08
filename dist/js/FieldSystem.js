@@ -1,3 +1,7 @@
+import { SecondFieldObject } from "./SecondFieldObject.js";
+import { SecondBoss } from "./SecondBoss.js";
+import { Monsters } from "./Monsters.js";
+
 export class FieldSystem {
   getCharX(char, field){
     return char.getBoundingClientRect().x - field.getBoundingClientRect().x;
@@ -83,6 +87,16 @@ export class FieldSystem {
       return false;
     }
   }
+  encountMonster(floorName){
+    let monster
+    let enemyNum;
+    enemyNum = Math.floor(Math.random() * 4) + 1;
+    // Load Monster's data
+    if(floorName == 'first floor'){
+      monster = new Monsters(enemyNum);
+    }
+    return monster;
+  }
 
   fieldMessagePosition(char){
     let position;
@@ -92,5 +106,22 @@ export class FieldSystem {
       position = 'left';
     }
     return position;
+  }
+
+  goUpStairs(foName){
+    let floor;
+    if(foName == 'first floor'){
+      floor = new SecondFieldObject;
+    }
+    return floor;
+  }
+  setBoss(foName){
+    let boss;
+    if(foName == 'first floor'){
+      boss = new FirstBoss;
+    }else if(foName == 'second floor'){
+      boss = new SecondBoss;
+    }
+    return boss;
   }
 }

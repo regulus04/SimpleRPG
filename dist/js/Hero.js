@@ -66,4 +66,8 @@ export class Hero {
     monster.hp -= this.atk;
     return this.atk;
   }
+  resetPosition(){
+    this.xOnField = 250;
+    this.yOnField = 500;
+  }
 }

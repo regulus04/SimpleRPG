@@ -1,4 +1,4 @@
-export class Monster {
+export class Monsters {
   constructor(enemyNum){
     switch(enemyNum){
       case 1 :

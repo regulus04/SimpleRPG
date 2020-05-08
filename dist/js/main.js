@@ -1,4 +1,4 @@
-import { Monster } from './Monsters.js';
+import { Monsters } from './Monsters.js';
 import { Hero } from './Hero.js';
 import { Items } from './Items.js';
 import { BattleSystem } from './BattleSystem.js';
@@ -6,11 +6,13 @@ import { FieldSystem } from './FieldSystem.js';
 import { FieldObject } from './FieldObject.js';
 import { SecondFieldObject } from './SecondFieldObject.js';
 import { FirstBoss } from './FirstBoss.js';
+import { SecondBoss } from './SecondBoss.js';
 
 // Functions I want to add later 
 // 1. typing message(by array and foreach)
 
 // Field 
+const blackFade = document.querySelector('#black-fade');
 const fieldContainer = document.querySelector('#field-container');
 const mouseMoveArea = document.querySelector('#event-field');
 const field = document.querySelector('#field');
@@ -69,10 +71,11 @@ let items = new Items;
 let bs = new BattleSystem;
 let fs = new FieldSystem;
 let fo = new FieldObject;
-
+let fieldBoss = new FirstBoss;
 
 // Boss status 
 let firstBoss = 'alive';
+let secondBoss = 'alive';
 
 // Battle 
 let heroAction;
@@ -104,6 +107,10 @@ class UI{
     field.style.display = 'block';
   }
   // Switch scene ///////////
+  blackFade(){
+    blackFade.style.display = 'block';
+    setTimeout(() => {blackFade.style.display = 'none'}, 2100);
+  }
   battleEnd(){
     // this.setChar(charX, charY);
     fieldContainer.style.display = "flex";
@@ -140,6 +147,16 @@ class UI{
       firstBoss = 'dead';
     }
     boss.style.background = 'black';
+  }
+  changeFieldUp(){
+    field.style.background = `url(${fo.background}) center center / cover`;
+    hero.resetPosition();
+    heroOnField.style.top = 500 + 'px';
+    heroOnField.style.left = 250 + 'px';
+    fs.setBoss(fo.name);
+    if(checkBoss() == 'talk'){
+      boss.style.background = `url(${fieldBoss.background}) center center / cover`;
+    }
   }
   // Buttle UI /////////////////
   arrowOn(){
@@ -268,7 +285,9 @@ function runTalk(){
     }
   }else if(checkBoss() == 'stair'){
   // Stairs
-    console.log('stair');
+    fo = fs.goUpStairs(fo.name);
+    ui.changeFieldUp();
+    
   }
 }
 // Answering the question
@@ -276,7 +295,9 @@ yesBox.addEventListener('click', runYes);
 function runYes(){
   ui.messageOffOnField();
   if(fo.name == 'first floor'){
-    encountFirstBoss();
+    monster = new FirstBoss;
+  }else if(fo.name == 'second floor'){
+    monster = new SecondBoss;
   }
   startBattle();
 }
@@ -325,35 +346,26 @@ function runMoveChar(e){
       // Encount
       if(fs.encount() == true){
         clearInterval(animation);
-        encountMonster();
+        monster = fs.encountMonster(fo.name);
         setTimeout(() => { startBattle() }, 1000);
         setTimeout(() => { movable = 1 }, 2000);
       }
     }, 350); 
-
-    
   }
-
 }
 
 // Start Battle against encount monsters
 function startBattle(){
+  ui.blackFade();
   // UI
-  ui.battleStart();
-  // Enemy's UI
-  ui.applyEnemy(monster.name, monster.hp, monster.color);
-  ui.messageOn(`${monster.name} ${monster.message}`);
+  setTimeout(() => {
+    ui.battleStart();
+    // Enemy's UI
+    ui.applyEnemy(monster.name, monster.hp, monster.color);
+    ui.messageOn(`${monster.name} ${monster.message}`);
+  }, 1000);
 }
-function encountMonster(){
-  let enemyNum;
-  enemyNum = Math.floor(Math.random() * 4) + 1;
-  // Load Monster's data
-  monster = new Monster(enemyNum);
-}
-// Start Battle against Boss Monsters
-function encountFirstBoss() {
-  monster = new FirstBoss;
-}
+
 // Events after battle
 function eventAfterBattle(){
   if(monster.event == 'stairs'){
@@ -366,6 +378,13 @@ function checkBoss(){
   switch(fo.name){
     case 'first floor':
       if(firstBoss == 'alive'){
+        result = 'talk';
+      }else{
+        result = 'stair';
+      }
+      break;
+    case 'second floor':
+      if(secondBoss == 'alive'){
         result = 'talk';
       }else{
         result = 'stair';

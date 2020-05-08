@@ -4,6 +4,7 @@ export class FieldObject {
     this.obstaclesPosition = [
       {name: 'boss', top: 0, left: 250}
     ];
+    this.background = '../dist/img/punching.png';
   }
   deadConfirm(){
     this.obstaclesPosition[0].status = 'dead';
@@ -51,5 +52,13 @@ export class FieldObject {
       }
     });
     return talkable;
+  }
+
+  stairCheck(){
+    let stairs;
+    if(this.name != 'first floor'){
+      stairs = 'on stairs';
+    }
+    return stairs;
   }
 }

@@ -1,6 +1,7 @@
 export class SecondFieldObject {
   constructor(){
     this.name = 'second floor';
+    this.background = '../dist/img/potion.png';
     this.obstaclesPosition = [
       {name: 'boss', top: 0, left: 250},
       {name: 'treasure', top: 100, left: 200}
@@ -49,5 +50,13 @@ export class SecondFieldObject {
       }
     });
     return talkable;
+  }
+
+  stairCheck(){
+    let stairs;
+    if(this.name != 'first floor'){
+      stairs = 'on stairs';
+    }
+    return stairs;
   }
 }
