@@ -70,4 +70,33 @@ export class Hero {
     this.xOnField = 250;
     this.yOnField = 500;
   }
+  resetPositionToUp(){
+    this.xOnField = 250;
+    this.yOnField = 50;
+  }
+  goDownStairs(foName){
+    let action;
+    if(this.xOnField == 250 && this.yOnField == 500 && foName != 'first floor'){
+      action = 'go down';
+    }
+    return action;
+  }
+  setFieldImg(direction){
+    let img;
+    switch(direction){
+      case 'up':
+        img = '../dist/img/heroUp.png';
+        break;
+      case 'down':
+        img = '../dist/img/heroDown.png';
+        break;
+      case 'left':
+        img = '../dist/img/heroLeft.png';
+        break;
+      case 'right':
+        img = '../dist/img/heroRight.png';
+        break;
+    }
+    return img;
+  }
 }

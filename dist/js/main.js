@@ -145,18 +145,28 @@ class UI{
   afterBossBattle(){
     if(fo.name == 'first floor'){
       firstBoss = 'dead';
+    }else if(fo.name == 'second floor'){
+      secondBoss = 'dead';
     }
-    boss.style.background = 'black';
+    boss.style.background = `url(../dist/img/upStairs.png) center center / cover`;
   }
   changeFieldUp(){
     field.style.background = `url(${fo.background}) center center / cover`;
     hero.resetPosition();
     heroOnField.style.top = 500 + 'px';
     heroOnField.style.left = 250 + 'px';
-    fs.setBoss(fo.name);
+    fieldBoss = fs.setBoss(fo.name);
     if(checkBoss() == 'talk'){
       boss.style.background = `url(${fieldBoss.background}) center center / cover`;
     }
+  }
+  changeFieldDown(){
+    field.style.background = `url(${fo.background}) center center / cover`;
+    hero.resetPositionToUp();
+    heroOnField.style.top = 50 + 'px';
+    heroOnField.style.left = 250 + 'px';
+    fieldBoss = fs.setBoss(fo.name);
+    boss.style.background = `url(../dist/img/upStairs.png) center center / cover`
   }
   // Buttle UI /////////////////
   arrowOn(){
@@ -285,9 +295,11 @@ function runTalk(){
     }
   }else if(checkBoss() == 'stair'){
   // Stairs
-    fo = fs.goUpStairs(fo.name);
-    ui.changeFieldUp();
-    
+    if(talkable == true){
+      fo = fs.goUpStairs(fo.name);
+      ui.blackFade();
+      setTimeout(() => {ui.changeFieldUp()}, 700);
+    }
   }
 }
 // Answering the question
@@ -321,7 +333,8 @@ function runMoveChar(e){
     // console.log(`charX = ${charX}, charY = ${charY}, mouseX = ${e.offsetX}, mouseY = ${e.offsetY}`);
     let direction = fs.getDirection(mouseX, mouseY, charX, charY);
     moveCount = fs.moveCount(mouseX, mouseY, charX, charY, direction);
-  
+    // Change char on field img
+    heroOnField.style.background = `url(${hero.setFieldImg(direction)}) center center / cover`;
     // Actually char moving here
     var animation = setInterval(() => {
 
@@ -333,6 +346,7 @@ function runMoveChar(e){
         setTimeout(() => {movable = 1}, 500);
         
       }else{
+        // Actually moving here
         hero.moveOnField(direction);
         ui.moveChar(heroOnField, hero.xOnField, hero.yOnField);
       }
@@ -343,8 +357,15 @@ function runMoveChar(e){
         
         movable = 1;
       }
-      // Encount
-      if(fs.encount() == true){
+      // Downstairs Check //
+      if(hero.goDownStairs(fo.name) == 'go down'){
+        clearInterval(animation);
+        movable = 1;
+        fo = fs.goDownStairs(fo.name);
+        setTimeout(() => {ui.blackFade()}, 500);
+        setTimeout(() => {ui.changeFieldDown()}, 1200);
+      // Encount 
+      }else if(fs.encount() == true){
         clearInterval(animation);
         monster = fs.encountMonster(fo.name);
         setTimeout(() => { startBattle() }, 1000);
@@ -511,7 +532,6 @@ function runPunch(){
       ui.applyEnemy(monster.name, monster.hp);
       ui.damageMessageOn(monster.name, damage);
     }, 2200);
-    console.log('punch action');
   }
 
   battleProcess();

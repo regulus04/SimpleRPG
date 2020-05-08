@@ -1,6 +1,9 @@
 import { SecondFieldObject } from "./SecondFieldObject.js";
+import { FirstBoss } from "./FirstBoss.js";
 import { SecondBoss } from "./SecondBoss.js";
 import { Monsters } from "./Monsters.js";
+import { SecondMonsters } from "./SecondMonsters.js";
+import { FieldObject } from "./FieldObject.js";
 
 export class FieldSystem {
   getCharX(char, field){
@@ -94,6 +97,8 @@ export class FieldSystem {
     // Load Monster's data
     if(floorName == 'first floor'){
       monster = new Monsters(enemyNum);
+    }else if(floorName == 'second floor'){
+      monster = new SecondMonsters(enemyNum);
     }
     return monster;
   }
@@ -115,6 +120,13 @@ export class FieldSystem {
     }
     return floor;
   }
+  goDownStairs(foName){
+    let floor;
+    if(foName == 'second floor'){
+      floor = new FieldObject;
+    }
+    return floor;
+  }
   setBoss(foName){
     let boss;
     if(foName == 'first floor'){
@@ -124,4 +136,5 @@ export class FieldSystem {
     }
     return boss;
   }
+
 }

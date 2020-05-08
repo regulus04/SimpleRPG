@@ -90,7 +90,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  background: url(../img/battleBack.png) center center/cover; }
   #battle-box #hp-and-name-box {
     display: flex;
     justify-content: space-between;
@@ -275,14 +276,14 @@ body {
             margin: 0.5rem; }
   #field-container #field {
     background: slategray;
-    background: url(../img/punching.png) center center/cover;
+    background: url(../img/firstFloor.png) center center/cover;
     width: 550px;
     height: 550px;
     position: relative; }
     #field-container #field #character {
       width: 50px;
       height: 50px;
-      background: brown;
+      background: url(../img/heroUp.png) center center/cover;
       top: 500px;
       left: 250px;
       position: absolute;
@@ -295,11 +296,11 @@ body {
       width: 100%; }
     #field-container #field #boss {
       position: absolute;
+      background: url(../img/guard.png) center center/cover;
       top: 0px;
       left: 250px;
       width: 50px;
-      height: 50px;
-      background: blue; }
+      height: 50px; }
     #field-container #field #field-message-box {
       position: absolute;
       top: 0px;

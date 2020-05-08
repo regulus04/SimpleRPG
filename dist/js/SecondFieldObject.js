@@ -1,7 +1,7 @@
 export class SecondFieldObject {
   constructor(){
     this.name = 'second floor';
-    this.background = '../dist/img/potion.png';
+    this.background = '../dist/img/secondFloorH.png';
     this.obstaclesPosition = [
       {name: 'boss', top: 0, left: 250},
       {name: 'treasure', top: 100, left: 200}
