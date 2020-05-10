@@ -6,3 +6,27 @@
     opacity: 1;
   }
 }
+
+@keyframes fadeInOut{
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes heroface {
+  50% {
+    top: 1px;
+  }
+}
+
+@keyframes herobody {
+  50% {
+    top: 2px;
+  }
+}
