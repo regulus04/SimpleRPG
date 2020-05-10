@@ -59,6 +59,10 @@ const skipArrow = document.querySelector('#skip-arrow');
 const backArrow = document.querySelector('#back-arrow');
 const commandList = document.getElementById('command-list');
 const heroMoveBox = document.querySelector('#player-box');
+const heroBC = document.querySelector('#battle-hero-cap');
+const heroBW = document.querySelector('#battle-hero-weapon');
+const heroBS = document.querySelector('#battle-hero-shoes');
+const heroBT = document.querySelector('#battle-hero-t-shirt');
 const monsterMoveBox = document.querySelector('#enemy-box');
 const monsterName = document.querySelector('#enemy-name');
 const monsterHp = document.querySelector('#enemy-hp');
@@ -163,6 +167,21 @@ class UI{
     fieldContainer.style.display = "none";
     battleField.style.display = "flex";
     backArrow.style.display = 'none';
+    this.battleHeroVisual();
+  }
+  battleHeroVisual(){
+    if(hero.weapon != 'none'){
+      heroBW.style.background = `url(${qItems.getImg(hero.weapon)}) center center / cover`;
+    }
+    if(hero.head != 'none'){
+      heroBC.style.background = `url(${qItems.getImg(hero.head)}) center center / cover`;
+    }
+    if(hero.shoes != 'none'){
+      heroBS.style.background = `url(${qItems.getImg(hero.shoes)}) center center / cover`;
+    }
+    if(hero.shirt != 'none'){
+      heroBT.style.background = `url(${qItems.getImg(hero.shirt)}) center center / cover`;
+    }
   }
   messageLeftOnField(){
     movable = 2;
@@ -481,7 +500,7 @@ function runMoveChar(e){
         clearInterval(animation);
         monster = fs.encountMonster(fo.name);
         setTimeout(() => { startBattle() }, 1000);
-        setTimeout(() => { movable = 1 }, 2000);
+        setTimeout(() => { movable = 1 }, 5000);
       }
     }, 350); 
   }
