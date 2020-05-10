@@ -9,10 +9,15 @@ export class Hero {
     this.atk = 5;
     this.def = 5;
     this.spd = 5;
+    this.element = 'normal';
     this.exp = 99;
     this.maxExp = 100;
     this.xOnField = 250;
     this.yOnField = 500;
+    this.head = 'none';
+    this.weapon = 'none';
+    this.shoes = 'none';
+    this.shirt = 'none';
   }
 
   getXOnField(char, field){
@@ -98,5 +103,29 @@ export class Hero {
         break;
     }
     return img;
+  }
+  equipWeapon(item){
+    this.weapon = item;
+  }
+  equipShoes(item){
+    this.shoes = item;
+  }
+  equipHead(item){
+    this.head = item;
+  }
+  equipShirt(item){
+    this.shirt = item;
+  }
+  unequipWeapon(){
+    this.weapon = 'none';
+  }
+  unequipShoes(){
+    this.shoes = 'none';
+  }
+  unequipHead(){
+    this.head = 'none';
+  }
+  unequipShirt(){
+    this.shirt = 'none';
   }
 }

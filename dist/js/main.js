@@ -1,12 +1,17 @@
 import { Monsters } from './Monsters.js';
 import { Hero } from './Hero.js';
 import { Items } from './Items.js';
+import { EquipItems } from './EquipItems.js';
 import { BattleSystem } from './BattleSystem.js';
 import { FieldSystem } from './FieldSystem.js';
 import { FieldObject } from './FieldObject.js';
 import { SecondFieldObject } from './SecondFieldObject.js';
 import { FirstBoss } from './FirstBoss.js';
 import { SecondBoss } from './SecondBoss.js';
+import { Weapons } from './Weapons.js';
+import { Shoes } from './Shoes.js';
+import { Caps } from './Caps.js';
+import { Shirts } from './Shirts.js';
 
 // Functions I want to add later 
 // 1. typing message(by array and foreach)
@@ -32,6 +37,8 @@ const noBox = document.querySelector('#no-box');
 // Menu
 const menuScreen = document.querySelector('#menu-screen');
 const menuItemList = document.querySelector('#menu-item-list');
+const menuItems = document.querySelector('#menu-items-title');
+const menuEquip = document.querySelector('#menu-equip-title');
 const menuStatusLv = document.querySelector('#menu-status-lv');
 const menuStatusHp = document.querySelector('#menu-status-hp');
 const menuStatusMp = document.querySelector('#menu-status-mp');
@@ -39,6 +46,12 @@ const menuStatusAtk = document.querySelector('#menu-status-atk');
 const menuStatusDef = document.querySelector('#menu-status-def');
 const menuStatusSpd = document.querySelector('#menu-status-spd');
 const menuStatusExp = document.querySelector('#menu-status-exp');
+const menuHeroB = document.querySelector('#menu-hero-body');
+const menuHeroT = document.querySelector('#menu-hero-t-shirt');
+const menuHeroW = document.querySelector('#menu-hero-weapon');
+const menuHeroS = document.querySelector('#menu-hero-shoes');
+const menuHeroC = document.querySelector('#menu-hero-head');
+
 // Battle
 const battleField = document.querySelector('#main-container');
 const message = document.querySelector('#message');
@@ -68,10 +81,15 @@ const itemList = document.querySelector('#command-item-list');
 let hero = new Hero;
 let monster;
 let items = new Items;
+let qItems = new EquipItems;
 let bs = new BattleSystem;
 let fs = new FieldSystem;
 let fo = new FieldObject;
 let fieldBoss = new FirstBoss;
+let weapons = new Weapons;
+let shoes = new Shoes;
+let caps = new Caps;
+let shirts = new Shirts;
 
 // Boss status 
 let firstBoss = 'alive';
@@ -93,6 +111,17 @@ class UI{
   openMenu(){
     menuScreen.style.display = 'grid';
     field.style.display = 'none';
+    this.reStatusOnMenu();
+    this.reImgOnMenu();
+    this.itemsOn(menuItemList);
+    menuItems.style.opacity = 1;
+    menuEquip.style.opacity = 0.5;
+  }
+  closeMenu(){
+    menuScreen.style.display = 'none';
+    field.style.display = 'block';
+  }
+  reStatusOnMenu(){
     menuStatusLv.textContent = `${hero.lv}`;
     menuStatusHp.textContent = `${hero.hp} / ${hero.maxHp}`;
     menuStatusMp.textContent = `${hero.mp} / ${hero.maxMp}`;
@@ -100,11 +129,24 @@ class UI{
     menuStatusDef.textContent = `${hero.def}`;
     menuStatusSpd.textContent = `${hero.spd}`;
     menuStatusExp.textContent = `${hero.exp} / ${hero.maxExp}`;
-    this.itemsOn(menuItemList);
   }
-  closeMenu(){
-    menuScreen.style.display = 'none';
-    field.style.display = 'block';
+  reImgOnMenu(){
+    menuHeroW.style.background = 'none';
+    menuHeroS.style.background = 'none';
+    menuHeroC.style.background = 'none';
+    menuHeroT.style.background = 'none';
+    if(hero.weapon != 'none'){
+      menuHeroW.style.background = `url(${qItems.getImg(hero.weapon)}) center center / cover`;
+    }
+    if(hero.head != 'none'){
+      menuHeroC.style.background = `url(${qItems.getImg(hero.head)}) center center / cover`;
+    }
+    if(hero.shoes != 'none'){
+      menuHeroS.style.background = `url(${qItems.getImg(hero.shoes)}) center center / cover`;
+    }
+    if(hero.shirt != 'none'){
+      menuHeroT.style.background = `url(${qItems.getImg(hero.shirt)}) center center / cover`;
+    }
   }
   // Switch scene ///////////
   blackFade(){
@@ -219,11 +261,53 @@ class UI{
     items.itemList.forEach(function(item){
       if(item['stock'] != 0){
         const one = document.createElement('div');
-        one.textContent = `${item['name']}[${item['stock']}]`;
+        const two = document.createElement('div');
+        two.textContent = `${item['name']}`;
+        two.className = 'items';
+        const three = document.createElement('div');
+        three.textContent = `[${item['stock']}]`
+        one.appendChild(two);
+        one.appendChild(three);
         destination.appendChild(one); 
       }
     });
     backNum = 2;
+  }
+  equipOn(destination, hero){
+    while(destination.firstChild) {
+      destination.removeChild(destination.firstChild);
+    }
+    qItems.itemList.forEach(function(item){
+      if(item['stock'] != 0){
+        const one = document.createElement('div');
+        const two = document.createElement('div');
+        two.textContent = `${item['name']}`;
+        two.className = 'equip';
+        two.style.color = 'black';
+        if(qItems.type(item['name']) == 'weapon'){
+          if(item['name'] == hero.weapon){
+            two.style.color = 'red';
+          }
+        }else if(qItems.type(item['name']) == 'shoes'){
+          if(item['name'] == hero.shoes){
+            two.style.color = 'red';
+          }
+        }else if(qItems.type(item['name']) == 'cap'){
+          if(item['name'] == hero.head){
+            two.style.color = 'red';
+          }
+        }else if(qItems.type(item['name']) == 'shirt'){
+          if(item['name'] == hero.shirt){
+            two.style.color = 'red';
+          }
+        }
+        const three = document.createElement('div');
+        three.textContent = `[${item['stock']}]`
+        one.appendChild(two);
+        one.appendChild(three);
+        destination.appendChild(one); 
+      }
+    });
   }
   itemsOff(){
     itemList.style.display = 'none';
@@ -278,6 +362,34 @@ function runMenu(){
     menuNum = 0;
   }
 }
+// Make Item List
+menuItems.addEventListener('click', () => {
+  ui.itemsOn(menuItemList);
+  menuItems.style.opacity = 1;
+  menuEquip.style.opacity = 0.5;
+});
+// Make Equip List
+menuEquip.addEventListener('click', () => {
+  ui.equipOn(menuItemList, hero);
+  menuItems.style.opacity = 0.5;
+  menuEquip.style.opacity = 1;
+});
+// Items on Menu 
+
+// Equip on Menu ///
+menuItemList.addEventListener('click', e => {
+  let item = e.target.textContent;
+  // Using items on menu
+  if(e.target.className == 'items'){
+
+  // Equip on menu
+  }else if(e.target.className == 'equip'){
+    qItems.checkHeroEquip(item, hero);
+    ui.equipOn(menuItemList, hero);
+  }
+  ui.reStatusOnMenu();
+  ui.reImgOnMenu();
+});
 
 // Talk people on field /////////////
 boss.addEventListener('click', runTalk);
