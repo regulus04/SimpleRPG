@@ -485,8 +485,8 @@ function runMoveChar(e){
       moveCount -= 1;
       if(moveCount <= 0){
         clearInterval(animation);
-        
-        movable = 1;
+      
+        setTimeout(() => {movable = 1}, 500);
       }
       // Downstairs Check //
       if(hero.goDownStairs(fo.name) == 'go down'){
