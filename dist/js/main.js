@@ -68,6 +68,15 @@ const monsterName = document.querySelector('#enemy-name');
 const monsterHp = document.querySelector('#enemy-hp');
 const heroHp = document.querySelector('#hero-hp');
 const heroMp = document.querySelector('#hero-mp');
+// level up
+const levelUpBox = document.querySelector('#level-up-parameter-box');
+const remainP = document.querySelector('#remaining-point');
+const paraHp = document.querySelector('#parameter-hp');
+const paraMp = document.querySelector('#parameter-mp');
+const paraAtk = document.querySelector('#parameter-atk');
+const paraDef = document.querySelector('#parameter-def');
+const paraSpd = document.querySelector('#parameter-spd');
+
 // Action Command 
 const attackCmd = document.querySelector('#action-attack');
 const defendCmd = document.querySelector('#action-defend');
@@ -102,9 +111,18 @@ let secondBoss = 'alive';
 // Battle 
 let heroAction;
 let monsterAction;
+// Level up parameter
+let levelUpP = 0;
+let temHp = 0;
+let temMp = 0; 
+let temAtk = 0;
+let temDef = 0;
+let temSpd = 0;
 
 // If movabele == 1, character can move on the field
 let movable = 1;
+// Item on itemlists of the menu 
+let menuItemClickable = 1;
 
 class UI{
   // Field UI /////////////////////////////
@@ -118,6 +136,7 @@ class UI{
     this.reStatusOnMenu();
     this.reImgOnMenu();
     this.itemsOn(menuItemList);
+    menuItemClickable = 1;
     menuItems.style.opacity = 1;
     menuEquip.style.opacity = 0.5;
   }
@@ -280,6 +299,7 @@ class UI{
     items.itemList.forEach(function(item){
       if(item['stock'] != 0){
         const one = document.createElement('div');
+        one.style.position = 'relative';
         const two = document.createElement('div');
         two.textContent = `${item['name']}`;
         two.className = 'items';
@@ -290,7 +310,65 @@ class UI{
         destination.appendChild(one); 
       }
     });
+    menuItemClickable = 1;
     backNum = 2;
+  }
+  itemPopOut(target){
+    let itemName = target.textContent;
+    let desc = items.getDescription(itemName);
+    if(items.getType(itemName) == 'battle'){
+      const t = document.createElement('div');
+      t.className = 'triangle';
+      const one = document.createElement('div');
+      one.className = 'menu-pop-out';
+      const oneP = document.createElement('p');
+      oneP.textContent = `${desc}`;
+      const two = document.createElement('div');
+      two.className = 'option-box';
+      const four = document.createElement('div');
+      four.className = 'x-btn field-button';
+      const five = document.createElement('i');
+      five.className = 'fas fa-times';
+      four.appendChild(five);
+      two.appendChild(four);
+      one.appendChild(t);
+      one.appendChild(oneP);
+      one.appendChild(two);
+      target.appendChild(one);
+    }else{
+      const t = document.createElement('div');
+      t.className = 'triangle';
+      const one = document.createElement('div');
+      one.className = 'menu-pop-out';
+      const oneP = document.createElement('p');
+      oneP.textContent = `${desc}`;
+      const two = document.createElement('div');
+      two.className = 'option-box';
+      const three = document.createElement('div');
+      three.className = 'use-btn field-button';
+      three.textContent = 'USE';
+      const four = document.createElement('div');
+      four.className = 'x-btn field-button';
+      const five = document.createElement('i');
+      five.className = 'fas fa-times';
+      four.appendChild(five);
+      two.appendChild(three);
+      two.appendChild(four);
+      one.appendChild(t);
+      one.appendChild(oneP);
+      one.appendChild(two);
+      target.appendChild(one);
+    }
+  }
+  closeItemPopOut(){
+    menuItemList.childNodes.forEach(function(each){
+      each.firstChild.childNodes.forEach(function(theone){
+        if(theone.className == 'menu-pop-out'){
+          let popout = document.querySelector('.menu-pop-out');
+          popout.parentNode.removeChild(popout);
+        }
+      });
+    });
   }
   equipOn(destination, hero){
     while(destination.firstChild) {
@@ -342,6 +420,18 @@ class UI{
     heroHp.textContent = hp;
     heroMp.textContent = mp;
   }
+  openLevelUp(){
+    levelUpBox.style.display = 'grid';
+    remainP.textContent = levelUpP;
+    paraHp.textContent = `HP: ${hero.maxHp}`;
+    paraMp.textContent = `MP: ${hero.maxMp}`;
+    paraAtk.textContent = `ATK: ${hero.atk}`;
+    paraDef.textContent = `DEF: ${hero.def}`;
+    paraSpd.textContent = `SPD: ${hero.spd}`;
+  }
+  closeLevelUp(){
+    levelUpBox.style.display = 'none';
+  }
   // Action Animation ////
   punchAnime(){
     heroMoveBox.style.background = 'red';
@@ -367,6 +457,8 @@ class UI{
 }
 // Generate UI instance
 const ui = new UI();
+
+ui.messageOff();
 
 // Field ////////////////////////////////////////////////////////////
 // Menu ////////
@@ -396,11 +488,25 @@ menuEquip.addEventListener('click', () => {
 // Items on Menu 
 
 // Equip on Menu ///
+let menuItemClicked;
 menuItemList.addEventListener('click', e => {
   let item = e.target.textContent;
   // Using items on menu
   if(e.target.className == 'items'){
-
+    if(menuItemClickable == 1){
+      menuItemClicked = e.target.textContent;
+      ui.itemPopOut(e.target);
+      menuItemClickable = 2;
+    }
+  // Close the pop-out
+  }else if(e.target.className == 'x-btn field-button' || e.target.className == 'fas fa-times'){
+    ui.closeItemPopOut();
+    menuItemClickable = 1;
+  // Use the items on menu
+  }else if(e.target.textContent == 'USE'){
+    items.useItem(menuItemClicked, hero);
+    ui.itemsOn(menuItemList);
+    menuItemClickable = 1;
   // Equip on menu
   }else if(e.target.className == 'equip'){
     qItems.checkHeroEquip(item, hero);
@@ -615,7 +721,7 @@ function runNext(){
     case 'get exp' :
       ui.messageOn(`Hero got ${monster.exp} exp!`);
       hero.recieveExp(monster.exp);
-      if(hero.exp >= 100){
+      if(hero.exp >= hero.maxExp){
         skipNum = 'level up';
         hero.resetExp();
       }else{
@@ -624,6 +730,13 @@ function runNext(){
       break;
     case 'level up' :
       ui.messageOn('Hero leveled up!');
+      skipNum = 'parameter';
+      break;
+    case 'parameter' :
+      ui.messageOff();
+      ui.arrowOff();
+      levelUpP += 3;
+      ui.openLevelUp();
       skipNum = 'get item';
       break;
     case 'get item' :
@@ -643,6 +756,101 @@ function runNext(){
       break;
   }
 }
+// Level up parameter 
+levelUpBox.addEventListener('click', runPara);
+function runPara(e){
+  if(e.target.textContent == '+' && levelUpP != 0){
+    switch(e.target.id){
+      case 'atk-plus' :
+        levelUpP -= 1;
+        hero.atk += 1;
+        temAtk += 1;
+        ui.openLevelUp();
+        break;
+      case 'def-plus' :
+        levelUpP -= 1;
+        hero.def += 1;
+        temDef += 1;
+        ui.openLevelUp();
+        break;
+      case 'spd-plus' :
+        levelUpP -= 1;
+        hero.spd += 1;
+        temSpd += 1;
+        ui.openLevelUp();
+        break;
+      case 'hp-plus' :
+        levelUpP -= 1;
+        hero.maxHp += 10;
+        hero.hp += 10;
+        temHp += 1;
+        ui.openLevelUp();
+        break;
+      case 'mp-plus' :
+        levelUpP -= 1;
+        hero.maxMp += 3;
+        hero.mp += 3;
+        temMp += 1;
+        ui.openLevelUp();
+        break;
+    }
+  }else if(e.target.textContent == '-'){
+    switch(e.target.id){
+      case 'atk-minus' :
+        if(temAtk != 0){
+          levelUpP += 1;
+          hero.atk -= 1;
+          temAtk -= 1;
+          ui.openLevelUp();
+        }
+        break;
+      case 'def-minus' :
+        if(temDef != 0){
+          levelUpP += 1;
+          hero.def -= 1;
+          temDef -= 1;
+          ui.openLevelUp();
+        }
+        break;
+      case 'spd-minus' :
+        if(temSpd != 0){
+          levelUpP += 1;
+          hero.spd -= 1;
+          temSpd -= 1;
+          ui.openLevelUp();
+        }
+        break;
+      case 'hp-minus' :
+        if(temHp != 0){
+          levelUpP += 1;
+          hero.maxHp -= 10;
+          hero.hp -= 10;
+          temHp -= 1;
+          ui.openLevelUp();
+        }
+        break;
+      case 'mp-minus' :
+        if(temMp != 0){
+          levelUpP += 1;
+          hero.maxMp -= 3;
+          hero.mp -= 3;
+          temMp -= 1;
+          ui.openLevelUp();
+        }
+        break;
+    }
+  }else if(e.target.textContent == 'DONE'){
+    temAtk = 0;
+    temDef = 0;
+    temSpd = 0;
+    temHp = 0;
+    temMp = 0;
+    ui.closeLevelUp();
+    runNext();
+  }
+}
+
+
 //////////////////////////////////
 // Attack command ////
 attackCmd.addEventListener('click', function(){
