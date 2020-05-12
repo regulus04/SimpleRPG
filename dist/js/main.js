@@ -385,8 +385,65 @@ class UI{
       target.appendChild(one);
     }
   }
+  battleItemPopOut(target){
+    let itemName = target.textContent;
+    let desc = items.getDescription(itemName);
+    if(items.getType(itemName) == 'field' || items.getType(itemName) == 'material'){
+      const t = document.createElement('div');
+      t.className = 'triangle';
+      const one = document.createElement('div');
+      one.className = 'menu-pop-out';
+      const oneP = document.createElement('p');
+      oneP.textContent = `${desc}`;
+      const two = document.createElement('div');
+      two.className = 'option-box';
+      const four = document.createElement('div');
+      four.className = 'x-btn field-button';
+      const five = document.createElement('i');
+      five.className = 'fas fa-times';
+      four.appendChild(five);
+      two.appendChild(four);
+      one.appendChild(t);
+      one.appendChild(oneP);
+      one.appendChild(two);
+      target.appendChild(one);
+    }else{
+      const t = document.createElement('div');
+      t.className = 'triangle';
+      const one = document.createElement('div');
+      one.className = 'menu-pop-out';
+      const oneP = document.createElement('p');
+      oneP.textContent = `${desc}`;
+      const two = document.createElement('div');
+      two.className = 'option-box';
+      const three = document.createElement('div');
+      three.className = 'use-btn field-button';
+      three.textContent = 'USE';
+      const four = document.createElement('div');
+      four.className = 'x-btn field-button';
+      const five = document.createElement('i');
+      five.className = 'fas fa-times';
+      four.appendChild(five);
+      two.appendChild(three);
+      two.appendChild(four);
+      one.appendChild(t);
+      one.appendChild(oneP);
+      one.appendChild(two);
+      target.appendChild(one);
+    }
+  }
   closeItemPopOut(){
     menuItemList.childNodes.forEach(function(each){
+      each.firstChild.childNodes.forEach(function(theone){
+        if(theone.className == 'menu-pop-out'){
+          let popout = document.querySelector('.menu-pop-out');
+          popout.parentNode.removeChild(popout);
+        }
+      });
+    });
+  }
+  battleCloseItemPopOut(){
+    itemList.childNodes.forEach(function(each){
       each.firstChild.childNodes.forEach(function(theone){
         if(theone.className == 'menu-pop-out'){
           let popout = document.querySelector('.menu-pop-out');
@@ -1030,6 +1087,20 @@ function runGurad(){
 // Item Command ////
 itemCmd.addEventListener('click', function(){
   ui.itemsOn(itemList);
+  battleItemClickable = 1;
+});
+let battleItemClickable = 1;
+itemList.addEventListener('click', function(e){
+  if(e.target.className == 'items' && battleItemClickable == 1){
+    ui.battleItemPopOut(e.target);
+    battleItemClickable = 0;
+  }else if(e.target.className == 'x-btn field-button' || e.target.className == 'fas fa-times'){
+    ui.battleCloseItemPopOut();
+    battleItemClickable = 1;
+  }else if(e.target.textContent == 'USE'){
+    // Item action //////////
+    console.log('hello');
+  }
 });
 
 // Run away ////
