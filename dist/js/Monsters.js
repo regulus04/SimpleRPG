@@ -3,6 +3,7 @@ export class Monsters {
     switch(enemyNum){
       case 1 :
         this.hp = 10;
+        this.maxHp = 10;
         this.name = "Goomba";
         this.atk = 6;
         this.color = "saddlebrown";
@@ -15,6 +16,7 @@ export class Monsters {
         break;
       case 2 :
         this.hp = 20;
+        this.maxHp = 20;
         this.name = "Koopa";
         this.atk = 7;
         this.color = "seagreen";
@@ -27,6 +29,7 @@ export class Monsters {
         break;
       case 3 :
         this.hp = 30;
+        this.maxHp = 30;
         this.name = "Patapata";
         this.atk = 10;
         this.color = "crimson";
@@ -39,6 +42,7 @@ export class Monsters {
         break;
       case 4 :
         this.hp = 40;
+        this.maxHp = 40;
         this.name = "Bowser";
         this.atk = 20;
         this.color = "green";
@@ -50,16 +54,20 @@ export class Monsters {
         this.rareItem = 0;
         break;
     }
+    this.action = 1;
     this.message = 'sprang out!!!';
     this.event = 'none';
   }
 
-  attack(hero){
+  attack(hero, guardNum){
     let damage;
-    if(this.atk - hero.def <= 0){
+    if(this.atk - hero.battleDef <= 0){
       damage = 1;
     }else{
-      damage = this.atk - hero.def;
+      damage = this.atk - hero.battleDef;
+    }
+    if(guardNum == 1){
+      damage = Math.floor(damage / 3);
     }
     hero.hp -= damage;
     return damage;

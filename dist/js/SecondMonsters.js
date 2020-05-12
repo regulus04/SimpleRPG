@@ -3,6 +3,7 @@ export class SecondMonsters {
     switch(enemyNum){
       case 1 :
         this.hp = 10;
+        this.maxHp = 10;
         this.name = "Fish";
         this.atk = 6;
         this.color = "pink";
@@ -15,6 +16,7 @@ export class SecondMonsters {
         break;
       case 2 :
         this.hp = 20;
+        this.maxHp = 20;
         this.name = "Calamari";
         this.atk = 7;
         this.color = "wheat";
@@ -27,6 +29,7 @@ export class SecondMonsters {
         break;
       case 3 :
         this.hp = 30;
+        this.maxHp = 30;
         this.name = "Cat";
         this.atk = 10;
         this.color = "purple";
@@ -39,6 +42,7 @@ export class SecondMonsters {
         break;
       case 4 :
         this.hp = 40;
+        this.maxHp = 40;
         this.name = "King";
         this.atk = 20;
         this.color = "gray";
@@ -56,10 +60,13 @@ export class SecondMonsters {
 
   attack(hero){
     let damage;
-    if(this.atk - hero.def <= 0){
+    if(this.atk - hero.battleDef <= 0){
       damage = 1;
     }else{
-      damage = this.atk - hero.def;
+      damage = this.atk - hero.battleDef;
+    }
+    if(guardNum == 1){
+      damage = Math.floor(damage / 3);
     }
     hero.hp -= damage;
     return damage;

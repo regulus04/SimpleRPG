@@ -1,6 +1,7 @@
 export class SecondBoss {
   constructor(){
     this.hp = 1;
+    this.maxHp = 1;
     this.name = 'Fire Devil';
     this.atk = 10;
     this.color = "crimson";
@@ -17,10 +18,13 @@ export class SecondBoss {
 
   attack(hero){
     let damage;
-    if(this.atk - hero.def <= 0){
+    if(this.atk - hero.battleDef <= 0){
       damage = 1;
     }else{
-      damage = this.atk - hero.def;
+      damage = this.atk - hero.battleDef;
+    }
+    if(guardNum == 1){
+      damage = Math.floor(damage / 3);
     }
     hero.hp -= damage;
     return damage;

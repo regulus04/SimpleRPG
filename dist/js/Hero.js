@@ -9,6 +9,9 @@ export class Hero {
     this.atk = 5;
     this.def = 5;
     this.spd = 5;
+    this.battleAtk = 0;
+    this.battleDef = 0;
+    this.battleSpd = 0;
     this.defE = 'normal';
     this.atkE = 'normal';
     this.exp = 99;
@@ -19,6 +22,19 @@ export class Hero {
     this.weapon = 'none';
     this.shoes = 'none';
     this.shirt = 'none';
+  }
+
+  setBattlePara(){
+    this.battleAtk = this.atk;
+    this.battleDef = this.def;
+    this.battleSpd = this.spd;
+  }
+  
+  guardMp(){
+    this.mp += 10;
+    if(this.mp > this.maxMp){
+      this.mp = this.maxMp;
+    }
   }
 
   getXOnField(char, field){
@@ -47,9 +63,9 @@ export class Hero {
 
   recieveExp(monsterExp){
     this.exp += monsterExp;
-    if(this.exp >= this.maxExp){
-      this.levelUp();
-    }
+    // if(this.exp >= this.maxExp){
+    //   this.levelUp();
+    // }
   }
 
   resetExp(){
@@ -69,8 +85,8 @@ export class Hero {
   }
 
   punch(monster){
-    monster.hp -= this.atk;
-    return this.atk;
+    monster.hp -= this.battleAtk;
+    return this.battleAtk;
   }
   resetPosition(){
     this.xOnField = 250;

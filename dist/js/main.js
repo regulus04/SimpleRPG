@@ -95,7 +95,7 @@ const runCmd = document.querySelector('#action-run');
 // Attack Command
 const attackList = document.querySelector('#attack-list');
 const punchCmd = document.querySelector('#attack-punch');
-const kickCmd = document.querySelector('#attack-kick');
+const iceCmd = document.querySelector('#attack-ice');
 const fireCmd = document.querySelector('#attack-fire');
 const thunderCmd = document.querySelector('#attack-thunder');
 // Item Command
@@ -498,25 +498,42 @@ class UI{
   }
   // Action Animation ////
   punchAnime(){
-    heroMoveBox.style.background = 'red';
-    this.messageOn('Hero is punching!');
     setTimeout(function(){
-      heroMoveBox.style.background = 'steelblue';
+      heroMoveBox.style.animationName = 'heroHit';
+      heroMoveBox.style.animationPlayState = 'running';
+    }, 400);
+    this.messageOn('Hero is attacking!');
+    setTimeout(function(){
       ui.messageOff();
+      heroMoveBox.style.animationPlayState = 'paused';
     }, 1000);
   }
   getDamageAnime(e){
     if(e == 1){
+      heroMoveBox.style.animationName = 'flashing';
       heroMoveBox.style.animationPlayState = 'running';
       setTimeout(function(){
         heroMoveBox.style.animationPlayState = 'paused';
       }, 1200);
     }else{
+      monsterMoveBox.style.animationName = 'flashing';
       monsterMoveBox.style.animationPlayState = 'running';
       setTimeout(function(){
         monsterMoveBox.style.animationPlayState = 'paused';
       }, 1200);
     }
+  }
+  monsterHitAnime(){
+    this.messageOn(`${monster.name} is attacking!`);
+    setTimeout(function(){
+      monsterMoveBox.style.animationName = 'monsterHit';
+      monsterMoveBox.style.animationPlayState = 'running';
+    }, 400);
+    // this.messageOn(`${monster.name} is attacking!`);
+    setTimeout(function(){
+      ui.messageOff();
+      monsterMoveBox.style.animationPlayState = 'paused';
+    }, 1000);
   }
 }
 // Generate UI instance
@@ -657,6 +674,7 @@ function runYes(){
   }else if(fo.name == 'second floor'){
     monster = new SecondBoss;
   }
+  hero.setBattlePara();
   startBattle();
 }
 noBox.addEventListener('click', runNo);
@@ -714,6 +732,7 @@ function runMoveChar(e){
       }else if(fs.encount() == true){
         clearInterval(animation);
         monster = fs.encountMonster(fo.name);
+        hero.setBattlePara();
         setTimeout(() => { startBattle() }, 1000);
         setTimeout(() => { movable = 1 }, 5000);
       }
@@ -762,9 +781,10 @@ function checkBoss(){
 }
 
 // Battle ///////////////////////////////////////////////////////////////////
-// startButtle();
-// Experiment zone////////////////////
 
+// Experiment zone////////////////////
+// monster = fs.encountMonster(fo.name);
+// startBattle();
 // Back arrow ////////////
 backArrow.addEventListener('click', runBack);
 let backNum = 0;
@@ -782,13 +802,16 @@ function runBack(){
 // Skip arrow //////////// Battle Turn Process //////
 skipArrow.addEventListener('click', runNext);
 let skipNum = 'battle start';
+let guardNum = 0;
 function runNext(){
   switch(skipNum){
     case 'battle start' :
       ui.messageOff();
       ui.commandOn();
+      guardNum = 0;
       break;
     case 'battle end' :
+      hero.setBattlePara();
       ui.backArrowOff();
       ui.battleEnd();
       eventAfterBattle();
@@ -818,6 +841,11 @@ function runNext(){
       ui.messageOff();
       ui.arrowOff();
       ui.commandOn();
+      if(guardNum == 1){
+        hero.guardMp();
+        ui.applyHero(hero.hp, hero.mp);
+      }
+      guardNum = 0;
       break;
     case 'run' :
       ui.battleEnd();
@@ -831,6 +859,7 @@ function runNext(){
       ui.messageOn(`Hero got ${monster.exp} exp!`);
       hero.recieveExp(monster.exp);
       if(hero.exp >= hero.maxExp){
+        hero.levelUp();
         skipNum = 'level up';
         hero.resetExp();
       }else{
@@ -975,13 +1004,26 @@ function runPunch(){
     let damage = hero.punch(monster);
     monster.hp = bs.hpAdjust(monster.hp);
     ui.punchAnime();
-    setTimeout(ui.getDamageAnime.bind(null,0), 1000);
+    setTimeout(ui.getDamageAnime.bind(null,0),1000);
     setTimeout(function(){
       ui.applyEnemy(monster.name, monster.hp);
       ui.damageMessageOn(monster.name, damage);
     }, 2200);
   }
-
+  battleProcess();
+}
+// Guard ///
+defendCmd.addEventListener('click', runGurad);
+function runGurad(){
+  heroAction = function guard(){
+    ui.commandOff();
+    guardNum = 1;
+    // (guard anime 0.6s) //
+    setTimeout(function(){
+      ui.messageOn('Hero is defending himself');
+      ui.arrowOn();
+    }, 1000);
+  }
   battleProcess();
 }
 
@@ -993,19 +1035,38 @@ itemCmd.addEventListener('click', function(){
 // Run away ////
 runCmd.addEventListener('click', runAway);
 function runAway(){
-  ui.commandOff();
-  ui.messageOn('Hero escaped successflly');
-  ui.arrowOn();
-  skipNum = 'run';
+  if(bs.compareSp(hero, monster) == 1){
+    ui.commandOff();
+    ui.messageOn('Hero escaped successflly');
+    ui.arrowOn();
+    skipNum = 'run';
+  }else{
+    ui.commandOff();
+    ui.messageOn('Hero failed to escape!!!');
+    ui.arrowOn();
+    skipNum = 'second monster';
+  }
 }
 
 // Enemy Turn /////
 monsterAction = function enemyTurn(){
-  ui.attackOff();
-  let damage = monster.attack(hero);
-  hero.hp = bs.hpAdjust(hero.hp);
-  ui.applyHero(hero.hp, hero.mp);
-  ui.damageMessageOn(hero.name, damage);
+  if(monster.hp <= monster.maxHp * 0.2 && monster.action != 1){
+    
+  }else{
+    // Monster normal attack
+    ui.attackOff();
+    ui.commandOff();
+    ui.monsterHitAnime();
+    setTimeout(function(){
+      ui.getDamageAnime(1);
+    }, 1000);
+    setTimeout(function(){
+      let damage = monster.attack(hero, guardNum);
+      hero.hp = bs.hpAdjust(hero.hp);
+      ui.applyHero(hero.hp, hero.mp);
+      ui.damageMessageOn(hero.name, damage);
+    }, 2200);
+  }
 }
 
 // Battle turns process
@@ -1028,3 +1089,4 @@ function battleProcess(){
     }
   }
 }
+

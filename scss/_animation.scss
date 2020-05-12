@@ -39,3 +39,21 @@
     background: white;
   }
 }
+
+@keyframes heroHit {
+  30% {
+    left: 50px;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes monsterHit {
+  30% {
+    left: -50px;
+  }
+  100% {
+    left: 0;
+  }
+}
