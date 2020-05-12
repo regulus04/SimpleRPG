@@ -1,7 +1,7 @@
 export class Caps {
   constructor(){
     this.itemList = [
-      {name: 'Legend Cap', def: 5, element: 'fire', img: '../dist/img/legendCap.png'},
+      {name: 'Legend Cap', def: 5, defE: 'fire', img: '../dist/img/legendCap.png'},
     ];
   }
 
@@ -9,7 +9,7 @@ export class Caps {
     this.itemList.forEach(function(each){
       if(each['name'] == cap){
         hero.def += each['def'];
-        hero.element = each['element'];
+        hero.defE = each['defE'];
       }
     });
   }
@@ -17,7 +17,7 @@ export class Caps {
     this.itemList.forEach(function(each){
       if(each['name'] == cap){
         hero.def -= each['def'];
-        hero.element = 'normal';
+        hero.defE = 'normal';
       }
     });
   }

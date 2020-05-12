@@ -9,7 +9,8 @@ export class Hero {
     this.atk = 5;
     this.def = 5;
     this.spd = 5;
-    this.element = 'normal';
+    this.defE = 'normal';
+    this.atkE = 'normal';
     this.exp = 99;
     this.maxExp = 100;
     this.xOnField = 250;

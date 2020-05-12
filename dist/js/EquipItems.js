@@ -11,6 +11,14 @@ export class EquipItems {
       {name: 'Legend Cap', stock: 1, type: 'cap'},
       {name: 'Red Shoes', stock: 1, type: 'shoes'},
       {name: 'Legend T-shirt', stock: 1, type: 'shirt'},
+      {name: 'Flame Sword', stock: 1, type: 'weapon'},
+      // {name: 'Dagger', stock: 1, type: 'weapon'},
+      // {name: 'Katana', stock: 1, type: 'weapon'},
+      // {name: 'Legend Cap', stock: 1, type: 'cap'},
+      // {name: 'Red Shoes', stock: 1, type: 'shoes'},
+      // {name: 'Legend T-shirt', stock: 1, type: 'shirt'},
+      // {name: 'Flame Sword', stock: 1, type: 'weapon'},
+
     ];
   }
   spendItem(itemName){
@@ -99,7 +107,7 @@ export class EquipItems {
     caps.itemList.forEach(function(each){
       if(each['name'] == item){
         hero.def += each['def'];
-        hero.element = each['element'];
+        hero.defE = each['defE'];
       }
     });
     shirts.itemList.forEach(function(each){
@@ -125,7 +133,7 @@ export class EquipItems {
     caps.itemList.forEach(function(each){
       if(each['name'] == item){
         hero.def -= each['def'];
-        hero.element = 'normal';
+        hero.defE = 'normal';
       }
     });
     shirts.itemList.forEach(function(each){
@@ -134,7 +142,6 @@ export class EquipItems {
       }
     });
   }
-
 
   checkHeroEquip(item, hero){
     this.itemList.forEach(function(each){

@@ -41,7 +41,6 @@ export class FieldSystem {
         }else if(mouseX > charX && mouseY < charY){
           if(mouseX - (charX + 50) > charY - mouseY){
             direction = 'right';
-            console.log('hello');
           }else{
             direction = 'up';
           }

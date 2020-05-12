@@ -12,6 +12,7 @@ import { Weapons } from './Weapons.js';
 import { Shoes } from './Shoes.js';
 import { Caps } from './Caps.js';
 import { Shirts } from './Shirts.js';
+import { Craft } from './Craft.js';
 
 // Functions I want to add later 
 // 1. typing message(by array and foreach)
@@ -26,6 +27,7 @@ const heroOnField = document.querySelector('#character');
 const boss = document.querySelector('#boss');
 // Field Menu
 const menuBtn = document.querySelector('#cmd-menu');
+const craftBtm = document.querySelector('#cmd-craft');
 const saveBtn = document.querySelector('#cmd-save');
 const loadBtn = document.querySelector('#cmd-load');
 // Field Message
@@ -51,6 +53,14 @@ const menuHeroT = document.querySelector('#menu-hero-t-shirt');
 const menuHeroW = document.querySelector('#menu-hero-weapon');
 const menuHeroS = document.querySelector('#menu-hero-shoes');
 const menuHeroC = document.querySelector('#menu-hero-head');
+// Craft
+const craftScreen = document.querySelector('#craft-screen');
+const materialList = document.querySelector('#craft-material-list');
+const equipList = document.querySelector('#craft-equipment-list');
+const resultMaterial = document.querySelector('#craft-result-material');
+const resultEquip = document.querySelector('#craft-result-equipment');
+const resultResult = document.querySelector('#craft-result-result');
+const doCraft = document.querySelector('#craft-btn');
 
 // Battle
 const battleField = document.querySelector('#main-container');
@@ -95,6 +105,7 @@ let hero = new Hero;
 let monster;
 let items = new Items;
 let qItems = new EquipItems;
+let crafts = new Craft;
 let bs = new BattleSystem;
 let fs = new FieldSystem;
 let fo = new FieldObject;
@@ -107,6 +118,11 @@ let shirts = new Shirts;
 // Boss status 
 let firstBoss = 'alive';
 let secondBoss = 'alive';
+
+// Craft
+let selectedMaterial = '???';
+let selectedEquipment = '???';
+let selectedResult = '???'
 
 // Battle 
 let heroAction;
@@ -124,21 +140,30 @@ let movable = 1;
 // Item on itemlists of the menu 
 let menuItemClickable = 1;
 
+field
 class UI{
   // Field UI /////////////////////////////
+  fieldOn(){
+    field.style.display = 'block';
+  }
+  fieldOff(){
+    field.style.display = 'none';
+  }
   moveChar(char, xTo, yTo){
     char.style.top = yTo + 'px';
     char.style.left = xTo + 'px';
   }
   openMenu(){
+    this.craftOff();
+    this.fieldOff();
     menuScreen.style.display = 'grid';
-    field.style.display = 'none';
     this.reStatusOnMenu();
     this.reImgOnMenu();
     this.itemsOn(menuItemList);
     menuItemClickable = 1;
     menuItems.style.opacity = 1;
     menuEquip.style.opacity = 0.5;
+    console.log('hello');
   }
   closeMenu(){
     menuScreen.style.display = 'none';
@@ -316,7 +341,7 @@ class UI{
   itemPopOut(target){
     let itemName = target.textContent;
     let desc = items.getDescription(itemName);
-    if(items.getType(itemName) == 'battle'){
+    if(items.getType(itemName) == 'battle' || items.getType(itemName) == 'material'){
       const t = document.createElement('div');
       t.className = 'triangle';
       const one = document.createElement('div');
@@ -411,6 +436,45 @@ class UI{
     backArrow.style.display = 'none';
     this.commandOn();
   }
+  craftOn(){
+    craftScreen.style.display = 'grid';
+    field.style.display = 'none';
+    menuScreen.style.display = 'none';
+    selectedMaterial = '???';
+    selectedEquipment = '???';
+    selectedResult = '???';
+    doCraft.style.display = 'none';
+    this.craftResultOn();
+    this.materialOn(materialList);
+    this.equipOn(equipList, hero);
+  }
+  craftOff(){
+    craftScreen.style.display = 'none';
+  }
+  materialOn(destination){
+    while(destination.firstChild) {
+      destination.removeChild(destination.firstChild);
+    }
+    items.itemList.forEach(function(item){
+      if(item['stock'] != 0 && item['use'] == 'material'){
+        const one = document.createElement('div');
+        one.style.position = 'relative';
+        const two = document.createElement('div');
+        two.textContent = `${item['name']}`;
+        two.className = 'items';
+        const three = document.createElement('div');
+        three.textContent = `[${item['stock']}]`
+        one.appendChild(two);
+        one.appendChild(three);
+        destination.appendChild(one); 
+      }
+    });
+  }
+  craftResultOn(){
+    resultMaterial.textContent = selectedMaterial;
+    resultEquip.textContent = selectedEquipment;
+    resultResult.textContent = selectedResult;
+  }
   applyEnemy(name, hp, color){
     monsterName.textContent = name;
     monsterHp.textContent = hp;
@@ -458,19 +522,15 @@ class UI{
 // Generate UI instance
 const ui = new UI();
 
-ui.messageOff();
-
 // Field ////////////////////////////////////////////////////////////
-// Menu ////////
+// Menu //////////////////////
 menuBtn.addEventListener('click', runMenu);
-let menuNum = 0;
+
 function runMenu(){
-  if(menuNum == 0){
+  if(menuScreen.style.display == 'none' || menuScreen.style.display == ''){
     ui.openMenu();
-    menuNum = 1;
   }else{
     ui.closeMenu();
-    menuNum = 0;
   }
 }
 // Make Item List
@@ -485,7 +545,6 @@ menuEquip.addEventListener('click', () => {
   menuItems.style.opacity = 0.5;
   menuEquip.style.opacity = 1;
 });
-// Items on Menu 
 
 // Equip on Menu ///
 let menuItemClicked;
@@ -515,6 +574,56 @@ menuItemList.addEventListener('click', e => {
   ui.reStatusOnMenu();
   ui.reImgOnMenu();
 });
+
+// Craft //////////////////////////////////////
+craftBtm.addEventListener('click', runCraft);
+function runCraft(){
+  if(craftScreen.style.display == 'none' || craftScreen.style.display == ''){
+    ui.craftOn();
+  }else{
+    ui.craftOff();
+    ui.fieldOn();
+  }
+}
+materialList.addEventListener('click', runMaterial);
+function runMaterial(e){
+  if(e.target.className == 'items'){
+    selectedMaterial = e.target.textContent;
+    ui.craftResultOn();
+    if(selectedMaterial != '???' && selectedEquipment != '???'){
+      selectedResult = crafts.craftPatern(selectedMaterial, selectedEquipment);
+      ui.craftResultOn();
+      doCraft.style.display = 'block';
+    }
+  }
+}
+equipList.addEventListener('click', runEquipment);
+function runEquipment(e){
+  if(e.target.className == 'equip'){
+    if(e.target.style.color != 'red'){
+      selectedEquipment = e.target.textContent;
+      ui.craftResultOn();
+      if(selectedEquipment != '???' && selectedMaterial != '???'){
+        selectedResult = crafts.craftPatern(selectedMaterial, selectedEquipment);
+        ui.craftResultOn();
+        doCraft.style.display = 'block';
+      } 
+    }
+  }
+}
+doCraft.addEventListener('click', runCraftExecution);
+function runCraftExecution(){
+  if(selectedResult == 'Stone'){
+    items.spendItem(selectedMaterial);
+    qItems.spendItem(selectedEquipment);
+    items.getItem('Stone');
+  }else{
+    items.spendItem(selectedMaterial);
+    qItems.spendItem(selectedEquipment);
+    qItems.getItem(selectedResult);
+  }
+  ui.craftOn();
+}
 
 // Talk people on field /////////////
 boss.addEventListener('click', runTalk);

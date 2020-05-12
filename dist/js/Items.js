@@ -5,9 +5,12 @@ export class Items {
       {name: 'Ether', stock: 3, use: 'both', description: '20 HP recovery'},
       {name: 'Stone', stock: 0, use: 'battle', description: 'You can throw'},
       {name: 'Shuriken', stock: 3, use: 'battle', description: 'You can throw'},
-      {name: 'Chocolate', stock: 0, use: 'battle', description: 'Gain 5 atk temporary'},
-      {name: 'Whistle', stock: 0, use: 'field', description: 'Use and see what happens'},
-      {name: 'Fire Ball', stock: 0, use: 'battle', description: 'You can throw'},
+      {name: 'Chocolate', stock: 1, use: 'battle', description: 'Gain 5 atk temporary'},
+      {name: 'Whistle', stock: 1, use: 'field', description: 'Use and see what happens'},
+      {name: 'Fire Ball', stock: 1, use: 'battle', description: 'You can throw'},
+      {name: 'Mithril', stock: 1, use: 'material', description: 'This is for Craft'},
+      {name: 'Bronze', stock: 1, use: 'material', description: 'This is for Craft'},
+      {name: 'Orichalcum', stock: 1, use: 'material', description: 'This is for Craft'},
     ];
   }
   useItem(itemName, hero){

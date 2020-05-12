@@ -447,7 +447,10 @@ body {
               margin: 0.5rem;
             }
           }
-          div:hover {
+          .items:hover {
+            cursor: pointer;
+          }
+          .equip:hover {
             cursor: pointer;
           }
 
@@ -499,8 +502,111 @@ body {
       }
     }
   }
+
+  // Craft screen //////////////////
+  #craft-screen {
+    width: 550px;
+    height: 550px;
+    box-sizing: border-box;
+    background: white;
+    border: 5px black solid;
+    border-radius: 10px;
+    display: grid;
+    display: none;
+    grid-template-rows: repeat(1, 1fr 4fr 4fr 3fr);
+    #craft-title-box {
+      background: white;
+      i {
+        font-size: 1.2rem;
+      }
+    }
+    #craft-material-box {
+      background: white;
+      border-top: 3px black solid;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+
+      #craft-material-title-box {
+        border-bottom: 3px black solid;
+      }
+
+      #craft-material-list {
+        width: 100%;
+        height: 160px;
+        overflow: scroll;
+
+        .items:hover {
+          cursor: pointer;
+        }
+        div {
+          display: inline-block;
+
+          div {
+            display: inline-block;
+            padding: 0.5rem;
+          }
+        }
+      }
+    }
+    #craft-equipment-box {
+      background: white;
+      border-bottom: 3px black solid;
+      border-top: 3px black solid;
+      box-sizing: border-box;
+
+      #craft-equipment-title-box {
+        border-bottom: 3px black solid;
+      }
+      #craft-equipment-list-box {
+        width: 100%;
+        height: 100%;
+        #craft-equipment-list{
+          width: 100%;
+          height: 160px;
+          overflow: scroll;
+
+          .equip:hover {
+            cursor: pointer;
+          }
+          div {
+            display: inline-block;
   
-  // Field Field //////////
+            div {
+              display: inline-block;
+              padding: 0.5rem;
+            }
+          }
+        }
+      }
+    }
+    #craft-result-box {
+      background: steelblue;
+      position: relative;
+      #craft-result-up-box, #craft-result-down-box {
+        width: 100%;
+        height: 100%;
+      }
+
+      #craft-btn {
+        position: absolute;
+        right: 1rem;
+        bottom: 1rem;
+        padding: 0.3rem;
+        animation-name: redFlashing;
+        animation-duration: 1.5s;
+        animation-iteration-count: infinite;
+
+        display: none;
+
+        i {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+  
+  // Field Field ////////////////////////
   #field {
     background: slategray;
     background: url(../img/firstFloor.png) center center/ cover;

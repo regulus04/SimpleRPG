@@ -30,3 +30,12 @@
     top: 2px;
   }
 }
+
+@keyframes redFlashing {
+  50% {
+    background: red;
+  }
+  100% {
+    background: white;
+  }
+}

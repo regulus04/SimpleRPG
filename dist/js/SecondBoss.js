@@ -5,6 +5,8 @@ export class SecondBoss {
     this.atk = 10;
     this.color = "crimson";
     this.spd = 1;
+    this.defE = 'normal';
+    this.atkE = 'normal';
     this.exp = 150;
     this.item = 'Shuriken';
     // this.firstMessage = 'Wanna fight me???';

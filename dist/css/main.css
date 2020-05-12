@@ -20,6 +20,12 @@
   50% {
     top: 2px; } }
 
+@keyframes redFlashing {
+  50% {
+    background: red; }
+  100% {
+    background: white; } }
+
 * {
   margin: 0;
   padding: 0; }
@@ -360,7 +366,9 @@ body {
             #field-container #menu-screen #menu-item-box #menu-item-list-box #menu-item-list div div {
               display: inline-block;
               margin: 0.5rem; }
-          #field-container #menu-screen #menu-item-box #menu-item-list-box #menu-item-list div:hover {
+          #field-container #menu-screen #menu-item-box #menu-item-list-box #menu-item-list .items:hover {
+            cursor: pointer; }
+          #field-container #menu-screen #menu-item-box #menu-item-list-box #menu-item-list .equip:hover {
             cursor: pointer; }
           #field-container #menu-screen #menu-item-box #menu-item-list-box #menu-item-list .menu-pop-out {
             position: absolute;
@@ -398,6 +406,77 @@ body {
                 align-items: center; }
                 #field-container #menu-screen #menu-item-box #menu-item-list-box #menu-item-list .menu-pop-out .option-box .x-btn i {
                   font-size: 1rem; }
+  #field-container #craft-screen {
+    width: 550px;
+    height: 550px;
+    box-sizing: border-box;
+    background: white;
+    border: 5px black solid;
+    border-radius: 10px;
+    display: grid;
+    display: none;
+    grid-template-rows: repeat(1, 1fr 4fr 4fr 3fr); }
+    #field-container #craft-screen #craft-title-box {
+      background: white; }
+      #field-container #craft-screen #craft-title-box i {
+        font-size: 1.2rem; }
+    #field-container #craft-screen #craft-material-box {
+      background: white;
+      border-top: 3px black solid;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%; }
+      #field-container #craft-screen #craft-material-box #craft-material-title-box {
+        border-bottom: 3px black solid; }
+      #field-container #craft-screen #craft-material-box #craft-material-list {
+        width: 100%;
+        height: 160px;
+        overflow: scroll; }
+        #field-container #craft-screen #craft-material-box #craft-material-list .items:hover {
+          cursor: pointer; }
+        #field-container #craft-screen #craft-material-box #craft-material-list div {
+          display: inline-block; }
+          #field-container #craft-screen #craft-material-box #craft-material-list div div {
+            display: inline-block;
+            padding: 0.5rem; }
+    #field-container #craft-screen #craft-equipment-box {
+      background: white;
+      border-bottom: 3px black solid;
+      border-top: 3px black solid;
+      box-sizing: border-box; }
+      #field-container #craft-screen #craft-equipment-box #craft-equipment-title-box {
+        border-bottom: 3px black solid; }
+      #field-container #craft-screen #craft-equipment-box #craft-equipment-list-box {
+        width: 100%;
+        height: 100%; }
+        #field-container #craft-screen #craft-equipment-box #craft-equipment-list-box #craft-equipment-list {
+          width: 100%;
+          height: 160px;
+          overflow: scroll; }
+          #field-container #craft-screen #craft-equipment-box #craft-equipment-list-box #craft-equipment-list .equip:hover {
+            cursor: pointer; }
+          #field-container #craft-screen #craft-equipment-box #craft-equipment-list-box #craft-equipment-list div {
+            display: inline-block; }
+            #field-container #craft-screen #craft-equipment-box #craft-equipment-list-box #craft-equipment-list div div {
+              display: inline-block;
+              padding: 0.5rem; }
+    #field-container #craft-screen #craft-result-box {
+      background: steelblue;
+      position: relative; }
+      #field-container #craft-screen #craft-result-box #craft-result-up-box, #field-container #craft-screen #craft-result-box #craft-result-down-box {
+        width: 100%;
+        height: 100%; }
+      #field-container #craft-screen #craft-result-box #craft-btn {
+        position: absolute;
+        right: 1rem;
+        bottom: 1rem;
+        padding: 0.3rem;
+        animation-name: redFlashing;
+        animation-duration: 1.5s;
+        animation-iteration-count: infinite;
+        display: none; }
+        #field-container #craft-screen #craft-result-box #craft-btn i {
+          font-size: 1.3rem; }
   #field-container #field {
     background: slategray;
     background: url(../img/firstFloor.png) center center/cover;
