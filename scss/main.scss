@@ -98,7 +98,7 @@ body {
   #hp-and-name-box {
     display: flex;
     justify-content: space-between;
-    width: 600px;
+    width: 700px;
     font-size: 1rem;
     #hero-hp-mp-box {
       display: flex;
@@ -110,7 +110,8 @@ body {
   }
 
   #battle-field {
-    width: 600px;
+    position: relative;
+    width: 700px;
     height: 200px;
     // background: green;
     display: flex;
@@ -165,6 +166,34 @@ body {
         
       // }
 
+    }
+
+    #hero-throwing-item {
+      position: absolute;
+      top: 100px;
+      left: 200px;
+      width: 50px;
+      height: 50px;
+      z-index: 5;
+      animation-name: heroProjectile;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      animation-play-state: paused;
+    }
+
+    #monster-throwing-item {
+      position: absolute;
+      top: 70px;
+      right: 200px;
+      width: 80px;
+      height: 80px;
+      z-index: 5;
+      animation-name: monsterProjectile;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      animation-play-state: paused;
     }
 
     #enemy-box {

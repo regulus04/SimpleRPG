@@ -34,8 +34,49 @@ export class Items {
       case 'Chocolate' :
         hero.battleAtk += 5;
         url = '../dist/img/potion.png'
+        break;
+      case 'Stone' :
+        url = '../dist/img/shuriken.png';
+        break;
+      case 'Shuriken' :
+        url = '../dist/img/shuriken.png';
+        break;
+      case 'Fire Ball' :
+        url = '../dist/img/shuriken.png';
+        break;
     }
     return url;
+  }
+
+  throwItem(itemName, hero, monster){
+    let damage;
+    switch(itemName){
+      case 'Stone' :
+        if(monster.defE == 'dark'){
+          damage = Math.floor(hero.battleAtk * 2);
+          monster.hp -= damage;
+        }else{
+          damage = Math.floor(hero.battleAtk * 0.8);
+          monster.hp -= damage;
+        }
+        break;
+      case 'Shuriken' :
+        damage = Math.floor(hero.battleAtk * 1.5);
+        monster.hp -= damage;
+        console.log(Math.floor(hero.battleAtk * 1.5));
+        break;
+      case 'Fire Ball' :
+        if(monster.defE == 'ice'){
+          damage = Math.floor(hero.battleAtk * 2);
+          monster.hp -= damage;
+        }else if(monster.defE == 'water'){
+          damage = Math.floor(hero.battleAtk * 0.2);
+        }else{
+          damage = Math.floor(hero.battleAtk * 0.8);
+        }
+        break;
+    }
+    return damage;
   }
 
   spendItem(itemName){

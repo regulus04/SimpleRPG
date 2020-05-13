@@ -75,9 +75,11 @@ const heroBW = document.querySelector('#battle-hero-weapon');
 const heroBS = document.querySelector('#battle-hero-shoes');
 const heroBT = document.querySelector('#battle-hero-t-shirt');
 const heroBattleE = document.querySelector('#battle-hero-effect-box');
+const heroPJT = document.querySelector('#hero-throwing-item');
 const monsterMoveBox = document.querySelector('#enemy-box');
 const monsterName = document.querySelector('#enemy-name');
 const monsterHp = document.querySelector('#enemy-hp');
+const monsterPJT = document.querySelector('#monster-throwing-item');
 const heroHp = document.querySelector('#hero-hp');
 const heroMp = document.querySelector('#hero-mp');
 // level up
@@ -139,6 +141,8 @@ let temSpd = 0;
 
 // If movabele == 1, character can move on the field
 let movable = 1;
+// If walking != 1, hero cant talk to the boss
+let walking = 1;
 // Item on itemlists of the menu 
 let menuItemClickable = 1;
 
@@ -545,6 +549,9 @@ class UI{
     monsterHp.textContent = hp;
     monsterMoveBox.style.background = color;
   }
+  applyEnemyHp(monster){
+    monsterHp.textContent = monster.hp;
+  }
   applyHero(hp, mp){
     heroHp.textContent = hp;
     heroMp.textContent = mp;
@@ -571,6 +578,22 @@ class UI{
     setTimeout(function(){
       ui.messageOff();
       heroMoveBox.style.animationPlayState = 'paused';
+    }, 1000);
+  }
+  heroPJTAnime(url){
+    heroPJT.style.background = `url(${url}) center center / cover`;
+    heroPJT.style.animationPlayState = 'running';
+    setTimeout(function(){
+      heroPJT.style.background = 'none';
+      heroPJT.style.animationPlayState = 'paused';
+    }, 1000);
+  }
+  monsterPJTAnime(url){
+    monsterPJT.style.background = `url(${url}) center center / cover`;
+    monsterPJT.style.animationPlayState = 'running';
+    setTimeout(function(){
+      monsterPJT.style.background = 'none';
+      monsterPJT.style.animationPlayState = 'paused';
     }, 1000);
   }
   getDamageAnime(e){
@@ -721,23 +744,25 @@ function runCraftExecution(){
 // Talk people on field /////////////
 boss.addEventListener('click', runTalk);
 function runTalk(){
-  let talkable;
-  talkable = fo.checkIfNext(hero.xOnField, hero.yOnField, 'boss');
-  if(checkBoss() == 'talk'){
-    if(talkable == true){
-      let position = fs.fieldMessagePosition(hero);
-      if(position == 'right'){
-        ui.messageRightOnField();
-      }else{
-        ui.messageLeftOnField();
+  if(walking == 1){
+    let talkable;
+    talkable = fo.checkIfNext(hero.xOnField, hero.yOnField, 'boss');
+    if(checkBoss() == 'talk'){
+      if(talkable == true){
+        let position = fs.fieldMessagePosition(hero);
+        if(position == 'right'){
+          ui.messageRightOnField();
+        }else{
+          ui.messageLeftOnField();
+        }
       }
-    }
-  }else if(checkBoss() == 'stair'){
-  // Stairs
-    if(talkable == true){
-      fo = fs.goUpStairs(fo.name);
-      ui.blackFade();
-      setTimeout(() => {ui.changeFieldUp()}, 700);
+    }else if(checkBoss() == 'stair'){
+    // Stairs
+      if(talkable == true){
+        fo = fs.goUpStairs(fo.name);
+        ui.blackFade();
+        setTimeout(() => {ui.changeFieldUp()}, 700);
+      }
     }
   }
 }
@@ -806,11 +831,13 @@ function runMoveChar(e){
         setTimeout(() => {ui.changeFieldDown()}, 1200);
       // Encount 
       }else if(fs.encount() == true){
+        walking = 0;
         clearInterval(animation);
         monster = fs.encountMonster(fo.name);
         hero.setBattlePara();
         setTimeout(() => { startBattle() }, 1000);
         setTimeout(() => { movable = 1 }, 5000);
+        setTimeout(() => { walking = 1 }, 5000);
       }
     }, 350); 
   }
@@ -1121,7 +1148,6 @@ itemList.addEventListener('click', function(e){
     ui.battleCloseItemPopOut();
     battleItemClickable = 1;
   }else if(e.target.textContent == 'USE'){
-    console.log(e.target.parentNode.textContent);
     // Item action ////////////////////////////////////////
     // Drinkable items ///////////////////
     if(items.getType(selectedItem) == 'drink'){
@@ -1129,7 +1155,6 @@ itemList.addEventListener('click', function(e){
       ui.itemsOff();
       heroAction = function itemTurn(){
         let url = items.useItem(selectedItem, hero);
-       
         ui.heroBEOn(url);
         setTimeout(function(){ui.heroBEOff()}, 1000);
         setTimeout(function(){
@@ -1138,12 +1163,33 @@ itemList.addEventListener('click', function(e){
           ui.arrowOn();
         }, 1000);
       }
-
       battleProcess();
 
     // Throwable items /////////////////
-    }else if(item.getType(selectedItem == 'throw')){
-
+    }else if(items.getType(selectedItem) == 'throw'){
+      ui.backArrowOff();
+      ui.itemsOff();
+      heroAction = function itemTurn(){
+        ui.messageOff();
+        let url = items.useItem(selectedItem, hero);
+        ui.messageOn(items.getMessage(selectedItem));
+        ui.heroPJTAnime(url);
+        if(hero.throwItem() == 'hit'){
+          setTimeout(function(){ui.getDamageAnime(0)}, 1000);
+          setTimeout(function(){
+            ui.damageMessageOn(monster.name, items.throwItem(selectedItem, hero, monster));
+            monster.hp = bs.hpAdjust(monster.hp);
+            ui.applyEnemyHp(monster);
+          }, 2200);
+        }else{
+          // If hero missed it
+          setTimeout(function(){
+            ui.messageOn('Hero missed it!');
+            ui.arrowOn();
+          }, 1000);
+        }
+      }
+      battleProcess();
     }
   }
 });

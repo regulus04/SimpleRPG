@@ -38,6 +38,14 @@
   100% {
     left: 0; } }
 
+@keyframes heroProjectile {
+  to {
+    left: 450px; } }
+
+@keyframes monsterProjectile {
+  to {
+    right: 420px; } }
+
 * {
   margin: 0;
   padding: 0; }
@@ -121,14 +129,15 @@ body {
   #battle-box #hp-and-name-box {
     display: flex;
     justify-content: space-between;
-    width: 600px;
+    width: 700px;
     font-size: 1rem; }
     #battle-box #hp-and-name-box #hero-hp-mp-box {
       display: flex; }
     #battle-box #hp-and-name-box #enemy-hp-name-box {
       display: flex; }
   #battle-box #battle-field {
-    width: 600px;
+    position: relative;
+    width: 700px;
     height: 200px;
     display: flex;
     justify-content: space-between; }
@@ -168,6 +177,30 @@ body {
         #battle-box #battle-field #player-box #battle-hero-arms-legs div {
           width: 100%;
           height: 100%; }
+    #battle-box #battle-field #hero-throwing-item {
+      position: absolute;
+      top: 100px;
+      left: 200px;
+      width: 50px;
+      height: 50px;
+      z-index: 5;
+      animation-name: heroProjectile;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      animation-play-state: paused; }
+    #battle-box #battle-field #monster-throwing-item {
+      position: absolute;
+      top: 70px;
+      right: 200px;
+      width: 80px;
+      height: 80px;
+      z-index: 5;
+      animation-name: monsterProjectile;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      animation-play-state: paused; }
     #battle-box #battle-field #enemy-box {
       background: wheat;
       width: 200px;

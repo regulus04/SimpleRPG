@@ -88,6 +88,15 @@ export class Hero {
     monster.hp -= this.battleAtk;
     return this.battleAtk;
   }
+  throwItem(){
+    let result;
+    if(Math.floor(Math.random() * 10 + 1) > 3){
+      result = 'hit';
+    }else{
+      result = 'missed'
+    }
+    return result;
+  }
   resetPosition(){
     this.xOnField = 250;
     this.yOnField = 500;
