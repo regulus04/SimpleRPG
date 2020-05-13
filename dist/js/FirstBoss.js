@@ -16,7 +16,7 @@ export class FirstBoss {
     this.background = '../dist/img/guard.png';
   }
 
-  attack(hero){
+  attack(hero, guardNum){
     let damage;
     if(this.atk - hero.battleDef <= 0){
       damage = 1;

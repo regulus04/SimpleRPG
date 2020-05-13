@@ -53,6 +53,7 @@ const menuHeroT = document.querySelector('#menu-hero-t-shirt');
 const menuHeroW = document.querySelector('#menu-hero-weapon');
 const menuHeroS = document.querySelector('#menu-hero-shoes');
 const menuHeroC = document.querySelector('#menu-hero-head');
+const menuHeroE = document.querySelector('#menu-hero-effect');
 // Craft
 const craftScreen = document.querySelector('#craft-screen');
 const materialList = document.querySelector('#craft-material-list');
@@ -73,6 +74,7 @@ const heroBC = document.querySelector('#battle-hero-cap');
 const heroBW = document.querySelector('#battle-hero-weapon');
 const heroBS = document.querySelector('#battle-hero-shoes');
 const heroBT = document.querySelector('#battle-hero-t-shirt');
+const heroBattleE = document.querySelector('#battle-hero-effect-box');
 const monsterMoveBox = document.querySelector('#enemy-box');
 const monsterName = document.querySelector('#enemy-name');
 const monsterHp = document.querySelector('#enemy-hp');
@@ -140,7 +142,7 @@ let movable = 1;
 // Item on itemlists of the menu 
 let menuItemClickable = 1;
 
-field
+
 class UI{
   // Field UI /////////////////////////////
   fieldOn(){
@@ -163,7 +165,6 @@ class UI{
     menuItemClickable = 1;
     menuItems.style.opacity = 1;
     menuEquip.style.opacity = 0.5;
-    console.log('hello');
   }
   closeMenu(){
     menuScreen.style.display = 'none';
@@ -195,6 +196,14 @@ class UI{
     if(hero.shirt != 'none'){
       menuHeroT.style.background = `url(${qItems.getImg(hero.shirt)}) center center / cover`;
     }
+  }
+  menuHeroEOn(url){
+    if(url != 'none'){
+      menuHeroE.style.background = `url(${url}) center center / cover`;
+    }
+  }
+  menuHeroEOff(){
+    menuHeroE.style.background = 'none';
   }
   // Switch scene ///////////
   blackFade(){
@@ -341,7 +350,7 @@ class UI{
   itemPopOut(target){
     let itemName = target.textContent;
     let desc = items.getDescription(itemName);
-    if(items.getType(itemName) == 'battle' || items.getType(itemName) == 'material'){
+    if(items.getUse(itemName) == 'battle' || items.getUse(itemName) == 'material'){
       const t = document.createElement('div');
       t.className = 'triangle';
       const one = document.createElement('div');
@@ -388,7 +397,7 @@ class UI{
   battleItemPopOut(target){
     let itemName = target.textContent;
     let desc = items.getDescription(itemName);
-    if(items.getType(itemName) == 'field' || items.getType(itemName) == 'material'){
+    if(items.getUse(itemName) == 'field' || items.getUse(itemName) == 'material'){
       const t = document.createElement('div');
       t.className = 'triangle';
       const one = document.createElement('div');
@@ -491,7 +500,6 @@ class UI{
   itemsOff(){
     itemList.style.display = 'none';
     backArrow.style.display = 'none';
-    this.commandOn();
   }
   craftOn(){
     craftScreen.style.display = 'grid';
@@ -580,6 +588,15 @@ class UI{
       }, 1200);
     }
   }
+  heroBEOn(url){
+    if(url != 'none'){
+      heroBattleE.style.background = `url(${url}) center center / cover`;
+    }
+  }
+  heroBEOff(){
+    heroBattleE.style.background = 'none';
+  }
+
   monsterHitAnime(){
     this.messageOn(`${monster.name} is attacking!`);
     setTimeout(function(){
@@ -637,7 +654,9 @@ menuItemList.addEventListener('click', e => {
     menuItemClickable = 1;
   // Use the items on menu
   }else if(e.target.textContent == 'USE'){
-    items.useItem(menuItemClicked, hero);
+    let url = items.useItem(menuItemClicked, hero);
+    ui.menuHeroEOn(url);
+    setTimeout(function(){ui.menuHeroEOff()}, 1000);
     ui.itemsOn(menuItemList);
     menuItemClickable = 1;
   // Equip on menu
@@ -806,6 +825,7 @@ function startBattle(){
     // Enemy's UI
     ui.applyEnemy(monster.name, monster.hp, monster.color);
     ui.messageOn(`${monster.name} ${monster.message}`);
+    ui.arrowOn();
   }, 1000);
 }
 
@@ -853,6 +873,7 @@ function runBack(){
       break;
     case 2 :
       ui.itemsOff();
+      ui.commandOn();
       break;
   }
 }
@@ -1090,16 +1111,40 @@ itemCmd.addEventListener('click', function(){
   battleItemClickable = 1;
 });
 let battleItemClickable = 1;
+let selectedItem;
 itemList.addEventListener('click', function(e){
   if(e.target.className == 'items' && battleItemClickable == 1){
+    selectedItem = e.target.textContent;
     ui.battleItemPopOut(e.target);
     battleItemClickable = 0;
   }else if(e.target.className == 'x-btn field-button' || e.target.className == 'fas fa-times'){
     ui.battleCloseItemPopOut();
     battleItemClickable = 1;
   }else if(e.target.textContent == 'USE'){
-    // Item action //////////
-    console.log('hello');
+    console.log(e.target.parentNode.textContent);
+    // Item action ////////////////////////////////////////
+    // Drinkable items ///////////////////
+    if(items.getType(selectedItem) == 'drink'){
+      ui.backArrowOff();
+      ui.itemsOff();
+      heroAction = function itemTurn(){
+        let url = items.useItem(selectedItem, hero);
+       
+        ui.heroBEOn(url);
+        setTimeout(function(){ui.heroBEOff()}, 1000);
+        setTimeout(function(){
+          ui.applyHero(hero.hp, hero.mp);
+          ui.messageOn(items.getMessage(selectedItem));
+          ui.arrowOn();
+        }, 1000);
+      }
+
+      battleProcess();
+
+    // Throwable items /////////////////
+    }else if(item.getType(selectedItem == 'throw')){
+
+    }
   }
 });
 

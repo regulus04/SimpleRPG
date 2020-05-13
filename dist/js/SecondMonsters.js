@@ -58,7 +58,7 @@ export class SecondMonsters {
     this.event = 'none';
   }
 
-  attack(hero){
+  attack(hero, guardNum){
     let damage;
     if(this.atk - hero.battleDef <= 0){
       damage = 1;
