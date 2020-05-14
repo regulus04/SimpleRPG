@@ -65,6 +65,7 @@ const doCraft = document.querySelector('#craft-btn');
 
 // Battle
 const battleField = document.querySelector('#main-container');
+const battleBG = document.querySelector('#battle-box');
 const message = document.querySelector('#message');
 const skipArrow = document.querySelector('#skip-arrow');
 const backArrow = document.querySelector('#back-arrow');
@@ -122,6 +123,9 @@ let shirts = new Shirts;
 // Boss status 
 let firstBoss = 'alive';
 let secondBoss = 'alive';
+let thirdBoss = 'alive';
+let fourthBoss = 'alive';
+let fifthBoss = 'alive';
 
 // Craft
 let selectedMaterial = '???';
@@ -184,8 +188,8 @@ class UI{
     menuStatusExp.textContent = `${hero.exp} / ${hero.maxExp}`;
   }
   reImgOnMenu(){
-    menuHeroW.style.background = 'none';
-    menuHeroS.style.background = 'none';
+    menuHeroW.style.background = `url(../dist/img/arms.png) center center / cover`;
+    menuHeroS.style.background = `url(../dist/img/legs.png) center center / cover`;
     menuHeroC.style.background = 'none';
     menuHeroT.style.background = 'none';
     if(hero.weapon != 'none'){
@@ -223,21 +227,30 @@ class UI{
   battleStart(){
     fieldContainer.style.display = "none";
     battleField.style.display = "flex";
+    battleBG.style.background = `url(${fo.battleBG}) center center / cover`;
     backArrow.style.display = 'none';
     this.battleHeroVisual();
   }
   battleHeroVisual(){
     if(hero.weapon != 'none'){
       heroBW.style.background = `url(${qItems.getImg(hero.weapon)}) center center / cover`;
+    }else{
+      heroBW.style.background = `url(../dist/img/arms.png) center center / cover`;
     }
     if(hero.head != 'none'){
       heroBC.style.background = `url(${qItems.getImg(hero.head)}) center center / cover`;
+    }else{
+      heroBC.style.background = `url(../dist/img/heroface.png) center center / cover`
     }
     if(hero.shoes != 'none'){
       heroBS.style.background = `url(${qItems.getImg(hero.shoes)}) center center / cover`;
+    }else{
+      heroBS.style.background = 'url(../dist/img/legs.png) center center / cover';
     }
     if(hero.shirt != 'none'){
       heroBT.style.background = `url(${qItems.getImg(hero.shirt)}) center center / cover`;
+    }else{
+      heroBT.style.background = 'url(../dist/img/herobody.png) center center / cover';
     }
   }
   messageLeftOnField(){
@@ -261,12 +274,24 @@ class UI{
     fieldMessage.style.display = 'none';
   }
   afterBossBattle(){
-    if(fo.name == 'first floor'){
-      firstBoss = 'dead';
-    }else if(fo.name == 'second floor'){
-      secondBoss = 'dead';
+    switch(fo.name){
+      case 'first floor' :
+        firstBoss = 'dead';
+        break;
+      case 'second floor' :
+        secondBoss = 'dead';
+        break;
+      case 'third floor' :
+        thirdBoss = 'dead';
+        break;
+      case 'fourth floor' :
+        fourthBoss = 'dead';
+        break;
+      case 'fifth floor' :
+        fifthBoss = 'dead';
+        break;
     }
-    boss.style.background = `url(../dist/img/upStairs.png) center center / cover`;
+    boss.style.background = `url(../dist/img/upstairs.png) center center / cover`;
   }
   changeFieldUp(){
     field.style.background = `url(${fo.background}) center center / cover`;
@@ -284,7 +309,7 @@ class UI{
     heroOnField.style.top = 50 + 'px';
     heroOnField.style.left = 250 + 'px';
     fieldBoss = fs.setBoss(fo.name);
-    boss.style.background = `url(../dist/img/upStairs.png) center center / cover`
+    boss.style.background = `url(../dist/img/upstairs.png) center center / cover`
   }
   // Buttle UI /////////////////
   arrowOn(){
@@ -880,6 +905,28 @@ function checkBoss(){
         result = 'stair';
       }
       break;
+    case 'third floor':
+      if(thirdBoss == 'alive'){
+        result = 'talk';
+      }else{
+        result = 'stair';
+      }
+      break;
+    case 'fourth floor':
+      if(fourthBoss == 'alive'){
+        result = 'talk';
+      }else{
+        result = 'stair';
+      }
+      break;
+    case 'fifth floor':
+      if(fifthBoss == 'alive'){
+        result = 'talk';
+      }else{
+        result = 'stair';
+      }
+      break;
+
   }
   return result;
 }

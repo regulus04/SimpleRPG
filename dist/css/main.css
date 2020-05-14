@@ -124,8 +124,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  background: url(../img/battleBack.png) center center/cover; }
+  align-items: center; }
   #battle-box #hp-and-name-box {
     display: flex;
     justify-content: space-between;
@@ -584,7 +583,7 @@ body {
       width: 100%; }
     #field-container #field #boss {
       position: absolute;
-      background: url(../img/guard.png) center center/cover;
+      background: url(../img/samuraiicon.png) center center/cover;
       top: 0px;
       left: 250px;
       width: 50px;

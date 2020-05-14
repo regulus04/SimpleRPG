@@ -13,7 +13,7 @@ export class SecondBoss {
     // this.firstMessage = 'Wanna fight me???';
     this.message = 'looks strong!!!';
     this.event = 'stairs';
-    this.background = '../dist/img/shuriken.png';
+    this.background = '../dist/img/purpleicon.png';
   }
 
   attack(hero, guardNum){

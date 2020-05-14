@@ -6,19 +6,42 @@ import { Shirts } from "./Shirts.js";
 export class EquipItems {
   constructor(){
     this.itemList = [
+
       {name: 'Dagger', stock: 1, type: 'weapon'},
       {name: 'Katana', stock: 1, type: 'weapon'},
-      {name: 'Legend Cap', stock: 1, type: 'cap'},
-      {name: 'Red Shoes', stock: 1, type: 'shoes'},
-      {name: 'Legend T-shirt', stock: 1, type: 'shirt'},
+      {name: 'Musashi', stock: 1, type: 'weapon'},
+      {name: 'Mixer', stock: 1, type: 'weapon'},
+      {name: 'Happy Flower', stock: 1, type: 'weapon'},
       {name: 'Flame Sword', stock: 1, type: 'weapon'},
-      // {name: 'Dagger', stock: 1, type: 'weapon'},
-      // {name: 'Katana', stock: 1, type: 'weapon'},
-      // {name: 'Legend Cap', stock: 1, type: 'cap'},
-      // {name: 'Red Shoes', stock: 1, type: 'shoes'},
-      // {name: 'Legend T-shirt', stock: 1, type: 'shirt'},
-      // {name: 'Flame Sword', stock: 1, type: 'weapon'},
+      {name: 'Bloody Sythe', stock: 1, type: 'weapon'},
+      {name: 'Axe', stock: 1, type: 'weapon'},
+      {name: 'Jinrai', stock: 1, type: 'weapon'},
+      {name: 'Wooden Stick', stock: 1, type: 'weapon'},
+      {name: 'Carp Heads', stock: 1, type: 'weapon'},
+      
+      {name: 'Legend Cap', stock: 1, type: 'cap'},
+      {name: 'Box Cap', stock: 1, type: 'cap'},
+      {name: 'Happy Head', stock: 1, type: 'cap'},
+      {name: 'Carrot Cap', stock: 1, type: 'cap'},
+      {name: 'Angel Head', stock: 1, type: 'cap'},
+      {name: 'Punk Head', stock: 1, type: 'cap'},
+      {name: 'Frog Cap', stock: 1, type: 'cap'},
+      {name: 'Crown', stock: 1, type: 'cap'},
 
+      {name: 'Red Shoes', stock: 1, type: 'shoes'},
+      {name: 'Yellow Shoes', stock: 1, type: 'shoes'},
+      {name: 'Beans Shoes', stock: 1, type: 'shoes'},
+      {name: 'Rain Boots', stock: 1, type: 'shoes'},
+      {name: 'Feather Shoes', stock: 1, type: 'shoes'},
+      {name: 'Box Shoes', stock: 1, type: 'shoes'},
+
+      {name: 'Dog T', stock: 1, type: 'shirt'},
+      {name: 'Rain T', stock: 1, type: 'shirt'},
+      {name: 'No.1 T', stock: 1, type: 'shirt'},
+      {name: 'Border T', stock: 1, type: 'shirt'},
+      {name: 'Manteau', stock: 1, type: 'shirt'},
+      {name: 'Triplet T', stock: 1, type: 'shirt'},
+      
     ];
   }
   spendItem(itemName){

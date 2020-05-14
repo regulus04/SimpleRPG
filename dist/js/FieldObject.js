@@ -5,6 +5,7 @@ export class FieldObject {
       {name: 'boss', top: 0, left: 250}
     ];
     this.background = '../dist/img/firstFloor.png';
+    this.battleBG = '../dist/img/battleBG4.png';
   }
   deadConfirm(){
     this.obstaclesPosition[0].status = 'dead';

@@ -1,9 +1,15 @@
 import { SecondFieldObject } from "./SecondFieldObject.js";
 import { FirstBoss } from "./FirstBoss.js";
 import { SecondBoss } from "./SecondBoss.js";
+import { ThirdBoss } from "./ThirdBoss.js";
+import { FourthBoss } from "./FourthBoss.js";
+import { FifthBoss } from "./FifthBoss.js";
 import { Monsters } from "./Monsters.js";
 import { SecondMonsters } from "./SecondMonsters.js";
 import { FieldObject } from "./FieldObject.js";
+import { ThirdFieldObject } from "./thirdFieldObject.js";
+import { FourthFieldObject } from "./FourthFieldObject.js";
+import { FifthFieldObject } from "./FifthFieldObject.js";
 
 export class FieldSystem {
   getCharX(char, field){
@@ -94,10 +100,23 @@ export class FieldSystem {
     let enemyNum;
     enemyNum = Math.floor(Math.random() * 4) + 1;
     // Load Monster's data
-    if(floorName == 'first floor'){
-      monster = new Monsters(enemyNum);
-    }else if(floorName == 'second floor'){
-      monster = new SecondMonsters(enemyNum);
+    switch(floorName){
+      case 'first floor' :
+        monster = new Monsters(enemyNum);
+        break;
+      case 'second floor' :
+        monster = new SecondMonsters(enemyNum);
+        break;
+      case 'third floor' :
+        monster = new ThirdMonsters(enemyNum);
+        break;
+      case 'fourth floor' :
+        monster = new FourthMonsters(enemyNum);
+        break;
+      case 'fifth floor' :
+        monster = new FifthMonsters(enemyNum);
+        break;
+      
     }
     return monster;
   }
@@ -114,24 +133,59 @@ export class FieldSystem {
 
   goUpStairs(foName){
     let floor;
-    if(foName == 'first floor'){
-      floor = new SecondFieldObject;
+    switch(foName){
+      case 'first floor' :
+        floor = new SecondFieldObject;
+        break;
+      case 'second floor' :
+        floor = new ThirdFieldObject;
+        break;
+      case 'third floor' :
+        floor = new FourthFieldObject;
+        break;
+      case 'fourth floor' :
+        floor = new FifthFieldObject;
+        break;
     }
     return floor;
   }
   goDownStairs(foName){
     let floor;
-    if(foName == 'second floor'){
-      floor = new FieldObject;
+    switch(foName){
+      case 'second floor' :
+        floor = new FieldObject;
+        break;
+      case 'third floor' :
+        floor = new SecondFieldObject;
+        break;
+      case 'fourth floor' :
+        floor = new ThirdFieldObject;
+        break;
+      case 'fifth floor' :
+        floor = new FourthFieldObject;
+        break;
     }
     return floor;
   }
   setBoss(foName){
     let boss;
-    if(foName == 'first floor'){
-      boss = new FirstBoss;
-    }else if(foName == 'second floor'){
-      boss = new SecondBoss;
+    switch(foName){
+      case 'first floor' :
+        boss = new FirstBoss;
+        break;
+      case 'second floor' :
+        boss = new SecondBoss;
+        break;
+      case 'third floor' :
+        boss = new ThirdBoss;
+        break;
+      case 'fourth floor' :
+        boss = new FourthBoss;
+        break;
+      case 'fifth floor' :
+        boss = new FifthBoss;
+        break;
+
     }
     return boss;
   }

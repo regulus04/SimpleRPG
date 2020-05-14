@@ -93,7 +93,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: url(../img/battleBack.png) center center / cover;
 
   #hp-and-name-box {
     display: flex;
@@ -732,7 +731,7 @@ body {
 
     #boss {
       position: absolute;
-      background: url(../img/guard.png) center center / cover;
+      background: url(../img/samuraiicon.png) center center / cover;
       top: 0px;
       left: 250px;
       width: 50px;
