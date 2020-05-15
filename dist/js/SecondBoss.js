@@ -2,7 +2,7 @@ export class SecondBoss {
   constructor(){
     this.hp = 1;
     this.maxHp = 1;
-    this.name = 'Fire Devil';
+    this.name = 'Purple Cat';
     this.atk = 10;
     this.color = '../dist/img/purplecat.png';
     this.spd = 1;
@@ -11,7 +11,7 @@ export class SecondBoss {
     this.exp = 150;
     this.item = 'Shuriken';
     // this.firstMessage = 'Wanna fight me???';
-    this.message = 'looks strong!!!';
+    this.message = 'looks purple!!!';
     this.event = 'stairs';
     this.background = '../dist/img/purpleicon.png';
     this.grave = '../dist/img/catgrave.png';

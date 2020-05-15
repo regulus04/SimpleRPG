@@ -4,8 +4,9 @@ export class SecondFieldObject {
     this.background = '../dist/img/secondFloorH.png';
     this.battleBG = '../dist/img/battleBG2.png';
     this.obstaclesPosition = [
-      {name: 'boss', top: 0, left: 250},
-      // {name: 'treasure', top: 100, left: 200}
+      {name: 'boss', top: 0, left: 250, type: 'boss', status: 'alive', img: '../dist/img/purpleicon.png'},
+      {name: 'chest-1', top: 100, left: 100, type: 'chest', status: 'closed', treasure: 'Shuriken'},
+      {name: 'chest-2', top: 200, left: 200, type: 'chest', status: 'closed', treasure: 'Stone'},
     ];
   }
 

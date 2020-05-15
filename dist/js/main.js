@@ -26,6 +26,7 @@ const blackFade = document.querySelector('#black-fade');
 const fieldContainer = document.querySelector('#field-container');
 const mouseMoveArea = document.querySelector('#event-field');
 const field = document.querySelector('#field');
+const fieldObstacles = document.querySelector('#field-obstacles');
 const heroOnField = document.querySelector('#character');
 // Field Character and Obstacles
 const boss = document.querySelector('#boss');
@@ -118,6 +119,8 @@ let crafts = new Craft;
 let bs = new BattleSystem;
 let fs = new FieldSystem;
 let fo = new FieldObject;
+let fo1 = new FieldObject;
+fo = fo1;
 let fo2 = new SecondFieldObject;
 let fo3 = new ThirdFieldObject;
 let fo4 = new FourthFieldObject;
@@ -221,7 +224,35 @@ class UI{
   menuHeroEOff(){
     menuHeroE.style.background = 'none';
   }
-  
+  makeFieldObject(){
+    while(fieldObstacles.firstChild) {
+      fieldObstacles.removeChild(fieldObstacles.firstChild);
+    }
+    fo.obstaclesPosition.forEach(function(each){
+      if(each['type'] == 'chest'){
+        const one = document.createElement('div');
+        one.className = 'chest';
+        one.id = each['name'];
+        one.style.top = `${each['top']}px`;
+        one.style.left = `${each['left']}px`;
+        if(each['status'] == 'closed'){
+          one.style.background = 'url(../dist/img/chest.png) center center / cover';
+        }else{
+          one.style.background = 'url(../dist/img/chestOpened.png) center center / cover';
+        }
+        fieldObstacles.appendChild(one);
+      }else if(each['type'] == 'boss'){
+        const one = document.createElement('div');
+        one.id = 'boss';
+        if(each['status'] == 'alive'){
+          one.style.background = `url(${each['img']}) center center / cover`;
+        }else{
+          one.style.background = `url(../dist/img/upstairs.png) center center / cover`;
+        }
+        fieldObstacles.appendChild(one);
+      }
+    });
+  }
   // Switch scene ///////////
   blackFade(){
     blackFade.style.display = 'block';
@@ -283,24 +314,8 @@ class UI{
     fieldMessage.style.display = 'none';
   }
   afterBossBattle(){
-    switch(fo.name){
-      case 'first floor' :
-        firstBoss = 'dead';
-        break;
-      case 'second floor' :
-        secondBoss = 'dead';
-        break;
-      case 'third floor' :
-        thirdBoss = 'dead';
-        break;
-      case 'fourth floor' :
-        fourthBoss = 'dead';
-        break;
-      case 'fifth floor' :
-        fifthBoss = 'dead';
-        break;
-    }
-    boss.style.background = `url(../dist/img/upstairs.png) center center / cover`;
+    fo.obstaclesPosition[0]['status'] = 'dead';
+    this.makeFieldObject();
   }
   changeFieldUp(){
     field.style.background = `url(${fo.background}) center center / cover`;
@@ -308,9 +323,9 @@ class UI{
     heroOnField.style.top = 500 + 'px';
     heroOnField.style.left = 250 + 'px';
     fieldBoss = fs.setBoss(fo.name);
-    if(checkBoss() == 'talk'){
-      boss.style.background = `url(${fieldBoss.background}) center center / cover`;
-    }
+    // if(checkBoss() == 'talk'){
+    //   boss.style.background = `url(${fieldBoss.background}) center center / cover`;
+    // }
   }
   changeFieldDown(){
     field.style.background = `url(${fo.background}) center center / cover`;
@@ -318,7 +333,7 @@ class UI{
     heroOnField.style.top = 50 + 'px';
     heroOnField.style.left = 250 + 'px';
     fieldBoss = fs.setBoss(fo.name);
-    boss.style.background = `url(../dist/img/upstairs.png) center center / cover`
+    // boss.style.background = `url(../dist/img/upstairs.png) center center / cover`
   }
   // Buttle UI /////////////////
   arrowOn(){
@@ -672,6 +687,8 @@ class UI{
 }
 // Generate UI instance
 const ui = new UI();
+ui.makeFieldObject();
+
 
 // Field ////////////////////////////////////////////////////////////
 // Menu //////////////////////
@@ -779,28 +796,34 @@ function runCraftExecution(){
 }
 
 // Talk people on field /////////////
-boss.addEventListener('click', runTalk);
-function runTalk(){
-  if(walking == 1){
-    let talkable;
-    talkable = fo.checkIfNext(hero.xOnField, hero.yOnField, 'boss');
-    if(checkBoss() == 'talk'){
-      if(talkable == true){
-        let position = fs.fieldMessagePosition(hero);
-        if(position == 'right'){
-          ui.messageRightOnField();
-        }else{
-          ui.messageLeftOnField();
+field.addEventListener('click', runTalk);
+function runTalk(e){
+  if(e.target.id == 'boss'){
+
+    if(walking == 1){
+      let talkable;
+      talkable = fo.checkIfNext(hero.xOnField, hero.yOnField, 'boss');
+      if(fo.obstaclesPosition[0]['status'] == 'alive'){
+        if(talkable == true){
+          let position = fs.fieldMessagePosition(hero);
+          if(position == 'right'){
+            ui.messageRightOnField();
+          }else{
+            ui.messageLeftOnField();
+          }
+        }
+      }else if(fo.obstaclesPosition[0]['status'] == 'dead'){
+      // Stairs
+        if(talkable == true){
+          fo = fs.goUpStairs(fo.name, fo, fo1, fo2, fo3, fo4, fo5);
+          ui.blackFade();
+          setTimeout(() => {
+            ui.changeFieldUp();
+            ui.makeFieldObject();
+          }, 700);
         }
       }
-    }else if(checkBoss() == 'stair'){
-    // Stairs
-      if(talkable == true){
-        fo = fs.goUpStairs(fo.name);
-        ui.blackFade();
-        setTimeout(() => {ui.changeFieldUp()}, 700);
-      }
-    }
+  }
   }
 }
 // Answering the question
@@ -814,6 +837,19 @@ function runYes(){
 noBox.addEventListener('click', runNo);
 function runNo(){
   ui.messageOffOnField();
+}
+
+// Opening the chest
+field.addEventListener('click', runChest);
+function runChest(e){
+  
+  let chest = fs.chestCheck(hero.xOnField, hero.yOnField, fo);
+  if(chest == e.target.id){
+    let item = fs.chestOpen(fo, chest);
+    e.target.style.background = 'url(../dist/img/chestOpened.png) center center / cover';
+    items.getItem(item);
+    // ui & message
+  }
 }
 
 // Move character function ///////////////////////////////////////
@@ -859,9 +895,12 @@ function runMoveChar(e){
       if(hero.goDownStairs(fo.name) == 'go down'){
         clearInterval(animation);
         movable = 1;
-        fo = fs.goDownStairs(fo.name);
+        fo = fs.goDownStairs(fo.name, fo, fo1, fo2, fo3, fo4, fo5);
         setTimeout(() => {ui.blackFade()}, 500);
-        setTimeout(() => {ui.changeFieldDown()}, 1200);
+        setTimeout(() => {
+          ui.changeFieldDown();
+          ui.makeFieldObject();
+        }, 1200);
       // Encount 
       }else if(fs.encount() == true){
         walking = 0;
@@ -895,49 +934,7 @@ function eventAfterBattle(){
     ui.afterBossBattle();
   }
 }
-// Select Boss
-function checkBoss(){
-  let result;
-  switch(fo.name){
-    case 'first floor':
-      if(firstBoss == 'alive'){
-        result = 'talk';
-      }else{
-        result = 'stair';
-      }
-      break;
-    case 'second floor':
-      if(secondBoss == 'alive'){
-        result = 'talk';
-      }else{
-        result = 'stair';
-      }
-      break;
-    case 'third floor':
-      if(thirdBoss == 'alive'){
-        result = 'talk';
-      }else{
-        result = 'stair';
-      }
-      break;
-    case 'fourth floor':
-      if(fourthBoss == 'alive'){
-        result = 'talk';
-      }else{
-        result = 'stair';
-      }
-      break;
-    case 'fifth floor':
-      if(fifthBoss == 'alive'){
-        result = 'talk';
-      }else{
-        result = 'stair';
-      }
-      break;
 
-  }
-  return result;
-}
 
 // Battle ///////////////////////////////////////////////////////////////////
 

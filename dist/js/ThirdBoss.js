@@ -2,7 +2,7 @@ export class ThirdBoss {
   constructor(){
     this.hp = 1;
     this.maxHp = 1;
-    this.name = 'Fire Devil';
+    this.name = 'Gray Cat';
     this.atk = 10;
     this.color = '../dist/img/graycat.png';
     this.spd = 1;

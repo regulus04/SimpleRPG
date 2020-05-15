@@ -131,38 +131,46 @@ export class FieldSystem {
     return position;
   }
 
-  goUpStairs(foName){
+  goUpStairs(foName, fo, fo1, fo2, fo3, fo4, fo5){
     let floor;
     switch(foName){
       case 'first floor' :
-        floor = new SecondFieldObject;
+        fo1 = fo;
+        floor = fo2;
         break;
       case 'second floor' :
-        floor = new ThirdFieldObject;
+        fo2 = fo;
+        floor = fo3;
         break;
       case 'third floor' :
-        floor = new FourthFieldObject;
+        fo3 = fo;
+        floor = fo4;
         break;
       case 'fourth floor' :
-        floor = new FifthFieldObject;
+        fo4 = fo;
+        floor = fo5;
         break;
     }
     return floor;
   }
-  goDownStairs(foName){
+  goDownStairs(foName, fo, fo1, fo2, fo3, fo4, fo5){
     let floor;
     switch(foName){
       case 'second floor' :
-        floor = new FieldObject;
+        fo2 = fo;
+        floor = fo1;
         break;
       case 'third floor' :
-        floor = new SecondFieldObject;
+        fo3 = fo;
+        floor = fo2;
         break;
       case 'fourth floor' :
-        floor = new ThirdFieldObject;
+        fo4 = fo;
+        floor = fo3;
         break;
       case 'fifth floor' :
-        floor = new FourthFieldObject;
+        fo5 = fo;
+        floor = fo4;
         break;
     }
     return floor;
@@ -190,4 +198,29 @@ export class FieldSystem {
     return boss;
   }
 
+  chestCheck(charX, charY, fo){
+    let chest;
+    fo.obstaclesPosition.forEach(function(each){
+      if(each['type'] == 'chest' && each['status'] == 'closed'){
+        if((each['top'] == charY && each['left'] - 50 == charX) ||
+           (each['top'] + 50 == charY && each['left'] == charX) ||
+           (each['top'] == charY && each['left'] + 50 == charX) ||
+           (each['top'] - 50 == charY && each['left'] == charX)){
+              chest = each['name'];
+           }
+      }
+    });
+    return chest;
+  }
+
+  chestOpen(fo, chestName){
+    let content;
+    fo.obstaclesPosition.forEach(function(each){
+      if(each['name'] == chestName){
+        each['status'] = 'opened';
+        content = each['treasure'];
+      }
+    });
+    return content;
+  }
 }
