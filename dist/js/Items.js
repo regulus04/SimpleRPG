@@ -10,9 +10,9 @@ export class Items {
       {name: 'Fire Ball', stock: 1, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a fire ball'},
       {name: 'Thunder Ball', stock: 1, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a fire ball'},
       {name: 'Ice Ball', stock: 1, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a fire ball'},
-      {name: 'Mithril', stock: 1, use: 'material', type: 'none', description: 'This is for Craft', img: '../dist/img/mythril.png'},
-      {name: 'Bronze', stock: 1, use: 'material', type: 'none', description: 'This is for Craft', img: '../dist/img/bronze.png'},
-      {name: 'Orichalcum', stock: 1, use: 'material', type: 'none', description: 'This is for Craft', img: '../dist/img/orichalcum.png'},
+      {name: 'Mithril', stock: 1, use: 'material', type: 'none', description: 'This is for Craft', img: './img/mythril.png'},
+      {name: 'Bronze', stock: 1, use: 'material', type: 'none', description: 'This is for Craft', img: './img/bronze.png'},
+      {name: 'Orichalcum', stock: 1, use: 'material', type: 'none', description: 'This is for Craft', img: './img/orichalcum.png'},
     ];
   }
   useItem(itemName, hero){
@@ -24,33 +24,33 @@ export class Items {
         if(hero.hp >= hero.maxHp){
           hero.hp = hero.maxHp
         }
-        url = '../dist/img/healEffect.png';
+        url = './img/healEffect.png';
         break;
       case 'Ether' :
         hero.mp += 20;
         if(hero.mp >= hero.maxMp){
           hero.mp = hero.maxMp
         }
-        url = '../dist/img/healEffect.png';
+        url = './img/healEffect.png';
         break;
       case 'Chocolate' :
         hero.battleAtk += 5;
-        url = '../dist/img/powerup.png'
+        url = './img/powerup.png'
         break;
       case 'Stone' :
-        url = '../dist/img/stone.png';
+        url = './img/stone.png';
         break;
       case 'Shuriken' :
-        url = '../dist/img/shuriken.png';
+        url = './img/shuriken.png';
         break;
       case 'Fire Ball' :
-        url = '../dist/img/fireball.png';
+        url = './img/fireball.png';
         break;
       case 'Thunder Ball' :
-        url = '../dist/img/thunderball.png';
+        url = './img/thunderball.png';
         break;
       case 'Ice Ball' :
-        url = '../dist/img/iceball.png';
+        url = './img/iceball.png';
         break;
     }
     return url;

@@ -1,13 +1,13 @@
 export class Shoes {
   constructor(){
     this.itemList = [
-      // {name: 'none', atk: 0, def: 0, spd: 0, img: '../dist/img/legs.png'},
-      {name: 'Red Shoes', atk: 1, def: 1, spd: 1, img: '../dist/img/redshoes.png'},
-      {name: 'Yellow Shoes', atk: 1, def: 1, spd: 5, img: '../dist/img/yellowS.png'},
-      {name: 'Beans Shoes', atk: 5, def: 1, spd: 3, img: '../dist/img/beansS.png'},
-      {name: 'Rain Boots', atk: 1, def: 10, spd: 5, img: '../dist/img/rainBoots.png'},
-      {name: 'Feather Shoes', atk: 3, def: 3, spd: 15, img: '../dist/img/featherS.png'},
-      {name: 'Box Shoes', atk: 10, def: 10, spd: -5, img: '../dist/img/boxS.png'},
+      // {name: 'none', atk: 0, def: 0, spd: 0, img: './img/legs.png'},
+      {name: 'Red Shoes', atk: 1, def: 1, spd: 1, img: './img/redshoes.png'},
+      {name: 'Yellow Shoes', atk: 1, def: 1, spd: 5, img: './img/yellowS.png'},
+      {name: 'Beans Shoes', atk: 5, def: 1, spd: 3, img: './img/beansS.png'},
+      {name: 'Rain Boots', atk: 1, def: 10, spd: 5, img: './img/rainBoots.png'},
+      {name: 'Feather Shoes', atk: 3, def: 3, spd: 15, img: './img/featherS.png'},
+      {name: 'Box Shoes', atk: 10, def: 10, spd: -5, img: './img/boxS.png'},
     ];
   }
 

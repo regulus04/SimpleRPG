@@ -57,7 +57,7 @@ export class FourthMonsters {
     this.action = 1;
     this.message = 'sprang out!!!';
     this.event = 'none';
-    this.grave = '../dist/img/grave.png';
+    this.grave = './img/grave.png';
   }
 
   attack(hero, guardNum){

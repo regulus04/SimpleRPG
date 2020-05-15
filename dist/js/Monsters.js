@@ -6,7 +6,7 @@ export class Monsters {
         this.maxHp = 10;
         this.name = "Cliper";
         this.atk = 6;
-        this.color = '../dist/img/clip.png';
+        this.color = './img/clip.png';
         this.spd = 1;
         this.defE = 'normal';
         this.atkE = 'normal';
@@ -19,7 +19,7 @@ export class Monsters {
         this.maxHp = 20;
         this.name = "Catcher";
         this.atk = 7;
-        this.color = '../dist/img/catcher.png';
+        this.color = './img/catcher.png';
         this.spd = 3;
         this.defE = 'normal';
         this.atkE = 'normal';
@@ -32,7 +32,7 @@ export class Monsters {
         this.maxHp = 30;
         this.name = 'Tiny King';
         this.atk = 10;
-        this.color = '../dist/img/tinyking.png';
+        this.color = './img/tinyking.png';
         this.spd = 7;
         this.defE = 'normal';
         this.atkE = 'normal';
@@ -45,7 +45,7 @@ export class Monsters {
         this.maxHp = 40;
         this.name = "Aubergiknight";
         this.atk = 20;
-        this.color = '../dist/img/arbergiknight.png';
+        this.color = './img/arbergiknight.png';
         this.spd = 6;
         this.defE = 'normal';
         this.atkE = 'normal';
@@ -57,7 +57,7 @@ export class Monsters {
     this.action = 1;
     this.message = 'sprang out!!!';
     this.event = 'none';
-    this.grave = '../dist/img/grave.png';
+    this.grave = './img/grave.png';
   }
 
   attack(hero, guardNum){

@@ -2,12 +2,12 @@ export class FieldObject {
   constructor(){
     this.name = 'first floor';
     this.obstaclesPosition = [
-      {name: 'boss', top: 0, left: 250, type: 'boss', status: 'alive', img: '../dist/img/samuraiicon.png'},
+      {name: 'boss', top: 0, left: 250, type: 'boss', status: 'alive', img: './img/samuraiicon.png'},
       {name: 'chest-1', top: 100, left: 100, type: 'chest', status: 'closed', treasure: 'Shuriken'},
       {name: 'chest-2', top: 200, left: 200, type: 'chest', status: 'closed', treasure: 'Stone'},
     ];
-    this.background = '../dist/img/firstFloor.png';
-    this.battleBG = '../dist/img/battleBG4.png';
+    this.background = './img/firstFloor.png';
+    this.battleBG = './img/battleBG4.png';
   }
   deadConfirm(){
     this.obstaclesPosition[0].status = 'dead';

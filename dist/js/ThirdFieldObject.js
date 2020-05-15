@@ -1,10 +1,10 @@
 export class ThirdFieldObject {
   constructor(){
     this.name = 'third floor';
-    this.background = '../dist/img/thirdFloorH.png';
-    this.battleBG = '../dist/img/battleBG3.png';
+    this.background = './img/thirdFloorH.png';
+    this.battleBG = './img/battleBG3.png';
     this.obstaclesPosition = [
-      {name: 'boss', top: 0, left: 250, type: 'boss', status: 'alive', img: '../dist/img/grayicon.png'},
+      {name: 'boss', top: 0, left: 250, type: 'boss', status: 'alive', img: './img/grayicon.png'},
       {name: 'chest-1', top: 100, left: 100, type: 'chest', status: 'closed', treasure: 'Shuriken'},
       {name: 'chest-2', top: 200, left: 200, type: 'chest', status: 'closed', treasure: 'Stone'},
     ];

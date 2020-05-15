@@ -194,8 +194,8 @@ class UI{
     menuStatusExp.textContent = `${hero.exp} / ${hero.maxExp}`;
   }
   reImgOnMenu(){
-    menuHeroW.style.background = `url(../dist/img/arms.png) center center / cover`;
-    menuHeroS.style.background = `url(../dist/img/legs.png) center center / cover`;
+    menuHeroW.style.background = `url(../img/arms.png) center center / cover`;
+    menuHeroS.style.background = `url(./img/legs.png) center center / cover`;
     menuHeroC.style.background = 'none';
     menuHeroT.style.background = 'none';
     if(hero.weapon != 'none'){
@@ -231,9 +231,9 @@ class UI{
         one.style.top = `${each['top']}px`;
         one.style.left = `${each['left']}px`;
         if(each['status'] == 'closed'){
-          one.style.background = 'url(../dist/img/chest.png) center center / cover';
+          one.style.background = 'url(./img/chest.png) center center / cover';
         }else{
-          one.style.background = 'url(../dist/img/chestOpened.png) center center / cover';
+          one.style.background = 'url(./img/chestOpened.png) center center / cover';
         }
         fieldObstacles.appendChild(one);
       }else if(each['type'] == 'boss'){
@@ -242,7 +242,7 @@ class UI{
         if(each['status'] == 'alive'){
           one.style.background = `url(${each['img']}) center center / cover`;
         }else{
-          one.style.background = `url(../dist/img/upstairs.png) center center / cover`;
+          one.style.background = `url(./img/upstairs.png) center center / cover`;
         }
         fieldObstacles.appendChild(one);
       }
@@ -281,22 +281,22 @@ class UI{
     if(hero.weapon != 'none'){
       heroBW.style.background = `url(${qItems.getImg(hero.weapon)}) center center / cover`;
     }else{
-      heroBW.style.background = `url(../dist/img/arms.png) center center / cover`;
+      heroBW.style.background = `url(./img/arms.png) center center / cover`;
     }
     if(hero.head != 'none'){
       heroBC.style.background = `url(${qItems.getImg(hero.head)}) center center / cover`;
     }else{
-      heroBC.style.background = `url(../dist/img/heroface.png) center center / cover`
+      heroBC.style.background = `url(./img/heroface.png) center center / cover`
     }
     if(hero.shoes != 'none'){
       heroBS.style.background = `url(${qItems.getImg(hero.shoes)}) center center / cover`;
     }else{
-      heroBS.style.background = 'url(../dist/img/legs.png) center center / cover';
+      heroBS.style.background = 'url(./img/legs.png) center center / cover';
     }
     if(hero.shirt != 'none'){
       heroBT.style.background = `url(${qItems.getImg(hero.shirt)}) center center / cover`;
     }else{
-      heroBT.style.background = 'url(../dist/img/herobody.png) center center / cover';
+      heroBT.style.background = 'url(./img/herobody.png) center center / cover';
     }
   }
   messageLeftOnField(){
@@ -339,7 +339,7 @@ class UI{
     heroOnField.style.top = 50 + 'px';
     heroOnField.style.left = 250 + 'px';
     fieldBoss = fs.setBoss(fo.name);
-    // boss.style.background = `url(../dist/img/upstairs.png) center center / cover`
+    // boss.style.background = `url(./img/upstairs.png) center center / cover`
   }
   // Buttle UI /////////////////
   arrowOn(){
@@ -876,7 +876,7 @@ function runChest(e){
   let chest = fs.chestCheck(hero.xOnField, hero.yOnField, fo);
   if(chest == e.target.id){
     let item = fs.chestOpen(fo, chest);
-    e.target.style.background = 'url(../dist/img/chestOpened.png) center center / cover';
+    e.target.style.background = 'url(./img/chestOpened.png) center center / cover';
     items.getItem(item);
     ui.chestMOn(item, hero.xOnField, hero.yOnField);
     movable = 2;

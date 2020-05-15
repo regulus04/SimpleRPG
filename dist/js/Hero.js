@@ -116,16 +116,16 @@ export class Hero {
     let img;
     switch(direction){
       case 'up':
-        img = '../dist/img/heroUp.png';
+        img = './img/heroUp.png';
         break;
       case 'down':
-        img = '../dist/img/heroDown.png';
+        img = './img/heroDown.png';
         break;
       case 'left':
-        img = '../dist/img/heroLeft.png';
+        img = './img/heroLeft.png';
         break;
       case 'right':
-        img = '../dist/img/heroRight.png';
+        img = './img/heroRight.png';
         break;
     }
     return img;

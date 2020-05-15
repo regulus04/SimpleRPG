@@ -4,7 +4,7 @@ export class ThirdBoss {
     this.maxHp = 1;
     this.name = 'Gray Cat';
     this.atk = 10;
-    this.color = '../dist/img/graycat.png';
+    this.color = './img/graycat.png';
     this.spd = 1;
     this.defE = 'normal';
     this.atkE = 'normal';
@@ -13,8 +13,8 @@ export class ThirdBoss {
     // this.firstMessage = 'Wanna fight me???';
     this.message = 'looks gray!!!';
     this.event = 'stairs';
-    this.background = '../dist/img/grayicon.png';
-    this.grave = '../dist/img/catgrave.png';
+    this.background = './img/grayicon.png';
+    this.grave = './img/catgrave.png';
   }
 
   attack(hero, guardNum){
