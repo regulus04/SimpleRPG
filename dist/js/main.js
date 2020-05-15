@@ -41,6 +41,7 @@ const leftTriangle = document.querySelector('#left-triangle');
 const rightTriangle = document.querySelector('#right-triangle');
 const yesBox = document.querySelector('#yes-box');
 const noBox = document.querySelector('#no-box');
+const chestMessage = document.querySelector('#chest-message');
 // Menu
 const menuScreen = document.querySelector('#menu-screen');
 const menuItemList = document.querySelector('#menu-item-list');
@@ -131,12 +132,6 @@ let shoes = new Shoes;
 let caps = new Caps;
 let shirts = new Shirts;
 
-// Boss status 
-let firstBoss = 'alive';
-let secondBoss = 'alive';
-let thirdBoss = 'alive';
-let fourthBoss = 'alive';
-let fifthBoss = 'alive';
 
 // Craft
 let selectedMaterial = '???';
@@ -253,6 +248,17 @@ class UI{
       }
     });
   }
+
+  chestMOn(text, charX, charY){
+    chestMessage.textContent = `Found ${text}!`;
+    chestMessage.style.top = charY + 60 + 'px';
+    chestMessage.style.left = charX - 50 + 'px';
+    chestMessage.style.display = 'block';
+  }
+  chestMOff(){
+    chestMessage.style.display = 'none';
+  }
+
   // Switch scene ///////////
   blackFade(){
     blackFade.style.display = 'block';
@@ -848,7 +854,12 @@ function runChest(e){
     let item = fs.chestOpen(fo, chest);
     e.target.style.background = 'url(../dist/img/chestOpened.png) center center / cover';
     items.getItem(item);
-    // ui & message
+    ui.chestMOn(item, hero.xOnField, hero.yOnField);
+    movable = 2;
+    setTimeout(() => {
+      ui.chestMOff();
+      movable = 1;
+    }, 2000);
   }
 }
 

@@ -622,6 +622,15 @@ body {
         left: 25px; }
         #field-container #field #field-message-box #answer-box div {
           padding: 0.3rem; }
+    #field-container #field #chest-message {
+      position: absolute;
+      height: 30px;
+      background: white;
+      border: 5px black solid;
+      border-radius: 10px;
+      padding: 0.5rem 0.2rem;
+      z-index: 5;
+      display: none; }
   #field-container #field-menu-button {
     margin-top: 1rem;
     width: 550px;
