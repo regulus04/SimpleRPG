@@ -4,7 +4,7 @@ export class FirstBoss {
     this.maxHp = 1;
     this.name = 'The Devil';
     this.atk = 10;
-    this.color = "white";
+    this.color = '../dist/img/samuraicat.png';
     this.spd = 1;
     this.defE = 'normal';
     this.atkE = 'normal';
@@ -14,6 +14,7 @@ export class FirstBoss {
     this.message = 'looks strong!!!';
     this.event = 'stairs';
     this.background = '../dist/img/samuraiicon.png';
+    this.grave = '../dist/img/catgrave.png';
   }
 
   attack(hero, guardNum){

@@ -4,7 +4,7 @@ export class FifthBoss {
     this.maxHp = 1;
     this.name = 'Dark Cat';
     this.atk = 10;
-    this.color = "crimson";
+    this.color = '../dist/img/darkcat.png';
     this.spd = 1;
     this.defE = 'normal';
     this.atkE = 'normal';
@@ -14,6 +14,7 @@ export class FifthBoss {
     this.message = 'looks so strong!!!';
     this.event = 'stairs';
     this.background = '../dist/img/hiddencat.png';
+    this.grave = '../dist/img/catgrave.png';
   }
 
   attack(hero, guardNum){

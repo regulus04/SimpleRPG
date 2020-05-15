@@ -4,7 +4,7 @@ export class FourthBoss {
     this.maxHp = 1;
     this.name = 'Gloomy Cat';
     this.atk = 10;
-    this.color = "crimson";
+    this.color = '../dist/img/gloomycat.png';
     this.spd = 1;
     this.defE = 'normal';
     this.atkE = 'normal';
@@ -14,6 +14,7 @@ export class FourthBoss {
     this.message = 'looks gloomy!!!';
     this.event = 'stairs';
     this.background = '../dist/img/gloomyicon.png';
+    this.grave = '../dist/img/catgrave.png';
   }
 
   attack(hero, guardNum){

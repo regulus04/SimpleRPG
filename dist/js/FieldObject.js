@@ -2,7 +2,9 @@ export class FieldObject {
   constructor(){
     this.name = 'first floor';
     this.obstaclesPosition = [
-      {name: 'boss', top: 0, left: 250}
+      {name: 'boss', top: 0, left: 250, type: 'boss', status: 'alive'},
+      {name: 'chest-1', top: 100, left: 100, type: 'chest', status: 'closed'},
+      {name: 'chest-2', top: 200, left: 200, type: 'chest', status: 'opened'},
     ];
     this.background = '../dist/img/firstFloor.png';
     this.battleBG = '../dist/img/battleBG4.png';

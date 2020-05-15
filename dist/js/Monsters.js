@@ -4,9 +4,9 @@ export class Monsters {
       case 1 :
         this.hp = 10;
         this.maxHp = 10;
-        this.name = "Goomba";
+        this.name = "Cliper";
         this.atk = 6;
-        this.color = "saddlebrown";
+        this.color = '../dist/img/clip.png';
         this.spd = 1;
         this.defE = 'normal';
         this.atkE = 'normal';
@@ -17,9 +17,9 @@ export class Monsters {
       case 2 :
         this.hp = 20;
         this.maxHp = 20;
-        this.name = "Koopa";
+        this.name = "Catcher";
         this.atk = 7;
-        this.color = "seagreen";
+        this.color = '../dist/img/catcher.png';
         this.spd = 3;
         this.defE = 'normal';
         this.atkE = 'normal';
@@ -30,9 +30,9 @@ export class Monsters {
       case 3 :
         this.hp = 30;
         this.maxHp = 30;
-        this.name = "Patapata";
+        this.name = 'Tiny King';
         this.atk = 10;
-        this.color = "crimson";
+        this.color = '../dist/img/tinyking.png';
         this.spd = 7;
         this.defE = 'normal';
         this.atkE = 'normal';
@@ -43,9 +43,9 @@ export class Monsters {
       case 4 :
         this.hp = 40;
         this.maxHp = 40;
-        this.name = "Bowser";
+        this.name = "Aubergiknight";
         this.atk = 20;
-        this.color = "green";
+        this.color = '../dist/img/arbergiknight.png';
         this.spd = 6;
         this.defE = 'normal';
         this.atkE = 'normal';
@@ -57,6 +57,7 @@ export class Monsters {
     this.action = 1;
     this.message = 'sprang out!!!';
     this.event = 'none';
+    this.grave = '../dist/img/grave.png';
   }
 
   attack(hero, guardNum){

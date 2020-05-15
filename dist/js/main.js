@@ -13,6 +13,10 @@ import { Shoes } from './Shoes.js';
 import { Caps } from './Caps.js';
 import { Shirts } from './Shirts.js';
 import { Craft } from './Craft.js';
+import { ThirdBoss } from './ThirdBoss.js';
+import { ThirdFieldObject } from './thirdFieldObject.js';
+import { FourthFieldObject } from './FourthFieldObject.js';
+import { FifthFieldObject } from './FifthFieldObject.js';
 
 // Functions I want to add later 
 // 1. typing message(by array and foreach)
@@ -114,6 +118,10 @@ let crafts = new Craft;
 let bs = new BattleSystem;
 let fs = new FieldSystem;
 let fo = new FieldObject;
+let fo2 = new SecondFieldObject;
+let fo3 = new ThirdFieldObject;
+let fo4 = new FourthFieldObject;
+let fo5 = new FifthFieldObject;
 let fieldBoss = new FirstBoss;
 let weapons = new Weapons;
 let shoes = new Shoes;
@@ -213,6 +221,7 @@ class UI{
   menuHeroEOff(){
     menuHeroE.style.background = 'none';
   }
+  
   // Switch scene ///////////
   blackFade(){
     blackFade.style.display = 'block';
@@ -572,7 +581,7 @@ class UI{
   applyEnemy(name, hp, color){
     monsterName.textContent = name;
     monsterHp.textContent = hp;
-    monsterMoveBox.style.background = color;
+    monsterMoveBox.style.background = `url(${color}) center center/ cover`;
   }
   applyEnemyHp(monster){
     monsterHp.textContent = monster.hp;
@@ -592,6 +601,9 @@ class UI{
   }
   closeLevelUp(){
     levelUpBox.style.display = 'none';
+  }
+  monsterGrave(){
+    monsterMoveBox.style.background = `url(${monster.grave}) center center / cover`;
   }
   // Action Animation ////
   punchAnime(){
@@ -795,11 +807,7 @@ function runTalk(){
 yesBox.addEventListener('click', runYes);
 function runYes(){
   ui.messageOffOnField();
-  if(fo.name == 'first floor'){
-    monster = new FirstBoss;
-  }else if(fo.name == 'second floor'){
-    monster = new SecondBoss;
-  }
+  monster = fs.setBoss(fo.name);
   hero.setBattlePara();
   startBattle();
 }
@@ -1005,6 +1013,7 @@ function runNext(){
       break;
     case 'won' :
       ui.messageOn(`Hero beat ${monster.name}!`);
+      ui.monsterGrave();
       skipNum = 'get exp';
       break;
     case 'get exp' :
@@ -1158,7 +1167,7 @@ function runPunch(){
     ui.punchAnime();
     setTimeout(ui.getDamageAnime.bind(null,0),1000);
     setTimeout(function(){
-      ui.applyEnemy(monster.name, monster.hp);
+      ui.applyEnemy(monster.name, monster.hp, monster.color);
       ui.damageMessageOn(monster.name, damage);
     }, 2200);
   }

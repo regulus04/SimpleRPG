@@ -56,6 +56,7 @@ export class SecondMonsters {
     }
     this.message = 'sprang out!!!';
     this.event = 'none';
+    this.grave = '../dist/img/grave.png';
   }
 
   attack(hero, guardNum){
