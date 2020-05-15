@@ -10,7 +10,7 @@ export class Items {
       {name: 'Fire Ball', stock: 1, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a fire ball'},
       {name: 'Thunder Ball', stock: 1, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a fire ball'},
       {name: 'Ice Ball', stock: 1, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a fire ball'},
-      {name: 'Mithril', stock: 1, use: 'material', type: 'none', description: 'This is for Craft', img: '../dist/img/mithril.png'},
+      {name: 'Mithril', stock: 1, use: 'material', type: 'none', description: 'This is for Craft', img: '../dist/img/mythril.png'},
       {name: 'Bronze', stock: 1, use: 'material', type: 'none', description: 'This is for Craft', img: '../dist/img/bronze.png'},
       {name: 'Orichalcum', stock: 1, use: 'material', type: 'none', description: 'This is for Craft', img: '../dist/img/orichalcum.png'},
     ];
@@ -161,5 +161,14 @@ export class Items {
       }
     });
     return result;
+  }
+  getImg(itemName){
+    let img;
+    this.itemList.forEach(function(each){
+      if(itemName == each['name']){
+        img = each['img'];
+      }
+    });
+    return img;
   }
 }

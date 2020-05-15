@@ -250,7 +250,7 @@ class UI{
   }
 
   chestMOn(text, charX, charY){
-    chestMessage.textContent = `Found ${text}!`;
+    chestMessage.textContent = `Found "${text}"!`;
     chestMessage.style.top = charY + 60 + 'px';
     chestMessage.style.left = charX - 50 + 'px';
     chestMessage.style.display = 'block';
@@ -409,7 +409,7 @@ class UI{
   itemPopOut(target){
     let itemName = target.textContent;
     let desc = items.getDescription(itemName);
-    if(items.getUse(itemName) == 'battle' || items.getUse(itemName) == 'material'){
+    if(items.getUse(itemName) == 'battle'){
       const t = document.createElement('div');
       t.className = 'triangle';
       const one = document.createElement('div');
@@ -423,6 +423,30 @@ class UI{
       const five = document.createElement('i');
       five.className = 'fas fa-times';
       four.appendChild(five);
+      two.appendChild(four);
+      one.appendChild(t);
+      one.appendChild(oneP);
+      one.appendChild(two);
+      target.appendChild(one);
+    }else if(items.getUse(itemName) == 'material'){
+      const t = document.createElement('div');
+      t.className = 'triangle';
+      const one = document.createElement('div');
+      one.className = 'menu-pop-out';
+      const oneP = document.createElement('p');
+      oneP.textContent = `${desc}`;
+      const two = document.createElement('div');
+      two.className = 'option-box';
+      const three = document.createElement('div');
+      three.className = 'small-img';
+      let itemImg = items.getImg(itemName);
+      three.style.background = `url(${itemImg}) center center / cover`;
+      const four = document.createElement('div');
+      four.className = 'x-btn field-button';
+      const five = document.createElement('i');
+      five.className = 'fas fa-times';
+      four.appendChild(five);
+      two.appendChild(three);
       two.appendChild(four);
       one.appendChild(t);
       one.appendChild(oneP);
