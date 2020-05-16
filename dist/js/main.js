@@ -157,7 +157,7 @@ let walking = 1;
 let menuItemClickable = 1;
 
 
-class UI{
+export class UI{
   // Field UI /////////////////////////////
   fieldOn(){
     field.style.display = 'block';
@@ -194,7 +194,7 @@ class UI{
     menuStatusExp.textContent = `${hero.exp} / ${hero.maxExp}`;
   }
   reImgOnMenu(){
-    menuHeroW.style.background = `url(../img/arms.png) center center / cover`;
+    menuHeroW.style.background = `url(./img/arms.png) center center / cover`;
     menuHeroS.style.background = `url(./img/legs.png) center center / cover`;
     menuHeroC.style.background = 'none';
     menuHeroT.style.background = 'none';
@@ -942,7 +942,7 @@ function runMoveChar(e){
         clearInterval(animation);
         monster = fs.encountMonster(fo.name);
         hero.setBattlePara();
-        setTimeout(() => { startBattle() }, 1000);
+        setTimeout(() => { startBattle() }, 500);
         setTimeout(() => { movable = 1 }, 5000);
         setTimeout(() => { walking = 1 }, 5000);
       }
@@ -956,6 +956,7 @@ function startBattle(){
   // UI
   setTimeout(() => {
     ui.battleStart();
+    ui.applyHero(hero.hp, hero.mp);
     // Enemy's UI
     ui.applyEnemy(monster.name, monster.hp, monster.color);
     ui.messageOn(`${monster.name} ${monster.message}`);
@@ -1302,20 +1303,43 @@ function runAway(){
 monsterAction = function enemyTurn(){
   if(monster.hp <= monster.maxHp * 0.2 && monster.action != 1){
     
+  }else if(monster.hp >= monster.maxHp * 0.2 && monster.hp <= monster.maxHp * 0.5 && monster.action != 1){
+
   }else{
-    // Monster normal attack
-    ui.attackOff();
-    ui.commandOff();
-    ui.monsterHitAnime();
-    setTimeout(function(){
-      ui.getDamageAnime(1);
-    }, 1000);
-    setTimeout(function(){
-      let damage = monster.attack(hero, guardNum);
-      hero.hp = bs.hpAdjust(hero.hp);
-      ui.applyHero(hero.hp, hero.mp);
-      ui.damageMessageOn(hero.name, damage);
-    }, 2200);
+    let actionNum = Math.floor(Math.random() * 2) + 1;
+    if(actionNum == 1){
+      // Monster normal attack
+      ui.attackOff();
+      ui.commandOff();
+      ui.monsterHitAnime();
+      setTimeout(function(){
+        ui.getDamageAnime(1);
+      }, 1000);
+      setTimeout(function(){
+        let damage = monster.attack(hero, guardNum);
+        
+        hero.hp = bs.hpAdjust(hero.hp);
+        ui.applyHero(hero.hp, hero.mp);
+        ui.damageMessageOn(hero.name, damage);
+      }, 2200);
+    }else if(actionNum == 2){
+      // Monster throwing attack
+      ui.attackOff();
+      ui.commandOff();
+      ui.messageOn(`${monster.name} is throwing something!`);
+      ui.monsterPJTAnime(monster.pjt);
+      setTimeout(function(){
+        ui.getDamageAnime(1);
+        ui.messageOff();
+      }, 1000);
+      setTimeout(function(){
+        let damage = monster.attack2(hero, guardNum);
+        
+        hero.hp = bs.hpAdjust(hero.hp);
+        ui.applyHero(hero.hp, hero.mp);
+        ui.damageMessageOn(hero.name, damage);
+      }, 2200);
+    }
   }
 }
 

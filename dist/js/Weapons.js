@@ -13,7 +13,6 @@ export class Weapons {
       {name: 'Jinrai', atk: 20, spd: 5, atkE: 'thunder', img: './img/jinrai.png'},
       {name: 'Wooden Stick', atk: 20, spd: 1, atkE: 'leaf', img: './img/woodenStick.png'},
       {name: 'Carp Heads', atk: 20, spd: 10, atkE: 'water', img: './img/carpHeads.png'},
-
     ];
   }
 

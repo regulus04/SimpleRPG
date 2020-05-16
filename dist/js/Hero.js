@@ -1,3 +1,5 @@
+import { BattleSystem } from "./BattleSystem.js";
+
 export class Hero {
   constructor() {
     this.name = 'Hero';
@@ -74,19 +76,23 @@ export class Hero {
 
   levelUp(){
     this.lv += 1;
-    this.maxHp += 20;
+    this.maxHp += 10;
     this.maxMp += 5;
     this.hp = this.maxHp;
     this.mp = this.maxMp;
-    this.atk += 5;
-    this.def += 5;
-    this.spd += 5;
+    this.atk += 3;
+    this.def += 3;
+    this.spd += 3;
     this.maxExp += 50;
   }
 
   punch(monster){
-    monster.hp -= this.battleAtk;
-    return this.battleAtk;
+    let bs = new BattleSystem;
+    let hero = this;
+    let damage = this.battleAtk;
+    bs.elementHeroAttack(hero, monster, damage)
+    monster.hp -= damage;
+    return damage;
   }
   throwItem(){
     let result;

@@ -79,6 +79,8 @@ export class Items {
           monster.hp -= damage;
         }else if(monster.defE == 'water'){
           damage = Math.floor(hero.battleAtk * 0.2);
+        }else if(monster.defE == 'leaf'){
+          damage = Math.floor(hero.battleAtk * 1.5);
         }else{
           damage = Math.floor(hero.battleAtk * 0.8);
         }
@@ -87,14 +89,14 @@ export class Items {
         if(monster.defE == 'water'){
           damage = Math.floor(hero.battleAtk * 2);
           monster.hp -= damage;
-        }else if(monster.defE == 'plastic'){
-          damage = Math.floor(hero.battleAtk * 0.2);
+        }else if(monster.defE == 'ice'){
+          damage = Math.floor(hero.battleAtk * 0.5);
         }else{
           damage = Math.floor(hero.battleAtk * 0.8);
         }
         break;
       case 'Ice Ball' :
-        if(monster.defE == 'leaf'){
+        if(monster.defE == 'thunder'){
           damage = Math.floor(hero.battleAtk * 2);
           monster.hp -= damage;
         }else if(monster.defE == 'fire'){

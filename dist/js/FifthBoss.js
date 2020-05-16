@@ -15,6 +15,7 @@ export class FifthBoss {
     this.event = 'stairs';
     this.background = './img/hiddencat.png';
     this.grave = './img/catgrave.png';
+    this.action = 2;
   }
 
   attack(hero, guardNum){

@@ -1,3 +1,6 @@
+import { BattleSystem } from "./BattleSystem.js";
+
+
 export class Monsters {
   constructor(enemyNum){
     switch(enemyNum){
@@ -13,6 +16,7 @@ export class Monsters {
         this.exp = 1;
         this.item = 'Stone';
         this.rareItem = 0;
+        this.pjt = './img/stone.png';
         break;
       case 2 :
         this.hp = 20;
@@ -26,6 +30,7 @@ export class Monsters {
         this.exp = 3;
         this.item = 'Potion';
         this.rareItem = 0;
+        this.pjt = './img/stone.png';
         break;
       case 3 :
         this.hp = 30;
@@ -39,6 +44,7 @@ export class Monsters {
         this.exp = 5
         this.item = 'Ether';
         this.rareItem = 0;
+        this.pjt = './img/stone.png';
         break;
       case 4 :
         this.hp = 40;
@@ -47,11 +53,12 @@ export class Monsters {
         this.atk = 20;
         this.color = './img/arbergiknight.png';
         this.spd = 6;
-        this.defE = 'normal';
-        this.atkE = 'normal';
+        this.defE = 'leaf';
+        this.atkE = 'leaf';
         this.exp = 10;
         this.item = 'Shuriken';
         this.rareItem = 0;
+        this.pjt = './img/stone.png';
         break;
     }
     this.action = 1;
@@ -61,6 +68,7 @@ export class Monsters {
   }
 
   attack(hero, guardNum){
+    let bs = new BattleSystem;
     let damage;
     if(this.atk - hero.battleDef <= 0){
       damage = 1;
@@ -70,6 +78,23 @@ export class Monsters {
     if(guardNum == 1){
       damage = Math.floor(damage / 3);
     }
+    damage = bs.elementMonsterAttack(hero, this, damage);
+    hero.hp -= damage;
+    return damage;
+  }
+
+  attack2(hero, guardNum){
+    let bs = new BattleSystem;
+    let damage;
+    if(this.atk - hero.battleDef <= 0){
+      damage = 1;
+    }else{
+      damage = this.atk - hero.battleDef;
+    }
+    if(guardNum == 1){
+      damage = Math.floor(damage / 3);
+    }
+    damage = bs.elementMonsterAttack(hero, this, damage);
     hero.hp -= damage;
     return damage;
   }
@@ -80,7 +105,7 @@ export class Monsters {
       return this.rareItem;
     }else{
       let encountNum = Math.floor(Math.random() * 20 + 1);
-      if(encountNum >= 10){
+      if(encountNum >= 15){
         return this.item;
       }else{
         return 0;

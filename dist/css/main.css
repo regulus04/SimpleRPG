@@ -237,7 +237,8 @@ body {
   overflow: scroll; }
   #message-box #message {
     color: black;
-    font-size: 1.5rem; }
+    font-size: 1.5rem;
+    text-align: center; }
   #message-box #skip-arrow {
     position: absolute;
     bottom: 0;

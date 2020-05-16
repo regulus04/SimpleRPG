@@ -4,7 +4,7 @@ export class FifthFieldObject {
     this.background = './img/fieldBG5H.png';
     this.battleBG = './img/battleBG5.png';
     this.obstaclesPosition = [
-      {name: 'boss', top: 0, left: 250, type: 'boss', status: 'alive', img: './img/hiddenicon.png'},
+      {name: 'boss', top: 0, left: 250, type: 'boss', status: 'alive', img: './img/hiddencat.png'},
       {name: 'chest-1', top: 0, left: 0, type: 'chest', status: 'closed', treasure: 'Flame Sword'},
       {name: 'chest-2', top: 300, left: 300, type: 'chest', status: 'closed', treasure: 'Legend Cap'},
     ];
