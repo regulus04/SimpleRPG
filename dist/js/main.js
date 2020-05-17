@@ -60,6 +60,8 @@ const menuHeroW = document.querySelector('#menu-hero-weapon');
 const menuHeroS = document.querySelector('#menu-hero-shoes');
 const menuHeroC = document.querySelector('#menu-hero-head');
 const menuHeroE = document.querySelector('#menu-hero-effect');
+const atkElement = document.querySelector('#atk-element');
+const defElement = document.querySelector('#def-element');
 // Craft
 const craftScreen = document.querySelector('#craft-screen');
 const materialList = document.querySelector('#craft-material-list');
@@ -236,6 +238,45 @@ export class UI{
     }
     if(hero.shirt != 'none'){
       menuHeroT.style.background = `url(${qItems.getImg(hero.shirt)}) center center / cover`;
+    }
+    // Element
+    switch(hero.atkE){
+      case 'fire' :
+        atkElement.style.background = 'url(./img/fire.png) center center / cover';
+        break; 
+      case 'ice' :
+        atkElement.style.background = 'url(./img/ice.png) center center / cover';
+        break; 
+      case 'leaf' :
+        atkElement.style.background = 'url(./img/leaf.png) center center / cover';
+        break; 
+      case 'thunder' :
+        atkElement.style.background = 'url(./img/thunder.png) center center / cover';
+        break; 
+      case 'water' :
+        atkElement.style.background = 'url(./img/water.png) center center / cover';
+        break; 
+      default :
+        atkElement.style.background = 'none'; 
+    }
+    switch(hero.defE){
+      case 'fire' :
+        defElement.style.background = 'url(./img/fire.png) center center / cover';
+        break; 
+      case 'ice' :
+        defElement.style.background = 'url(./img/ice.png) center center / cover';
+        break; 
+      case 'leaf' :
+        defElement.style.background = 'url(./img/leaf.png) center center / cover';
+        break; 
+      case 'thunder' :
+        defElement.style.background = 'url(./img/thunder.png) center center / cover';
+        break; 
+      case 'water' :
+        defElement.style.background = 'url(./img/water.png) center center / cover';
+        break; 
+      default :
+        defElement.style.background = 'none'; 
     }
   }
   menuHeroEOn(url){
@@ -1222,6 +1263,7 @@ function runNext(){
         skipNum = 'battle start';
       }else{
         items.getItem(item);
+        qItems.getItem(item);
         ui.messageOn(`${monster.name} dropped ${item}!`);
         ui.arrowOn();
         skipNum = 'battle end';

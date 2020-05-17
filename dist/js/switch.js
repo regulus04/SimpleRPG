@@ -6,3 +6,43 @@ const fieldContainer = document.querySelector('#field-container');
 // Field
 battleField.style.display = 'none';
 fieldContainer.style.display = 'flex';
+
+// monster 
+// c1
+// c2
+// 1
+// 2
+// 3
+// 4
+// boss
+// monster 
+// c1
+// c2
+// 1
+// 2
+// 3
+// 4
+// boss
+// monster 
+// c1
+// c2
+// 1
+// 2
+// 3
+// 4
+// boss
+// monster 
+// c1
+// c2
+// 1
+// 2
+// 3
+// 4
+// boss
+// monster 
+// c1
+// c2
+// 1
+// 2
+// 3
+// 4

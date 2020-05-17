@@ -10,8 +10,8 @@ export class SecondMonsters {
         this.atk = 6;
         this.color = './img/monster/go.png';
         this.spd = 1;
-        this.defE = 'normal';
-        this.atkE = 'normal';
+        this.defE = 'thunder';
+        this.atkE = 'thunder';
         this.exp = 1;
         this.item = 'Stone';
         this.pjt = './img/cross.png';
