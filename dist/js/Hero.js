@@ -230,4 +230,25 @@ export class Hero {
   unequipShirt(){
     this.shirt = 'none';
   }
+
+  loadSavaData(sd){
+    this.lv = sd.lv;
+    this.hp = sd.hp;
+    this.mp = sd.mp;
+    this.maxHp = sd.maxHp;
+    this.maxMp = sd.maxMp;
+    this.atk = sd.atk;
+    this.def = sd.def;
+    this.spd = sd.spd;
+    this.defE = sd.defE;
+    this.atkE = sd.atkE;
+    this.exp = sd.exp;
+    this.maxExp = sd.maxExp;
+    this.xOnField = sd.xOnField;
+    this.yOnField = sd.yOnField;
+    this.head = sd.head;
+    this.weapon = sd.weapon;
+    this.shoes = sd.shoes;
+    this.shirt = sd.shirt;
+  }
 }

@@ -64,4 +64,11 @@ export class FieldObject {
     }
     return stairs;
   }
+
+  loadSaveData(sd){
+    this.obstaclesPosition = sd.obstaclesPosition;
+    this.name = sd.name;
+    this.background = sd.background;
+    this.battleBG = sd.battleBG;
+  }
 }

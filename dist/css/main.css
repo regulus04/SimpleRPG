@@ -85,6 +85,10 @@ body {
     background: chocolate;
     box-shadow: none; }
 
+a {
+  text-decoration: none;
+  color: black; }
+
 .field-button {
   border: 3px black solid;
   border-radius: 5px;
@@ -643,6 +647,25 @@ body {
         display: none; }
         #field-container #craft-screen #craft-result-box #craft-btn i {
           font-size: 1.3rem; }
+  #field-container #load-screen {
+    width: 550px;
+    height: 550px;
+    box-sizing: border-box;
+    background: white;
+    border: 5px black solid;
+    border-radius: 10px;
+    display: none;
+    justify-content: center;
+    align-items: center; }
+    #field-container #load-screen #load-message-box {
+      width: 400px;
+      height: 300px;
+      border: 5px black dotted;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      #field-container #load-screen #load-message-box #load-message {
+        line-height: 2; }
   #field-container #field {
     background: slategray;
     background: url(../img/firstFloor.png) center center/cover;

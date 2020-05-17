@@ -69,6 +69,9 @@ const resultEquip = document.querySelector('#craft-result-equipment');
 const resultResult = document.querySelector('#craft-result-result');
 const doCraft = document.querySelector('#craft-btn');
 
+// Load 
+const loadScreen = document.querySelector('#load-screen');
+
 // Battle
 const battleField = document.querySelector('#main-container');
 const battleBG = document.querySelector('#battle-box');
@@ -183,9 +186,19 @@ export class UI{
     char.style.top = yTo + 'px';
     char.style.left = xTo + 'px';
   }
+  loadOn(){
+    this.closeMenu();
+    this.craftOff();
+    this.fieldOff();
+    loadScreen.style.display = 'flex';
+  }
+  loadOff(){
+    loadScreen.style.display = 'none';
+  }
   openMenu(){
     this.craftOff();
     this.fieldOff();
+    this.loadOff();
     menuScreen.style.display = 'grid';
     this.reStatusOnMenu();
     this.reImgOnMenu();
@@ -354,6 +367,10 @@ export class UI{
     heroOnField.style.left = 250 + 'px';
     fieldBoss = fs.setBoss(fo.name);
     // boss.style.background = `url(./img/upstairs.png) center center / cover`
+  }
+  loadField(){
+    field.style.background = `url(${fo.background}) center center / cover`;
+    fieldBoss = fs.setBoss(fo.name);
   }
   // Buttle UI /////////////////
   arrowOn(){
@@ -602,6 +619,7 @@ export class UI{
     craftScreen.style.display = 'grid';
     field.style.display = 'none';
     menuScreen.style.display = 'none';
+    loadScreen.style.display = 'none';
     selectedMaterial = '???';
     selectedEquipment = '???';
     selectedResult = '???';
@@ -1612,3 +1630,121 @@ function battleProcess(){
   }
 }
 
+
+// Save & Load /////////////////////
+// Save data ////////////
+saveBtn.addEventListener('click', runSave);
+function runSave(){
+  // apply fo data to proper foNum
+  switch(fo.name){
+    case 'first floor' :
+      fo1 = fo;
+      break;
+    case 'second floor' :
+      fo2 = fo;
+      break;
+    case 'third floor' :
+      fo3 = fo;
+      break;
+    case 'fourth floor' :
+      fo4 = fo;
+      break;
+    case 'fifth floor' :
+      fo5 = fo;
+      break;
+  }
+  
+  let data = {heroData: hero, lvPData: levelUpP, itemsData: items, qItemsData: qItems, foData: fo, fo1Data: fo1, fo2Data: fo2, fo3Data: fo3, fo4Data: fo4, fo5Data: fo5};
+  let saveData = JSON.stringify(data);
+  console.log(data);
+  let blob = new Blob([saveData],{type:"text/plan"});
+  saveBtn.href = URL.createObjectURL(blob);
+  saveBtn.download = `SimpleRPGData.txt`;
+}
+// Load data //////
+// Load btn //
+loadBtn.addEventListener('click', runLoad);
+function runLoad(){
+  if(loadScreen.style.display == 'none' || loadScreen.style.display == ''){
+    ui.loadOn();
+  }else{
+    ui.loadOff();
+    ui.fieldOn();
+  }
+}
+// Load function
+loadScreen.addEventListener('dragover', changeIcon);
+loadScreen.addEventListener('drop', readTextFile);
+function changeIcon(event){
+   event.preventDefault();
+   event.dataTransfer.dropEffect = "copy";
+}
+function readTextFile(event){
+  event.preventDefault();
+  if (confirm('Are you sure you want to overwrite this data??')){
+    var f = event.dataTransfer;
+    // var str = f.getData("text");
+    let fileName = f.files[0].name;
+
+    // console.log(fileName);
+    var reader = new FileReader();
+    reader.onloadend = function(evt){
+      if (evt.target.readyState == FileReader.DONE){
+
+        // console.log(evt.target.result);  //File content 
+        overWriteOptions(evt.target.result, fileName);
+      }
+    };
+    reader.readAsText(f.files[0]);
+
+  }
+  
+}
+
+
+function overWriteOptions(e, fileName){
+  if(fileName.indexOf('SimpleRPG') != -1){
+    let sd = JSON.parse(e);
+    // Set data/////
+    hero.loadSavaData(sd['heroData']);
+    levelUpP = sd['lvPData'];
+    
+    items.itemList = sd['itemsData'].itemList;
+    qItems.itemList = sd['qItemsData'].itemList;
+    fo1.loadSaveData(sd['fo1Data']);
+    fo2.loadSaveData(sd['fo2Data']);
+    fo3.loadSaveData(sd['fo3Data']);
+    fo4.loadSaveData(sd['fo4Data']);
+    fo5.loadSaveData(sd['fo5Data']);
+
+    switch(sd['foData'].name){
+      case 'first floor' :
+        fo = fo1;
+        break;
+      case 'second floor' :
+        fo = fo2;
+        break;
+      case 'third floor' :
+        fo = fo3;
+        break;
+      case 'fourth floor' :
+        fo = fo4;
+        break;
+      case 'fifth floor' :
+        fo = fo5;
+        break;
+    }
+    console.log(hero.xOnField);
+    /////////////////
+    ui.blackFade();
+    setTimeout(() => {
+      ui.loadOff();
+      ui.fieldOn();
+      ui.loadField();
+      ui.makeFieldObject();
+      ui.moveChar(heroOnField, hero.xOnField, hero.yOnField);
+    }, 700);
+
+  }
+
+}
