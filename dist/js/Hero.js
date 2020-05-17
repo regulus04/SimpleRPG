@@ -132,6 +132,22 @@ export class Hero {
     return damage;
   }
 
+  beam(monster){
+    let bs = new BattleSystem;
+    let ui = new UI;
+    let hero = this;
+    // Hero spend MP
+    hero.mp -= 5;
+
+    let damage = hero.battleAtk;
+    damage = Math.floor(Math.random() * damage + Math.floor(damage * 0.5)) + Math.floor(damage * 0.5);
+
+    ui.heroPJTAnime('./img/beam.png');
+    monster.hp -= damage;
+
+    return damage;
+  }
+
   throwItem(){
     let result;
     if(Math.floor(Math.random() * 10 + 1) > 3){

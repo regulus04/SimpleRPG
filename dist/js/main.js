@@ -660,6 +660,11 @@ export class UI{
     }else{
       heroHp.style.color = 'black';
     }
+    if(hero.mp <= hero.maxMp * 0.2){
+      heroMp.style.color = 'red';
+    }else{
+      heroMp.style.color = 'black';
+    }
   }
   applyHeroMp(){
     heroMp.textContent = hero.mp;
@@ -1305,6 +1310,41 @@ function runMagic(){
   
       setTimeout(function(){
         ui.monsterBEOff();
+        ui.getDamageAnime(0);
+        ui.messageOff();
+      }, 1000);
+      setTimeout(function(){
+        ui.applyEnemyHp(monster);
+        ui.damageMessageOn(monster.name, damage);
+      }, 2200);
+    }
+    battleProcess();
+  }else{
+    ui.attackOff();
+    ui.messageOn(`Hero doesn't have enough MP!`);
+    setTimeout(() => {
+      ui.messageOff();
+      ui.attackOn();
+      ui.backArrowOn();
+    }, 1500);
+  }
+}
+
+// Beam
+beamCmd.addEventListener('click', runBeam);
+function runBeam(){
+  if(hero.mp >= 5){
+    ui.backArrowOff();
+    heroAction = function beamTurn(){
+      ui.attackOff();
+      ui.messageOn(`Hero: "Beam!!"`);
+      
+      let damage = hero.beam(monster);
+      monster.hp = bs.hpAdjust(monster.hp);
+      ui.applyHeroMp();
+
+  
+      setTimeout(function(){
         ui.getDamageAnime(0);
         ui.messageOff();
       }, 1000);
