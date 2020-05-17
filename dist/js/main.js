@@ -72,6 +72,8 @@ const doCraft = document.querySelector('#craft-btn');
 // Battle
 const battleField = document.querySelector('#main-container');
 const battleBG = document.querySelector('#battle-box');
+const battleEBG = document.querySelector('#battle-effect-background');
+const battleEFG = document.querySelector('#battle-effect-frontground');
 const message = document.querySelector('#message');
 const skipArrow = document.querySelector('#skip-arrow');
 const backArrow = document.querySelector('#back-arrow');
@@ -87,6 +89,7 @@ const monsterMoveBox = document.querySelector('#enemy-box');
 const monsterName = document.querySelector('#enemy-name');
 const monsterHp = document.querySelector('#enemy-hp');
 const monsterPJT = document.querySelector('#monster-throwing-item');
+const monsterPJT2 = document.querySelector('#monster-meteorite');
 const heroHp = document.querySelector('#hero-hp');
 const heroMp = document.querySelector('#hero-mp');
 // level up
@@ -141,6 +144,7 @@ let selectedResult = '???'
 // Battle 
 let heroAction;
 let monsterAction;
+let finalAttack;
 // Level up parameter
 let levelUpP = 0;
 let temHp = 0;
@@ -626,14 +630,29 @@ export class UI{
   applyEnemy(name, hp, color){
     monsterName.textContent = name;
     monsterHp.textContent = hp;
+    if(monster.hp <= monster.maxHp * 0.2){
+      monsterHp.style.color = 'red';
+    }else{
+      monsterHp.style.color = 'black';
+    }
     monsterMoveBox.style.background = `url(${color}) center center/ cover`;
   }
   applyEnemyHp(monster){
     monsterHp.textContent = monster.hp;
+    if(monster.hp <= monster.maxHp * 0.2){
+      monsterHp.style.color = 'red';
+    }else{
+      monsterHp.style.color = 'black';
+    }
   }
   applyHero(hp, mp){
     heroHp.textContent = hp;
     heroMp.textContent = mp;
+    if(hero.hp <= hero.maxHp * 0.2){
+      heroHp.style.color = 'red';
+    }else{
+      heroHp.style.color = 'black';
+    }
   }
   openLevelUp(){
     levelUpBox.style.display = 'grid';
@@ -663,20 +682,34 @@ export class UI{
     }, 1000);
   }
   heroPJTAnime(url){
+    heroPJT.style.display = 'block';
     heroPJT.style.background = `url(${url}) center center / cover`;
     heroPJT.style.animationPlayState = 'running';
     setTimeout(function(){
       heroPJT.style.background = 'none';
       heroPJT.style.animationPlayState = 'paused';
-    }, 1000);
+      heroPJT.style.display = 'none';
+    }, 700);
   }
   monsterPJTAnime(url){
+    monsterPJT.style.display = 'block';
     monsterPJT.style.background = `url(${url}) center center / cover`;
     monsterPJT.style.animationPlayState = 'running';
     setTimeout(function(){
       monsterPJT.style.background = 'none';
       monsterPJT.style.animationPlayState = 'paused';
-    }, 1000);
+      monsterPJT.style.display = 'none';
+    }, 700);
+  }
+  monsterPJT2Anime(url){
+    monsterPJT2.style.display = 'block';
+    monsterPJT2.style.background = `url(${url}) center center / cover`;
+    monsterPJT2.style.animationPlayState = 'running';
+    setTimeout(function(){
+      monsterPJT2.style.background = 'none';
+      monsterPJT2.style.animationPlayState = 'paused';
+      monsterPJT2.style.display = 'none';
+    }, 700);
   }
   getDamageAnime(e){
     if(e == 1){
@@ -701,6 +734,14 @@ export class UI{
   heroBEOff(){
     heroBattleE.style.background = 'none';
   }
+  heroGuardOn(){
+    heroBattleE.style.left = 150 + 'px';
+    heroBattleE.style.background = `url(./img/guard.png) center center / cover`;
+  }
+  heroGuardOff(){
+    heroBattleE.style.background = 'none';
+    heroBattleE.style.left = 0;
+  }
 
   monsterHitAnime(){
     this.messageOn(`${monster.name} is attacking!`);
@@ -713,6 +754,22 @@ export class UI{
       ui.messageOff();
       monsterMoveBox.style.animationPlayState = 'paused';
     }, 1000);
+  }
+
+  battleEBGOn(url){
+    battleEBG.style.background = `url(${url}) center center / cover`;
+  }
+  battleEBGCOn(color){
+    battleEBG.style.background = `${color}`;
+  }
+  battleEBGOff(){
+    battleEBG.style.background = 'none';
+  }
+  battleEFGOn(url){
+    battleEFG.style.background = `url(${url}) center center / cover`;
+  }
+  battleEFGOff(){
+    battleEFG.style.background = 'none';
   }
 }
 // Generate UI instance
@@ -863,6 +920,7 @@ function runYes(){
   ui.messageOffOnField();
   monster = fs.setBoss(fo.name);
   hero.setBattlePara();
+  finalAttack = 1;
   startBattle();
 }
 noBox.addEventListener('click', runNo);
@@ -1015,6 +1073,7 @@ function runNext(){
       ui.arrowOff();
       heroAction();
       // Check if mosnter is alive //
+      
       if(monster.hp == 0){
         skipNum = 'won';
       }else{
@@ -1213,8 +1272,9 @@ function runGurad(){
   heroAction = function guard(){
     ui.commandOff();
     guardNum = 1;
-    // (guard anime 0.6s) //
+    ui.heroGuardOn();
     setTimeout(function(){
+      ui.heroGuardOff();
       ui.messageOn('Hero is defending himself');
       ui.arrowOn();
     }, 1000);
@@ -1300,12 +1360,27 @@ function runAway(){
   }
 }
 
+// monster.hp >= monster.maxHp * 0.2 && 
+
 // Enemy Turn /////
 monsterAction = function enemyTurn(){
-  if(monster.hp <= monster.maxHp * 0.2 && monster.action != 1){
-    
-  }else if(monster.hp >= monster.maxHp * 0.2 && monster.hp <= monster.maxHp * 0.5 && monster.action != 1){
-
+  if(monster.hp <= monster.maxHp * 0.2 && monster.action != 1 && finalAttack == 1){
+    monster.attack5(hero, monster, guardNum);
+    finalAttack = 0;
+  }else if(monster.hp <= monster.maxHp * 0.5 && monster.action != 1){
+    let actionNum = Math.floor(Math.random() * 3) + 1;
+    if(actionNum == 1){
+      // Cat vomitting
+      ui.attackOff();
+      ui.commandOff();
+      ui.messageOn(`${monster.name} is vomiting a fur ball!`);
+      ui.getDamageAnime(0);
+      setTimeout(() => {ui.arrowOn()}, 1200);
+    }else if(actionNum == 2){
+      monster.attack3(hero, monster, guardNum);
+    }else{
+      monster.attack4(hero, monster, guardNum);
+    }
   }else{
     let actionNum = Math.floor(Math.random() * 2) + 1;
     if(actionNum == 1){
@@ -1327,7 +1402,7 @@ monsterAction = function enemyTurn(){
       // Monster throwing attack
       ui.attackOff();
       ui.commandOff();
-      ui.messageOn(`${monster.name} is throwing something!`);
+      ui.messageOn(`${monster.name} launched something!`);
       ui.monsterPJTAnime(monster.pjt);
       setTimeout(function(){
         ui.getDamageAnime(1);
@@ -1357,6 +1432,7 @@ function battleProcess(){
   }else{
     monsterAction();
     // Check if hero is alive //
+    
     if(hero.hp == 0){
       skipNum = 'lost';
     }else{

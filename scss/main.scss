@@ -104,11 +104,19 @@ body {
 }
 // Battle field
 #battle-box {
+  position: relative;
   background: gainsboro;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  #battle-effect-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: none;
+  }
 
   #hp-and-name-box {
     display: flex;
@@ -207,8 +215,8 @@ body {
       height: 50px;
       z-index: 5;
       animation-name: heroProjectile;
-      animation-duration: 1s;
-      animation-iteration-count: infinite;
+      animation-duration: 0.7s;
+      animation-iteration-count: 1;
       animation-timing-function: linear;
       animation-play-state: paused;
     }
@@ -221,8 +229,22 @@ body {
       height: 80px;
       z-index: 5;
       animation-name: monsterProjectile;
-      animation-duration: 1s;
-      animation-iteration-count: infinite;
+      animation-duration: 0.7s;
+      animation-iteration-count: 1;
+      animation-timing-function: linear;
+      animation-play-state: paused;
+    }
+    #monster-meteorite {
+      position: absolute;
+      top: -500px;
+      right: 100px;
+      width: 150px;
+      height: 150px;
+      z-index: 5;
+      background: none;
+      animation-name: monsterProjectile2;
+      animation-duration: 0.7s;
+      animation-iteration-count: 1;
       animation-timing-function: linear;
       animation-play-state: paused;
     }
@@ -243,6 +265,14 @@ body {
       }
     }
 
+  }
+
+  #battle-effect-frontground{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: none;
+    opacity: 0.5;
   }
 }
 // Message field

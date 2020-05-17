@@ -9,6 +9,15 @@ export class BattleSystem {
     }
   }
 
+  checkHeroHp(hero){
+    if(hero.hp == 0){
+      return 'lost';
+    }else{
+      return 'turn end';
+    }
+  }
+
+
   compareSp(hero, monster){
     if(hero.spd >= monster.spd){
       return 1;

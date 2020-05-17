@@ -76,7 +76,6 @@ export class Items {
       case 'Fire Ball' :
         if(monster.defE == 'ice'){
           damage = Math.floor(hero.battleAtk * 2);
-          monster.hp -= damage;
         }else if(monster.defE == 'water'){
           damage = Math.floor(hero.battleAtk * 0.2);
         }else if(monster.defE == 'leaf'){
@@ -84,6 +83,7 @@ export class Items {
         }else{
           damage = Math.floor(hero.battleAtk * 0.8);
         }
+        monster.hp -= damage;
         break;
       case 'Thunder Ball' :
         if(monster.defE == 'water'){
@@ -94,6 +94,7 @@ export class Items {
         }else{
           damage = Math.floor(hero.battleAtk * 0.8);
         }
+        monster.hp -= damage;
         break;
       case 'Ice Ball' :
         if(monster.defE == 'thunder'){
@@ -104,6 +105,7 @@ export class Items {
         }else{
           damage = Math.floor(hero.battleAtk * 0.8);
         }
+        monster.hp -= damage;
         break;
     }
     return damage;
