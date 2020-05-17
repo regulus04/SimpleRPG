@@ -140,9 +140,23 @@ export class Hero {
     hero.mp -= 5;
 
     let damage = hero.battleAtk;
-    damage = Math.floor(Math.random() * damage + Math.floor(damage * 0.5)) + Math.floor(damage * 0.5);
+    damage = Math.floor(Math.random() * (damage * 1.5 + 1 - damage * 0.5) + Math.floor(damage * 0.5));
 
     ui.heroPJTAnime('./img/beam.png');
+    monster.hp -= damage;
+
+    return damage;
+  }
+
+  explosion(monster){
+    let hero = this;
+    // Hero spend MP
+    hero.mp = 0;
+    hero.hp = 1;
+
+    let damage = hero.battleAtk;
+    damage = Math.floor(Math.random() * (damage * 3 + 1 - damage * 0.5) + Math.floor(damage * 0.5));
+
     monster.hp -= damage;
 
     return damage;

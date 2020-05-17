@@ -84,6 +84,7 @@ const heroBW = document.querySelector('#battle-hero-weapon');
 const heroBS = document.querySelector('#battle-hero-shoes');
 const heroBT = document.querySelector('#battle-hero-t-shirt');
 const heroBattleE = document.querySelector('#battle-hero-effect-box');
+const explosionBox = document.querySelector('#explosion-effect');
 const monsterBattleE = document.querySelector('#battle-monster-effect-box');
 const heroPJT = document.querySelector('#hero-throwing-item');
 const monsterMoveBox = document.querySelector('#enemy-box');
@@ -93,6 +94,10 @@ const monsterPJT = document.querySelector('#monster-throwing-item');
 const monsterPJT2 = document.querySelector('#monster-meteorite');
 const heroHp = document.querySelector('#hero-hp');
 const heroMp = document.querySelector('#hero-mp');
+const gameOver = document.querySelector('#game-over-box');
+const heroHead = document.querySelector('#battle-hero-head');
+const heroBody = document.querySelector('#battle-hero-body');
+const heroArmsLegs = document.querySelector('#battle-hero-arms-legs');
 // level up
 const levelUpBox = document.querySelector('#level-up-parameter-box');
 const remainP = document.querySelector('#remaining-point');
@@ -115,6 +120,10 @@ const beamCmd = document.querySelector('#attack-fire');
 const explosionCmd = document.querySelector('#attack-thunder');
 // Item Command
 const itemList = document.querySelector('#command-item-list');
+
+// Game Clear
+const gameClear = document.querySelector('#game-clear');
+
 // Generate Hero instance
 let hero = new Hero;
 let monster;
@@ -731,6 +740,16 @@ export class UI{
       monsterPJT2.style.display = 'none';
     }, 700);
   }
+  explosionAnime(){
+    explosionBox.style.display = 'block';
+    explosionBox.style.animationPlayState = 'running';
+    explosionBox.style.background = `url(./img/explosion.png) center center / cover`;
+    setTimeout(() => {
+      explosionBox.style.animationPlayState = 'paused';
+      explosionBox.style.background = 'none';
+      explosionBox.style.display = 'none';
+    }, 1500);
+  }
   getDamageAnime(e){
     if(e == 1){
       heroMoveBox.style.animationName = 'flashing';
@@ -798,6 +817,23 @@ export class UI{
   }
   battleEFGOff(){
     battleEFG.style.background = 'none';
+  }
+
+  gameOver(){
+    this.messageOn('Hero is fainted...');
+    heroBC.style.display = 'none';
+    heroBS.style.display = 'none';
+    heroBT.style.display = 'none';
+    heroBW.style.display = 'none';
+    heroHead.style.display = 'none';
+    heroBody.style.display = 'none';
+    heroArmsLegs.style.display = 'none';
+    heroMoveBox.style.background = `url(./img/herofaint.png) center center / cover`;
+    setTimeout(() => {gameOver.style.display = 'flex'}, 1000);
+  }
+  gameClear(){
+    gameClear.style.display = 'block';
+    gameClear.style.background = `url(./img/congratsforbattle.png) center center / cover`;
   }
 }
 // Generate UI instance
@@ -1055,6 +1091,8 @@ function startBattle(){
 function eventAfterBattle(){
   if(monster.event == 'stairs'){
     ui.afterBossBattle();
+  }else if(monster.event == 'clear'){
+    ui.gameClear();
   }
 }
 
@@ -1171,7 +1209,7 @@ function runNext(){
       }
       break;
     case 'lost' :
-      alert('Game Over');
+      ui.gameOver();
       break;
   }
 }
@@ -1364,6 +1402,41 @@ function runBeam(){
     }, 1500);
   }
 }
+
+explosionCmd.addEventListener('click', runExplosion);
+function runExplosion(){
+  if(hero.hp != 1){
+    ui.backArrowOff();
+    heroAction = function explosionTrun(){
+      ui.attackOff();
+      ui.messageOn(`Hero: "Explosion!!!!!!!"`);
+      
+      let damage = hero.explosion(monster);
+      monster.hp = bs.hpAdjust(monster.hp);
+      ui.explosionAnime();
+      ui.applyHero(hero.hp, hero.mp);
+  
+      setTimeout(function(){
+        ui.getDamageAnime(0);
+        ui.messageOff();
+      }, 1500);
+      setTimeout(function(){
+        ui.applyEnemyHp(monster);
+        ui.damageMessageOn(monster.name, damage);
+      }, 2700);
+    }
+    battleProcess();
+  }else{
+    ui.attackOff();
+    ui.messageOn(`Hero doesn't have enough energy!`);
+    setTimeout(() => {
+      ui.messageOff();
+      ui.attackOn();
+      ui.backArrowOn();
+    }, 1500);
+  }
+}
+
 
 // Guard ///
 defendCmd.addEventListener('click', runGurad);

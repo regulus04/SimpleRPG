@@ -16,7 +16,7 @@ export class FifthBoss {
     this.pjt = './img/darkball.png';
     this.pjt2 = './img/darkmeteorite.png';
     this.message = 'looks super strong!!!';
-    this.event = 'stairs';
+    this.event = 'clear';
     this.background = './img/hiddencat.png';
     this.grave = './img/darkcatgrave.png';
     this.action = 2;

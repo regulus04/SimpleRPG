@@ -51,6 +51,14 @@
     top: 70px;
     right: 420px; } }
 
+@keyframes explosion {
+  60% {
+    width: 250px;
+    height: 250px; }
+  100% {
+    width: 250px;
+    height: 250px; } }
+
 * {
   margin: 0;
   padding: 0; }
@@ -214,6 +222,22 @@ body {
         #battle-box #battle-field #player-box #battle-hero-arms-legs div {
           width: 100%;
           height: 100%; }
+      #battle-box #battle-field #player-box #battle-hero-explosion-box {
+        left: -25px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 250px;
+        height: 250px; }
+        #battle-box #battle-field #player-box #battle-hero-explosion-box #explosion-effect {
+          width: 50px;
+          height: 50px;
+          animation-name: explosion;
+          animation-duration: 1.5s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          animation-play-state: paused; }
     #battle-box #battle-field #hero-throwing-item {
       position: absolute;
       top: 100px;
@@ -274,6 +298,19 @@ body {
     height: 100%;
     background: none;
     opacity: 0.5; }
+  #battle-box #game-over-box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0.9;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    transition: all 3s linear; }
+    #battle-box #game-over-box #game-over-message {
+      font-size: 5rem;
+      color: red; }
 
 #message-box {
   background: slategray;
@@ -702,3 +739,10 @@ body {
   z-index: 99;
   animation-name: fadeInOut;
   animation-duration: 2s; }
+
+#game-clear {
+  width: 100%;
+  height: 100%;
+  display: none;
+  position: absolute;
+  z-index: 5; }
