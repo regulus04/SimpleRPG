@@ -263,6 +263,11 @@ body {
       animation-play-state: paused; }
       #battle-box #battle-field #enemy-box div {
         background: black; }
+      #battle-box #battle-field #enemy-box #battle-monster-effect-box {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: none; }
   #battle-box #battle-effect-frontground {
     position: absolute;
     width: 100%;

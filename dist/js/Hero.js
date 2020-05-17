@@ -1,11 +1,12 @@
 import { BattleSystem } from "./BattleSystem.js";
+import { UI } from "./main.js";
 
 export class Hero {
   constructor() {
     this.name = 'Hero';
     this.lv = 1;
     this.hp = 100;
-    this.mp = 20;
+    this.mp = 5;
     this.maxHp = 100;
     this.maxMp = 20;
     this.atk = 5;
@@ -77,7 +78,7 @@ export class Hero {
   levelUp(){
     this.lv += 1;
     this.maxHp += 10;
-    this.maxMp += 5;
+    this.maxMp += 3;
     this.hp = this.maxHp;
     this.mp = this.maxMp;
     this.atk += 3;
@@ -94,6 +95,43 @@ export class Hero {
     monster.hp -= damage;
     return damage;
   }
+
+  magic(monster){
+    let bs = new BattleSystem;
+    let ui = new UI;
+    let hero = this;
+    let damage = hero.maxMp;
+    hero.mp -= Math.floor(hero.maxMp / 4);
+
+    let magicNum = Math.floor(Math.random() * 5 + 1);
+    switch(magicNum){
+      case 1 :
+        setTimeout(() => {ui.monsterBEOn('./img/fire.png')}, 500);
+        damage = bs.elementHeroAttack('fire', monster, damage);
+        break;
+      case 2 :
+        setTimeout(() => {ui.monsterBEOn('./img/leaf.png')}, 500);
+        damage = bs.elementHeroAttack('leaf', monster, damage);
+        break;
+      case 3 :
+        setTimeout(() => {ui.monsterBEOn('./img/ice.png')}, 500);
+        damage = bs.elementHeroAttack('ice', monster, damage);
+        break;
+      case 4 :
+        setTimeout(() => {ui.monsterBEOn('./img/thunder.png')}, 500);
+        damage = bs.elementHeroAttack('thunder', monster, damage);
+        break;
+      case 5 :
+        setTimeout(() => {ui.monsterBEOn('./img/water.png')}, 500);
+        damage = bs.elementHeroAttack('water', monster, damage);
+        break;
+    }
+
+    monster.hp -= damage;
+
+    return damage;
+  }
+
   throwItem(){
     let result;
     if(Math.floor(Math.random() * 10 + 1) > 3){

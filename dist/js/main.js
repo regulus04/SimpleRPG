@@ -84,6 +84,7 @@ const heroBW = document.querySelector('#battle-hero-weapon');
 const heroBS = document.querySelector('#battle-hero-shoes');
 const heroBT = document.querySelector('#battle-hero-t-shirt');
 const heroBattleE = document.querySelector('#battle-hero-effect-box');
+const monsterBattleE = document.querySelector('#battle-monster-effect-box');
 const heroPJT = document.querySelector('#hero-throwing-item');
 const monsterMoveBox = document.querySelector('#enemy-box');
 const monsterName = document.querySelector('#enemy-name');
@@ -109,9 +110,9 @@ const runCmd = document.querySelector('#action-run');
 // Attack Command
 const attackList = document.querySelector('#attack-list');
 const punchCmd = document.querySelector('#attack-punch');
-const iceCmd = document.querySelector('#attack-ice');
-const fireCmd = document.querySelector('#attack-fire');
-const thunderCmd = document.querySelector('#attack-thunder');
+const magicCmd = document.querySelector('#attack-ice');
+const beamCmd = document.querySelector('#attack-fire');
+const explosionCmd = document.querySelector('#attack-thunder');
 // Item Command
 const itemList = document.querySelector('#command-item-list');
 // Generate Hero instance
@@ -660,6 +661,14 @@ export class UI{
       heroHp.style.color = 'black';
     }
   }
+  applyHeroMp(){
+    heroMp.textContent = hero.mp;
+    if(hero.mp <= hero.maxMp * 0.2){
+      heroMp.style.color = 'red';
+    }else{
+      heroMp.style.color = 'black';
+    }
+  }
   openLevelUp(){
     levelUpBox.style.display = 'grid';
     remainP.textContent = levelUpP;
@@ -739,6 +748,14 @@ export class UI{
   }
   heroBEOff(){
     heroBattleE.style.background = 'none';
+  }
+  monsterBEOn(url){
+    if(url != 'none'){
+      monsterBattleE.style.background = `url(${url}) center center / cover`;
+    }
+  }
+  monsterBEOff(){
+    monsterBattleE.style.background = 'none';
   }
   heroGuardOn(){
     heroBattleE.style.left = 150 + 'px';
@@ -1178,15 +1195,15 @@ function runPara(e){
         break;
       case 'hp-plus' :
         levelUpP -= 1;
-        hero.maxHp += 10;
-        hero.hp += 10;
+        hero.maxHp += 5;
+        hero.hp += 5;
         temHp += 1;
         ui.openLevelUp();
         break;
       case 'mp-plus' :
         levelUpP -= 1;
-        hero.maxMp += 3;
-        hero.mp += 3;
+        hero.maxMp += 2;
+        hero.mp += 2;
         temMp += 1;
         ui.openLevelUp();
         break;
@@ -1220,8 +1237,8 @@ function runPara(e){
       case 'hp-minus' :
         if(temHp != 0){
           levelUpP += 1;
-          hero.maxHp -= 10;
-          hero.hp -= 10;
+          hero.maxHp -= 5;
+          hero.hp -= 5;
           temHp -= 1;
           ui.openLevelUp();
         }
@@ -1229,8 +1246,8 @@ function runPara(e){
       case 'mp-minus' :
         if(temMp != 0){
           levelUpP += 1;
-          hero.maxMp -= 3;
-          hero.mp -= 3;
+          hero.maxMp -= 2;
+          hero.mp -= 2;
           temMp -= 1;
           ui.openLevelUp();
         }
@@ -1271,6 +1288,43 @@ function runPunch(){
   }
   battleProcess();
 }
+
+magicCmd.addEventListener('click', runMagic);
+function runMagic(){
+  if(hero.mp >= Math.floor(hero.maxMp / 4)){
+
+    ui.backArrowOff()
+    heroAction = function magicTurn(){
+      ui.attackOff();
+      ui.messageOn(`Hero casting random magic!!`);
+      
+      let damage = hero.magic(monster);
+      monster.hp = bs.hpAdjust(monster.hp);
+      ui.applyHeroMp();
+
+  
+      setTimeout(function(){
+        ui.monsterBEOff();
+        ui.getDamageAnime(0);
+        ui.messageOff();
+      }, 1000);
+      setTimeout(function(){
+        ui.applyEnemyHp(monster);
+        ui.damageMessageOn(monster.name, damage);
+      }, 2200);
+    }
+    battleProcess();
+  }else{
+    ui.attackOff();
+    ui.messageOn(`Hero doesn't have enough MP!`);
+    setTimeout(() => {
+      ui.messageOff();
+      ui.attackOn();
+      ui.backArrowOn();
+    }, 1500);
+  }
+}
+
 // Guard ///
 defendCmd.addEventListener('click', runGurad);
 function runGurad(){
@@ -1365,8 +1419,6 @@ function runAway(){
     skipNum = 'second monster';
   }
 }
-
-// monster.hp >= monster.maxHp * 0.2 && 
 
 // Enemy Turn /////
 monsterAction = function enemyTurn(){

@@ -161,4 +161,71 @@ export class BattleSystem {
     return damage;
   }
 
+  elementHeroMagic(element, monster, damage){
+    if(element == 'fire'){
+      switch(monster.defE){
+        case 'leaf' :
+          damage = Math.floor(damage * 1.5);
+          break;
+        case 'water' :
+          damage = Math.floor(damage / 2);
+          break;
+        case 'fire' :
+          damage = Math.floor(damage * 0.8);
+          break;
+        case 'ice' :
+          damage = damage * 2;
+          break;
+      }
+    }else if(element == 'light'){
+      switch(monster.defE){
+        case 'dark' :
+          damage = damage * 2;
+          break;
+      }
+    }else if(element == 'thunder'){
+      switch(monster.defE){
+        case 'water' :
+          damage = damage * 2;
+          break;
+        case 'ice' :
+          damage = Math.floor(damage / 2);
+      }
+    }else if(element == 'leaf'){
+      switch(monster.defE){
+        case 'fire' :
+          damage = Math.floor(damage / 2);
+          break;
+        case 'water' :
+          damage = Math.floor(damage * 1.5);
+          break;
+      }
+    }else if(element == 'water'){
+      switch(monster.defE){
+        case 'fire' :
+          damage = damage * 2;
+          break;
+        case 'ice' :
+          damage = Math.floor(damage * 1.5);
+          break;
+        case 'thunder' :
+          damage = Math.floor(damage / 2);
+          break;
+        case 'leaf' :
+          damage = Math.floor(damage * 0.75);
+          break;
+      }
+    }else if(element == 'ice'){
+      switch(monster.defE){
+        case 'thunder' :
+          damage = Math.floor(damage * 1.5);
+          break;
+        case 'fire' :
+          damge = Math.floor(damage / 2);
+          break;
+      }
+    }
+    return damage;
+  }
+
 }
