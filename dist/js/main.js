@@ -638,6 +638,9 @@ export class UI{
     monsterMoveBox.style.background = `url(${color}) center center/ cover`;
   }
   applyEnemyHp(monster){
+    if(monster.hp <= 0){
+      skipNum = 'won';
+    }
     monsterHp.textContent = monster.hp;
     if(monster.hp <= monster.maxHp * 0.2){
       monsterHp.style.color = 'red';
@@ -646,6 +649,9 @@ export class UI{
     }
   }
   applyHero(hp, mp){
+    if(hp == 0){
+      skipNum = 'lost';
+    }
     heroHp.textContent = hp;
     heroMp.textContent = mp;
     if(hero.hp <= hero.maxHp * 0.2){
@@ -1073,8 +1079,7 @@ function runNext(){
       ui.arrowOff();
       heroAction();
       // Check if mosnter is alive //
-      
-      if(monster.hp == 0){
+      if(skipNum == 'won'){
         skipNum = 'won';
       }else{
         skipNum = 'turn end';
@@ -1084,7 +1089,7 @@ function runNext(){
       ui.arrowOff();
       monsterAction();
       // Check if hero is alive //
-      if(hero.hp == 0){
+      if(skipNum == 'lost'){
         skipNum = 'lost';
       }else{
         skipNum = 'turn end';
@@ -1260,7 +1265,7 @@ function runPunch(){
     ui.punchAnime();
     setTimeout(ui.getDamageAnime.bind(null,0),1000);
     setTimeout(function(){
-      ui.applyEnemy(monster.name, monster.hp, monster.color);
+      ui.applyEnemyHp(monster);
       ui.damageMessageOn(monster.name, damage);
     }, 2200);
   }
@@ -1327,6 +1332,7 @@ itemList.addEventListener('click', function(e){
         if(hero.throwItem() == 'hit'){
           setTimeout(function(){ui.getDamageAnime(0)}, 1000);
           setTimeout(function(){
+            // this part is kinda baggy
             ui.damageMessageOn(monster.name, items.throwItem(selectedItem, hero, monster));
             monster.hp = bs.hpAdjust(monster.hp);
             ui.applyEnemyHp(monster);
@@ -1424,7 +1430,7 @@ function battleProcess(){
   if(bs.compareSp(hero, monster) == 1){
     heroAction();
     // Check if mosnter is alive //
-    if(monster.hp == 0){
+    if(skipNum == 'won'){
       skipNum = 'won';
     }else{
       skipNum = 'second monster';
@@ -1432,8 +1438,7 @@ function battleProcess(){
   }else{
     monsterAction();
     // Check if hero is alive //
-    
-    if(hero.hp == 0){
+    if(skipNum == 'lost'){
       skipNum = 'lost';
     }else{
       skipNum = 'second hero';

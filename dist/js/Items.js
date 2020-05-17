@@ -71,7 +71,6 @@ export class Items {
       case 'Shuriken' :
         damage = Math.floor(hero.battleAtk * 1.5);
         monster.hp -= damage;
-        console.log(Math.floor(hero.battleAtk * 1.5));
         break;
       case 'Fire Ball' :
         if(monster.defE == 'ice'){
