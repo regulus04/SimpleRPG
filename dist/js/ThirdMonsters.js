@@ -1,3 +1,5 @@
+import { BattleSystem } from "./BattleSystem.js";
+
 export class ThirdMonsters {
   constructor(enemyNum){
     switch(enemyNum){
@@ -6,12 +8,13 @@ export class ThirdMonsters {
         this.maxHp = 10;
         this.name = "Goomba";
         this.atk = 6;
-        this.color = "saddlebrown";
+        this.color = './img/monster/farfallebird.png';
         this.spd = 1;
         this.defE = 'normal';
         this.atkE = 'normal';
         this.exp = 1;
         this.item = 'Stone';
+        this.pjt = './img/farfalle.png';
         this.rareItem = 0;
         break;
       case 2 :
@@ -19,12 +22,13 @@ export class ThirdMonsters {
         this.maxHp = 20;
         this.name = "Koopa";
         this.atk = 7;
-        this.color = "seagreen";
+        this.color = './img/monster/guitar.png';
         this.spd = 3;
         this.defE = 'normal';
         this.atkE = 'normal';
         this.exp = 3;
         this.item = 'Potion';
+        this.pjt = './img/notes.png';
         this.rareItem = 0;
         break;
       case 3 :
@@ -32,12 +36,13 @@ export class ThirdMonsters {
         this.maxHp = 30;
         this.name = "Patapata";
         this.atk = 10;
-        this.color = "crimson";
+        this.color = './img/monster/kakigori.png';
         this.spd = 7;
         this.defE = 'normal';
         this.atkE = 'normal';
         this.exp = 5
         this.item = 'Ether';
+        this.pjt = './img/iceball.png';
         this.rareItem = 0;
         break;
       case 4 :
@@ -45,12 +50,13 @@ export class ThirdMonsters {
         this.maxHp = 40;
         this.name = "Bowser";
         this.atk = 20;
-        this.color = "green";
+        this.color = './img/monster/darkdia.png';
         this.spd = 6;
         this.defE = 'normal';
         this.atkE = 'normal';
         this.exp = 10;
         this.item = 'Shuriken';
+        this.pjt = './img/darkball.png';
         this.rareItem = 0;
         break;
     }
@@ -61,6 +67,7 @@ export class ThirdMonsters {
   }
 
   attack(hero, guardNum){
+    let bs = new BattleSystem;
     let damage;
     if(this.atk - hero.battleDef <= 0){
       damage = 1;
@@ -70,9 +77,27 @@ export class ThirdMonsters {
     if(guardNum == 1){
       damage = Math.floor(damage / 3);
     }
+    damage = bs.elementMonsterAttack(hero, this, damage);
     hero.hp -= damage;
     return damage;
   }
+
+  attack2(hero, guardNum){
+    let bs = new BattleSystem;
+    let damage = this.atk - hero.battleDef;
+    damage = Math.floor(Math.random() * damage + Math.floor(damage * 0.3)) + Math.floor(damage * 0.7);
+    if(damage <= 0){
+      damage = 1;
+    }
+    
+    if(guardNum == 1){
+      damage = Math.floor(damage / 3);
+    }
+    damage = bs.elementMonsterAttack(hero, this, damage);
+    hero.hp -= damage;
+    return damage;
+  }
+
 
   itemDrop(){
     let rareNum = Math.floor(Math.random() * 30 + 1);

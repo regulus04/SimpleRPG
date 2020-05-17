@@ -725,6 +725,7 @@ ui.makeFieldObject();
 menuBtn.addEventListener('click', runMenu);
 
 function runMenu(){
+  movable = 1;
   if(menuScreen.style.display == 'none' || menuScreen.style.display == ''){
     ui.openMenu();
   }else{

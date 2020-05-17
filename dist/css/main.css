@@ -144,9 +144,23 @@ body {
     width: 700px;
     font-size: 1rem; }
     #battle-box #hp-and-name-box #hero-hp-mp-box {
+      border: 3px black solid;
+      box-sizing: border-box;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+      background: white;
       display: flex; }
+      #battle-box #hp-and-name-box #hero-hp-mp-box #hero-hp {
+        margin-right: 0.5rem; }
     #battle-box #hp-and-name-box #enemy-hp-name-box {
+      border: 3px black solid;
+      box-sizing: border-box;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+      background: white;
       display: flex; }
+      #battle-box #hp-and-name-box #enemy-hp-name-box #enemy-name {
+        margin-right: 0.5rem; }
   #battle-box #battle-field {
     position: relative;
     width: 700px;

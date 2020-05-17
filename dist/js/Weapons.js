@@ -1,7 +1,6 @@
 export class Weapons {
   constructor(){
     this.itemList = [
-      // {name: 'none', atk: 0, spd: 0, atkE: 'normal', img: './img/arms.png'},
       {name: 'Dagger', atk: 5, spd: 3, atkE: 'normal', img: './img/dagger.png'},
       {name: 'Katana', atk: 8, spd: -3, atkE: 'normal', img: './img/katana.png'},
       {name: 'Flame Sword', atk: 15, spd: -3, atkE: 'fire', img: './img/flameSword.png'},

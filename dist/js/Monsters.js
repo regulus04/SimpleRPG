@@ -9,56 +9,56 @@ export class Monsters {
         this.maxHp = 10;
         this.name = "Cliper";
         this.atk = 6;
-        this.color = './img/clip.png';
+        this.color = './img/monster/clip.png';
         this.spd = 1;
         this.defE = 'normal';
         this.atkE = 'normal';
         this.exp = 1;
         this.item = 'Stone';
         this.rareItem = 0;
-        this.pjt = './img/stone.png';
+        this.pjt = './img/clips.png';
         break;
       case 2 :
         this.hp = 20;
         this.maxHp = 20;
         this.name = "Catcher";
         this.atk = 7;
-        this.color = './img/catcher.png';
+        this.color = './img/monster/catcher.png';
         this.spd = 3;
         this.defE = 'normal';
         this.atkE = 'normal';
         this.exp = 3;
         this.item = 'Potion';
         this.rareItem = 0;
-        this.pjt = './img/stone.png';
+        this.pjt = './img/ear.png';
         break;
       case 3 :
         this.hp = 30;
         this.maxHp = 30;
         this.name = 'Tiny King';
         this.atk = 10;
-        this.color = './img/tinyking.png';
+        this.color = './img/monster/tinyking.png';
         this.spd = 7;
         this.defE = 'normal';
         this.atkE = 'normal';
         this.exp = 5
         this.item = 'Ether';
         this.rareItem = 0;
-        this.pjt = './img/stone.png';
+        this.pjt = './img/flure.png';
         break;
       case 4 :
         this.hp = 40;
         this.maxHp = 40;
         this.name = "Aubergiknight";
         this.atk = 20;
-        this.color = './img/arbergiknight.png';
+        this.color = './img/monster/arbergiknight.png';
         this.spd = 6;
         this.defE = 'leaf';
         this.atkE = 'leaf';
         this.exp = 10;
         this.item = 'Shuriken';
         this.rareItem = 0;
-        this.pjt = './img/stone.png';
+        this.pjt = './img/chopsticks.png';
         break;
     }
     this.action = 1;
@@ -85,12 +85,12 @@ export class Monsters {
 
   attack2(hero, guardNum){
     let bs = new BattleSystem;
-    let damage;
-    if(this.atk - hero.battleDef <= 0){
+    let damage = this.atk - hero.battleDef;
+    damage = Math.floor(Math.random() * damage + Math.floor(damage * 0.3)) + Math.floor(damage * 0.7);
+    if(damage <= 0){
       damage = 1;
-    }else{
-      damage = this.atk - hero.battleDef;
     }
+    
     if(guardNum == 1){
       damage = Math.floor(damage / 3);
     }

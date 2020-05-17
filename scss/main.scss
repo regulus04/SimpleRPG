@@ -116,11 +116,27 @@ body {
     width: 700px;
     font-size: 1rem;
     #hero-hp-mp-box {
+      border: 3px black solid;
+      box-sizing: border-box;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+      background: white;
       display: flex;
+      #hero-hp {
+        margin-right: 0.5rem;
+      }
     }
 
     #enemy-hp-name-box {
+      border: 3px black solid;
+      box-sizing: border-box;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+      background: white;
       display: flex;
+      #enemy-name {
+        margin-right: 0.5rem;
+      }
     }
   }
 
@@ -227,27 +243,6 @@ body {
       }
     }
 
-    // .right-eye {
-    //   position: absolute;
-    //   height: 10px;
-    //   width: 10px;
-    //   top: 60px;
-    //   right: 60px;
-    // }
-    // .left-eye {
-    //   position: absolute;
-    //   height: 10px;
-    //   width: 10px;
-    //   top: 60px;
-    //   left: 60px;
-    // }
-    // .mouth {
-    //   position: absolute;
-    //   height: 10px;
-    //   width: 80px;
-    //   top: 120px;
-    //   left: 60px;
-    // }
   }
 }
 // Message field
