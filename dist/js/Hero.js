@@ -108,23 +108,23 @@ export class Hero {
     switch(magicNum){
       case 1 :
         setTimeout(() => {ui.monsterBEOn('./img/fire.png')}, 500);
-        damage = bs.elementHeroAttack('fire', monster, damage);
+        damage = bs.elementHeroMagic('fire', monster, damage);
         break;
       case 2 :
         setTimeout(() => {ui.monsterBEOn('./img/leaf.png')}, 500);
-        damage = bs.elementHeroAttack('leaf', monster, damage);
+        damage = bs.elementHeroMagic('leaf', monster, damage);
         break;
       case 3 :
         setTimeout(() => {ui.monsterBEOn('./img/ice.png')}, 500);
-        damage = bs.elementHeroAttack('ice', monster, damage);
+        damage = bs.elementHeroMagic('ice', monster, damage);
         break;
       case 4 :
         setTimeout(() => {ui.monsterBEOn('./img/thunder.png')}, 500);
-        damage = bs.elementHeroAttack('thunder', monster, damage);
+        damage = bs.elementHeroMagic('thunder', monster, damage);
         break;
       case 5 :
         setTimeout(() => {ui.monsterBEOn('./img/water.png')}, 500);
-        damage = bs.elementHeroAttack('water', monster, damage);
+        damage = bs.elementHeroMagic('water', monster, damage);
         break;
     }
 

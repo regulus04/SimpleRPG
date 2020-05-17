@@ -50,14 +50,14 @@ export class Monsters {
         this.hp = 40;
         this.maxHp = 40;
         this.name = "Aubergiknight";
-        this.atk = 20;
+        this.atk = 15;
         this.color = './img/monster/arbergiknight.png';
         this.spd = 6;
         this.defE = 'leaf';
         this.atkE = 'leaf';
         this.exp = 10;
         this.item = 'Shuriken';
-        this.rareItem = 0;
+        this.rareItem = 'Mythril';
         this.pjt = './img/chopsticks.png';
         break;
     }
@@ -101,12 +101,12 @@ export class Monsters {
   }
 
   itemDrop(){
-    let rareNum = Math.floor(Math.random() * 30 + 1);
-    if(rareNum >= 29){
+    let rareNum = Math.floor(Math.random() * 10 + 1);
+    if(rareNum >= 10){
       return this.rareItem;
     }else{
-      let encountNum = Math.floor(Math.random() * 20 + 1);
-      if(encountNum >= 15){
+      let encountNum = Math.floor(Math.random() * 5 + 1);
+      if(encountNum >= 4){
         return this.item;
       }else{
         return 0;

@@ -6,12 +6,12 @@ export class FourthMonsters {
       case 1 :
         this.hp = 10;
         this.maxHp = 10;
-        this.name = "Goomba";
+        this.name = "Eele";
         this.atk = 6;
         this.color = './img/monster/ele.png';
         this.spd = 1;
-        this.defE = 'normal';
-        this.atkE = 'normal';
+        this.defE = 'thunder';
+        this.atkE = 'thunder';
         this.exp = 1;
         this.item = 'Stone';
         this.pjt = './img/thunderball.png';
@@ -20,12 +20,12 @@ export class FourthMonsters {
       case 2 :
         this.hp = 20;
         this.maxHp = 20;
-        this.name = "Koopa";
+        this.name = "Match Kun";
         this.atk = 7;
         this.color = './img/monster/matchkun.png';
         this.spd = 3;
-        this.defE = 'normal';
-        this.atkE = 'normal';
+        this.defE = 'fire';
+        this.atkE = 'fire';
         this.exp = 3;
         this.item = 'Potion';
         this.pjt = './img/match.png';
@@ -34,7 +34,7 @@ export class FourthMonsters {
       case 3 :
         this.hp = 30;
         this.maxHp = 30;
-        this.name = "Patapata";
+        this.name = "Arms Pot";
         this.atk = 10;
         this.color = './img/monster/plant.png';
         this.spd = 7;
@@ -48,12 +48,12 @@ export class FourthMonsters {
       case 4 :
         this.hp = 40;
         this.maxHp = 40;
-        this.name = "Bowser";
+        this.name = "Fish Man";
         this.atk = 20;
         this.color = './img/monster/fishman.png';
         this.spd = 6;
-        this.defE = 'normal';
-        this.atkE = 'normal';
+        this.defE = 'water';
+        this.atkE = 'water';
         this.exp = 10;
         this.item = 'Shuriken';
         this.pjt = './img/fish.png';
@@ -101,12 +101,12 @@ export class FourthMonsters {
 
 
   itemDrop(){
-    let rareNum = Math.floor(Math.random() * 30 + 1);
-    if(rareNum >= 29){
+    let rareNum = Math.floor(Math.random() * 10 + 1);
+    if(rareNum >= 10){
       return this.rareItem;
     }else{
-      let encountNum = Math.floor(Math.random() * 20 + 1);
-      if(encountNum >= 10){
+      let encountNum = Math.floor(Math.random() * 5 + 1);
+      if(encountNum >= 4){
         return this.item;
       }else{
         return 0;

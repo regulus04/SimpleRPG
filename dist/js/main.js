@@ -1001,6 +1001,7 @@ function runChest(e){
     let item = fs.chestOpen(fo, chest);
     e.target.style.background = 'url(./img/chestOpened.png) center center / cover';
     items.getItem(item);
+    qItems.getItem(item);
     ui.chestMOn(item, hero.xOnField, hero.yOnField);
     movable = 2;
     setTimeout(() => {

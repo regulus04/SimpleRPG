@@ -4,7 +4,7 @@ export class FieldObject {
     this.obstaclesPosition = [
       {name: 'boss', top: 0, left: 250, type: 'boss', status: 'alive', img: './img/samuraiicon.png'},
       {name: 'chest-1', top: 100, left: 100, type: 'chest', status: 'closed', treasure: 'Shuriken'},
-      {name: 'chest-2', top: 200, left: 200, type: 'chest', status: 'closed', treasure: 'Stone'},
+      {name: 'chest-2', top: 200, left: 200, type: 'chest', status: 'closed', treasure: 'Flame Sword'},
     ];
     this.background = './img/firstFloor.png';
     this.battleBG = './img/battleBG4.png';

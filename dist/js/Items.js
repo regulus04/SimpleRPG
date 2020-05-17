@@ -2,14 +2,16 @@ export class Items {
   constructor(){
     this.itemList = [
       {name: 'Potion', stock: 3, use: 'both', type: 'drink', description: '30 HP recovery', message: 'Hero is healed a bit'},
+      {name: 'Super Potion', stock: 3, use: 'both', type: 'drink', description: '50 HP recovery', message: 'Hero is healed a bit'},
       {name: 'Ether', stock: 3, use: 'both', type: 'drink', description: '20 MP recovery', message: 'Hero is healed a bit'},
       {name: 'Stone', stock: 0, use: 'battle', type: 'throw',mdescription: 'You can throw', message: 'Hero threw a stone'},
       {name: 'Shuriken', stock: 3, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a Shuriken'},
       {name: 'Chocolate', stock: 1, use: 'battle', type: 'drink', description: 'Gain 5 atk temporary', message: 'Hero feels power!!!'},
-      {name: 'Whistle', stock: 1, use: 'field', type: 'other', description: 'Use and see what happens'},
+      {name: 'Whistle', stock: 0, use: 'field', type: 'other', description: 'Use and see what happens'},
       {name: 'Fire Ball', stock: 1, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a fire ball'},
       {name: 'Thunder Ball', stock: 1, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a fire ball'},
       {name: 'Ice Ball', stock: 1, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a fire ball'},
+      {name: 'Leaf Ball', stock: 1, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a leaf ball'},
       {name: 'Mithril', stock: 1, use: 'material', type: 'none', description: 'This is for Craft', img: './img/mythril.png'},
       {name: 'Bronze', stock: 1, use: 'material', type: 'none', description: 'This is for Craft', img: './img/bronze.png'},
       {name: 'Orichalcum', stock: 1, use: 'material', type: 'none', description: 'This is for Craft', img: './img/orichalcum.png'},
@@ -21,6 +23,13 @@ export class Items {
     switch(itemName){
       case 'Potion' :
         hero.hp += 30;
+        if(hero.hp >= hero.maxHp){
+          hero.hp = hero.maxHp
+        }
+        url = './img/healEffect.png';
+        break;
+      case 'Super Potion' :
+        hero.hp += 50;
         if(hero.hp >= hero.maxHp){
           hero.hp = hero.maxHp
         }
@@ -51,6 +60,9 @@ export class Items {
         break;
       case 'Ice Ball' :
         url = './img/iceball.png';
+        break;
+      case 'Leaf Ball' :
+        url = './img/leafball.png';
         break;
     }
     return url;
@@ -97,6 +109,17 @@ export class Items {
         break;
       case 'Ice Ball' :
         if(monster.defE == 'thunder'){
+          damage = Math.floor(hero.battleAtk * 2);
+          monster.hp -= damage;
+        }else if(monster.defE == 'fire'){
+          damage = Math.floor(hero.battleAtk * 0.2);
+        }else{
+          damage = Math.floor(hero.battleAtk * 0.8);
+        }
+        monster.hp -= damage;
+        break;
+      case 'Leaf Ball' :
+        if(monster.defE == 'water'){
           damage = Math.floor(hero.battleAtk * 2);
           monster.hp -= damage;
         }else if(monster.defE == 'fire'){

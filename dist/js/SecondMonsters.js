@@ -6,7 +6,7 @@ export class SecondMonsters {
       case 1 :
         this.hp = 10;
         this.maxHp = 10;
-        this.name = "Fish";
+        this.name = "GO";
         this.atk = 6;
         this.color = './img/monster/go.png';
         this.spd = 1;
@@ -20,7 +20,7 @@ export class SecondMonsters {
       case 2 :
         this.hp = 20;
         this.maxHp = 20;
-        this.name = "Calamari";
+        this.name = "Tenmusu";
         this.atk = 7;
         this.color = './img/monster/tenmusu.png';
         this.spd = 3;
@@ -34,7 +34,7 @@ export class SecondMonsters {
       case 3 :
         this.hp = 30;
         this.maxHp = 30;
-        this.name = "Cat";
+        this.name = "The Chord";
         this.atk = 10;
         this.color = './img/monster/chord.png';
         this.spd = 7;
@@ -48,16 +48,16 @@ export class SecondMonsters {
       case 4 :
         this.hp = 40;
         this.maxHp = 40;
-        this.name = "King";
+        this.name = "Water Man";
         this.atk = 20;
         this.color = './img/monster/waterman.png';
         this.spd = 6;
-        this.defE = 'normal';
-        this.atkE = 'normal';
+        this.defE = 'water';
+        this.atkE = 'water';
         this.exp = 10;
         this.item = 'Shuriken';
         this.pjt = './img/waterball.png';
-        this.rareItem = 'Flame Sword';
+        this.rareItem = 'Mythril';
         break;
     }
     this.message = 'sprang out!!!';
@@ -100,12 +100,12 @@ export class SecondMonsters {
 
 
   itemDrop(){
-    let rareNum = Math.floor(Math.random() * 30 + 1);
-    if(rareNum >= 29){
+    let rareNum = Math.floor(Math.random() * 10 + 1);
+    if(rareNum >= 10){
       return this.rareItem;
     }else{
-      let encountNum = Math.floor(Math.random() * 20 + 1);
-      if(encountNum >= 10){
+      let encountNum = Math.floor(Math.random() * 5 + 1);
+      if(encountNum >= 4){
         return this.item;
       }else{
         return 0;

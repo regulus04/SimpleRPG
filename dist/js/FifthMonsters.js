@@ -6,7 +6,7 @@ export class FifthMonsters {
       case 1 :
         this.hp = 10;
         this.maxHp = 10;
-        this.name = "Goomba";
+        this.name = "Yanky";
         this.atk = 6;
         this.color = './img/monster/gang.png';
         this.spd = 1;
@@ -20,12 +20,12 @@ export class FifthMonsters {
       case 2 :
         this.hp = 20;
         this.maxHp = 20;
-        this.name = "Koopa";
+        this.name = "Dark Hero";
         this.atk = 7;
         this.color = './img/monster/darkhero.png';
         this.spd = 3;
-        this.defE = 'normal';
-        this.atkE = 'normal';
+        this.defE = 'dark';
+        this.atkE = 'dark';
         this.exp = 3;
         this.item = 'Potion';
         this.pjt = './img/darkball.png';
@@ -34,7 +34,7 @@ export class FifthMonsters {
       case 3 :
         this.hp = 30;
         this.maxHp = 30;
-        this.name = "Patapata";
+        this.name = "Rainbow Bird";
         this.atk = 10;
         this.color = './img/monster/rainbow.png';
         this.spd = 7;
@@ -48,12 +48,12 @@ export class FifthMonsters {
       case 4 :
         this.hp = 40;
         this.maxHp = 40;
-        this.name = "Bowser";
+        this.name = "Fiery Dino";
         this.atk = 20;
         this.color = './img/monster/dinosor.png';
         this.spd = 6;
-        this.defE = 'normal';
-        this.atkE = 'normal';
+        this.defE = 'fire';
+        this.atkE = 'fire';
         this.exp = 10;
         this.item = 'Shuriken';
         this.pjt = './img/fireball.png';
@@ -101,12 +101,12 @@ export class FifthMonsters {
 
 
   itemDrop(){
-    let rareNum = Math.floor(Math.random() * 30 + 1);
-    if(rareNum >= 29){
+    let rareNum = Math.floor(Math.random() * 10 + 1);
+    if(rareNum >= 10){
       return this.rareItem;
     }else{
-      let encountNum = Math.floor(Math.random() * 20 + 1);
-      if(encountNum >= 10){
+      let encountNum = Math.floor(Math.random() * 5 + 1);
+      if(encountNum >= 4){
         return this.item;
       }else{
         return 0;
