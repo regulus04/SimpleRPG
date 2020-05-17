@@ -91,6 +91,7 @@ export class Hero {
     let bs = new BattleSystem;
     let hero = this;
     let damage = this.battleAtk;
+    damage = Math.floor(Math.random() * (damage * 1.1 + 1 - damage * 0.9) + Math.floor(damage * 0.9));
     bs.elementHeroAttack(hero, monster, damage)
     monster.hp -= damage;
     return damage;
@@ -133,7 +134,6 @@ export class Hero {
   }
 
   beam(monster){
-    let bs = new BattleSystem;
     let ui = new UI;
     let hero = this;
     // Hero spend MP
@@ -147,6 +147,8 @@ export class Hero {
 
     return damage;
   }
+
+
 
   throwItem(){
     let result;

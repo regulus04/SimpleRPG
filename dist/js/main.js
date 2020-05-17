@@ -1337,7 +1337,7 @@ function runBeam(){
     ui.backArrowOff();
     heroAction = function beamTurn(){
       ui.attackOff();
-      ui.messageOn(`Hero: "Beam!!"`);
+      ui.messageOn(`Hero: "Beeeaaaam!!"`);
       
       let damage = hero.beam(monster);
       monster.hp = bs.hpAdjust(monster.hp);

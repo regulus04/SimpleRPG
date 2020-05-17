@@ -73,6 +73,7 @@ export class SecondMonsters {
     }else{
       damage = this.atk - hero.battleDef;
     }
+    damage = Math.floor(Math.random() * (damage * 1.1 + 1 - damage * 0.9) + Math.floor(damage * 0.9));
     if(guardNum == 1){
       damage = Math.floor(damage / 3);
     }
@@ -84,7 +85,7 @@ export class SecondMonsters {
   attack2(hero, guardNum){
     let bs = new BattleSystem;
     let damage = this.atk - hero.battleDef;
-    damage = Math.floor(Math.random() * damage + Math.floor(damage * 0.3)) + Math.floor(damage * 0.7);
+    damage = Math.floor(Math.random() * (damage * 1.3 + 1 - damage * 0.7) + Math.floor(damage * 0.7));
     if(damage <= 0){
       damage = 1;
     }
