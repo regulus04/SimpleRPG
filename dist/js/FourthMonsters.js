@@ -49,7 +49,7 @@ export class FourthMonsters {
         this.hp = 100;
         this.maxHp = 100;
         this.name = "Fish Man";
-        this.atk = 47;
+        this.atk = 64;
         this.color = './img/monster/fishman.png';
         this.spd = 29;
         this.defE = 'water';

@@ -35,7 +35,7 @@ export class ThirdMonsters {
         this.hp = 60;
         this.maxHp = 60;
         this.name = "Kakigorier";
-        this.atk = 25;
+        this.atk = 32;
         this.color = './img/monster/kakigori.png';
         this.spd = 7;
         this.defE = 'ice';
@@ -49,7 +49,7 @@ export class ThirdMonsters {
         this.hp = 60;
         this.maxHp = 60;
         this.name = "Dark Dia";
-        this.atk = 30;
+        this.atk = 46;
         this.color = './img/monster/darkdia.png';
         this.spd = 20;
         this.defE = 'dark';

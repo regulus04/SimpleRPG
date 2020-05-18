@@ -1,7 +1,7 @@
 export class Items {
   constructor(){
     this.itemList = [
-      {name: 'Potion', stock: 3, use: 'both', type: 'drink', description: '30 HP recovery', message: 'Hero is healed a bit'},
+      {name: 'Potion', stock: 10, use: 'both', type: 'drink', description: '30 HP recovery', message: 'Hero is healed a bit'},
       {name: 'Super Potion', stock: 0, use: 'both', type: 'drink', description: '50 HP recovery', message: 'Hero is healed a bit'},
       {name: 'Ether', stock: 3, use: 'both', type: 'drink', description: '20 MP recovery', message: 'Hero is healed a bit'},
       {name: 'Stone', stock: 3, use: 'battle', type: 'throw',mdescription: 'You can throw', message: 'Hero threw a stone'},
