@@ -771,7 +771,7 @@ a {
           padding: 0.3rem; }
     #field-container #field #chest-message {
       position: absolute;
-      height: 30px;
+      height: auto;
       background: white;
       border: 5px black solid;
       border-radius: 10px;
