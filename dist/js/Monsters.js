@@ -15,7 +15,7 @@ export class Monsters {
         this.atkE = 'normal';
         this.exp = 1;
         this.item = 'Stone';
-        this.rareItem = 0;
+        this.rareItem = 'Ice Ball';
         this.pjt = './img/clips.png';
         break;
       case 2 :
@@ -29,7 +29,7 @@ export class Monsters {
         this.atkE = 'normal';
         this.exp = 3;
         this.item = 'Potion';
-        this.rareItem = 0;
+        this.rareItem = 'Thunder Ball';
         this.pjt = './img/ear.png';
         break;
       case 3 :
@@ -43,7 +43,7 @@ export class Monsters {
         this.atkE = 'normal';
         this.exp = 5
         this.item = 'Ether';
-        this.rareItem = 0;
+        this.rareItem = 'Shuriken';
         this.pjt = './img/flure.png';
         break;
       case 4 :
@@ -57,7 +57,7 @@ export class Monsters {
         this.atkE = 'leaf';
         this.exp = 10;
         this.item = 'Carrot Cap';
-        this.rareItem = 'Wooden Stick';
+        this.rareItem = 'Leaf Ball';
         this.pjt = './img/chopsticks.png';
         break;
     }

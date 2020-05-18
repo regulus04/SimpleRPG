@@ -27,7 +27,7 @@ export class SecondMonsters {
         this.defE = 'normal';
         this.atkE = 'normal';
         this.exp = 7;
-        this.item = 'Potion';
+        this.item = 'Water Ball';
         this.pjt = './img/shrimp.png';
         this.rareItem = 'Chocolate';
         break;
