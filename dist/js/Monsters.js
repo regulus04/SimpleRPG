@@ -56,7 +56,7 @@ export class Monsters {
         this.defE = 'leaf';
         this.atkE = 'leaf';
         this.exp = 10;
-        this.item = 'Shuriken';
+        this.item = 'Carrot Cap';
         this.rareItem = 'Mythril';
         this.pjt = './img/chopsticks.png';
         break;

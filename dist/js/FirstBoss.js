@@ -13,7 +13,7 @@ export class FirstBoss {
     this.defE = 'normal';
     this.atkE = 'normal';
     this.exp = 150;
-    this.item = 'Shuriken';
+    this.item = 'Bronze';
     this.pjt = './img/shuriken.png';
     this.pjt2 = './img/kunai.png';
     this.message = 'looks strong!!!';

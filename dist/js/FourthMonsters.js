@@ -41,7 +41,7 @@ export class FourthMonsters {
         this.defE = 'normal';
         this.atkE = 'normal';
         this.exp = 5
-        this.item = 'Ether';
+        this.item = 'Axe';
         this.pjt = './img/sword.png';
         this.rareItem = 0;
         break;
@@ -55,7 +55,7 @@ export class FourthMonsters {
         this.defE = 'water';
         this.atkE = 'water';
         this.exp = 10;
-        this.item = 'Shuriken';
+        this.item = 'Mixer';
         this.pjt = './img/fish.png';
         this.rareItem = 0;
         break;

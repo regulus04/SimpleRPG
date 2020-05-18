@@ -7,17 +7,17 @@ export class EquipItems {
   constructor(){
     this.itemList = [
 
-      {name: 'Dagger', stock: 1, type: 'weapon'},
-      {name: 'Katana', stock: 1, type: 'weapon'},
-      {name: 'Musashi', stock: 1, type: 'weapon'},
-      {name: 'Mixer', stock: 1, type: 'weapon'},
-      {name: 'Happy Flower', stock: 1, type: 'weapon'},
-      {name: 'Flame Sword', stock: 1, type: 'weapon'},
-      {name: 'Bloody Sythe', stock: 1, type: 'weapon'},
-      {name: 'Axe', stock: 1, type: 'weapon'},
-      {name: 'Jinrai', stock: 1, type: 'weapon'},
+      {name: 'Dagger', stock: 0, type: 'weapon'},
+      {name: 'Katana', stock: 0, type: 'weapon'},
+      {name: 'Musashi', stock: 0, type: 'weapon'},
+      {name: 'Mixer', stock: 0, type: 'weapon'},
+      {name: 'Happy Flower', stock: 0, type: 'weapon'},
+      {name: 'Flame Sword', stock: 0, type: 'weapon'},
+      {name: 'Bloody Sythe', stock: 0, type: 'weapon'},
+      {name: 'Axe', stock: 0, type: 'weapon'},
+      {name: 'Jinrai', stock: 0, type: 'weapon'},
       {name: 'Wooden Stick', stock: 1, type: 'weapon'},
-      {name: 'Carp Heads', stock: 1, type: 'weapon'},
+      {name: 'Carp Heads', stock: 0, type: 'weapon'},
       
       {name: 'Legend Cap', stock: 1, type: 'cap'},
       {name: 'Box Cap', stock: 1, type: 'cap'},
@@ -41,6 +41,7 @@ export class EquipItems {
       {name: 'Border T', stock: 1, type: 'shirt'},
       {name: 'Manteau', stock: 1, type: 'shirt'},
       {name: 'Triplet T', stock: 1, type: 'shirt'},
+      {name: 'Squid T', stock: 1, type: 'shirt'},
       
     ];
   }

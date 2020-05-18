@@ -8,8 +8,8 @@ battleField.style.display = 'none';
 fieldContainer.style.display = 'flex';
 
 // monster 
-// c1
-// c2
+// c1 red shoes
+// c2 wooden stick
 // 1
 // 2
 // 3

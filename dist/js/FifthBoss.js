@@ -12,7 +12,7 @@ export class FifthBoss {
     this.defE = 'dark';
     this.atkE = 'dark';
     this.exp = 150;
-    this.item = 'Shuriken';
+    this.item = 'none';
     this.pjt = './img/darkball.png';
     this.pjt2 = './img/darkmeteorite.png';
     this.message = 'looks super strong!!!';

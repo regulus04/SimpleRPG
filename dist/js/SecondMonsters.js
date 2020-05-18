@@ -55,9 +55,9 @@ export class SecondMonsters {
         this.defE = 'water';
         this.atkE = 'water';
         this.exp = 10;
-        this.item = 'Shuriken';
+        this.item = 'Frog Cap';
         this.pjt = './img/waterball.png';
-        this.rareItem = 'Mythril';
+        this.rareItem = 'Rain T';
         break;
     }
     this.message = 'sprang out!!!';

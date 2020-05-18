@@ -13,7 +13,7 @@ export class FifthMonsters {
         this.defE = 'normal';
         this.atkE = 'normal';
         this.exp = 1;
-        this.item = 'Stone';
+        this.item = 'No.1 T';
         this.pjt = './img/colm.png';
         this.rareItem = 0;
         break;
@@ -41,7 +41,7 @@ export class FifthMonsters {
         this.defE = 'normal';
         this.atkE = 'normal';
         this.exp = 5
-        this.item = 'Ether';
+        this.item = 'Feather Shoes';
         this.pjt = './img/feather.png';
         this.rareItem = 0;
         break;

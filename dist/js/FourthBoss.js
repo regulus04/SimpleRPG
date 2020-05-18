@@ -12,7 +12,7 @@ export class FourthBoss {
     this.defE = 'leaf';
     this.atkE = 'leaf';
     this.exp = 150;
-    this.item = 'Shuriken';
+    this.item = 'Orichalcum';
     this.pjt = './img/leafball.png';
     this.pjt2 = './img/hedoro.png';
     this.message = 'looks gloomy!!!';
