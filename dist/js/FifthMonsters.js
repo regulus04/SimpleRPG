@@ -4,60 +4,60 @@ export class FifthMonsters {
   constructor(enemyNum){
     switch(enemyNum){
       case 1 :
-        this.hp = 10;
-        this.maxHp = 10;
+        this.hp = 120;
+        this.maxHp = 120;
         this.name = "Yanky";
-        this.atk = 6;
+        this.atk = 52;
         this.color = './img/monster/gang.png';
-        this.spd = 1;
+        this.spd = 29;
         this.defE = 'normal';
         this.atkE = 'normal';
-        this.exp = 1;
+        this.exp = 25;
         this.item = 'No.1 T';
         this.pjt = './img/colm.png';
-        this.rareItem = 0;
+        this.rareItem = 'Super Potion';
         break;
       case 2 :
-        this.hp = 20;
-        this.maxHp = 20;
+        this.hp = 160;
+        this.maxHp = 160;
         this.name = "Dark Hero";
-        this.atk = 7;
+        this.atk = 62;
         this.color = './img/monster/darkhero.png';
-        this.spd = 3;
+        this.spd = 39;
         this.defE = 'dark';
         this.atkE = 'dark';
-        this.exp = 3;
-        this.item = 'Potion';
+        this.exp = 35;
+        this.item = 'Super Potion';
         this.pjt = './img/darkball.png';
-        this.rareItem = 0;
+        this.rareItem = 'Mythril';
         break;
       case 3 :
-        this.hp = 30;
-        this.maxHp = 30;
+        this.hp = 190;
+        this.maxHp = 190;
         this.name = "Rainbow Bird";
-        this.atk = 10;
+        this.atk = 71;
         this.color = './img/monster/rainbow.png';
-        this.spd = 7;
+        this.spd = 45;
         this.defE = 'normal';
         this.atkE = 'normal';
-        this.exp = 5
+        this.exp = 38;
         this.item = 'Feather Shoes';
         this.pjt = './img/feather.png';
-        this.rareItem = 0;
+        this.rareItem = 'Fire Ball';
         break;
       case 4 :
-        this.hp = 40;
-        this.maxHp = 40;
+        this.hp = 250;
+        this.maxHp = 250;
         this.name = "Fiery Dino";
-        this.atk = 20;
+        this.atk = 75;
         this.color = './img/monster/dinosor.png';
-        this.spd = 6;
+        this.spd = 33;
         this.defE = 'fire';
         this.atkE = 'fire';
-        this.exp = 10;
-        this.item = 'Shuriken';
+        this.exp = 45;
+        this.item = 'Fire Ball';
         this.pjt = './img/fireball.png';
-        this.rareItem = 0;
+        this.rareItem = 'Orichalcum';
         break;
     }
     this.action = 1;

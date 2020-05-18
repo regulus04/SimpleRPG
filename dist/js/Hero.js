@@ -6,7 +6,7 @@ export class Hero {
     this.name = 'Hero';
     this.lv = 1;
     this.hp = 100;
-    this.mp = 5;
+    this.mp = 20;
     this.maxHp = 100;
     this.maxMp = 20;
     this.atk = 5;
@@ -17,7 +17,7 @@ export class Hero {
     this.battleSpd = 0;
     this.defE = 'normal';
     this.atkE = 'normal';
-    this.exp = 99;
+    this.exp = 0;
     this.maxExp = 100;
     this.xOnField = 250;
     this.yOnField = 500;

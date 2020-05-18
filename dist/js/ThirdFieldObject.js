@@ -7,6 +7,7 @@ export class ThirdFieldObject {
       {name: 'boss', top: 0, left: 250, type: 'boss', status: 'alive', img: './img/grayicon.png'},
       {name: 'chest-1', top: 100, left: 400, type: 'chest', status: 'closed', treasure: 'Bronze'},
       {name: 'chest-2', top: 300, left: 200, type: 'chest', status: 'closed', treasure: 'Chocolate'},
+      {name: 'chest-2', top: 200, left: 500, type: 'chest', status: 'closed', treasure: 'Super Potion'},
     ];
   }
 

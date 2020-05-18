@@ -8,7 +8,7 @@ export class Monsters {
         this.hp = 10;
         this.maxHp = 10;
         this.name = "Cliper";
-        this.atk = 6;
+        this.atk = 7;
         this.color = './img/monster/clip.png';
         this.spd = 1;
         this.defE = 'normal';
@@ -57,7 +57,7 @@ export class Monsters {
         this.atkE = 'leaf';
         this.exp = 10;
         this.item = 'Carrot Cap';
-        this.rareItem = 'Mythril';
+        this.rareItem = 'Wooden Stick';
         this.pjt = './img/chopsticks.png';
         break;
     }
@@ -101,12 +101,12 @@ export class Monsters {
   }
 
   itemDrop(){
-    let rareNum = Math.floor(Math.random() * 10 + 1);
-    if(rareNum >= 10){
+    let rareNum = Math.floor(Math.random() * 7 + 1);
+    if(rareNum >= 7){
       return this.rareItem;
     }else{
-      let encountNum = Math.floor(Math.random() * 5 + 1);
-      if(encountNum >= 4){
+      let encountNum = Math.floor(Math.random() * 3 + 1);
+      if(encountNum >= 3){
         return this.item;
       }else{
         return 0;

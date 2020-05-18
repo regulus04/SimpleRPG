@@ -3,15 +3,15 @@ import { BattleSystem } from "./BattleSystem.js";
 
 export class FifthBoss {
   constructor(){
-    this.hp = 100;
-    this.maxHp = 100;
+    this.hp = 650;
+    this.maxHp = 650;
     this.name = 'Dark Cat';
-    this.atk = 10;
+    this.atk = 92;
     this.color = './img/darkcat.png';
-    this.spd = 1;
+    this.spd = 54;
     this.defE = 'dark';
     this.atkE = 'dark';
-    this.exp = 150;
+    this.exp = 0;
     this.item = 'none';
     this.pjt = './img/darkball.png';
     this.pjt2 = './img/darkmeteorite.png';
@@ -135,7 +135,7 @@ export class FifthBoss {
     }, 1500);
 
     setTimeout(function(){
-      let damage = 10000;
+      let damage = 300;
       
       hero.hp -= damage;
     

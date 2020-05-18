@@ -3,15 +3,15 @@ import { BattleSystem } from "./BattleSystem.js";
 
 export class FourthBoss {
   constructor(){
-    this.hp = 100;
-    this.maxHp = 100;
+    this.hp = 420;
+    this.maxHp = 420;
     this.name = 'Gloomy Cat';
-    this.atk = 10;
+    this.atk = 65;
     this.color = './img/gloomycat.png';
-    this.spd = 1;
+    this.spd = 34;
     this.defE = 'leaf';
     this.atkE = 'leaf';
-    this.exp = 150;
+    this.exp = 250;
     this.item = 'Orichalcum';
     this.pjt = './img/leafball.png';
     this.pjt2 = './img/hedoro.png';

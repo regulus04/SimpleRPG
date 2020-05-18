@@ -4,60 +4,60 @@ export class ThirdMonsters {
   constructor(enemyNum){
     switch(enemyNum){
       case 1 :
-        this.hp = 10;
-        this.maxHp = 10;
+        this.hp = 60;
+        this.maxHp = 60;
         this.name = "Farefalle Bird";
-        this.atk = 6;
+        this.atk = 25;
         this.color = './img/monster/farfallebird.png';
-        this.spd = 1;
+        this.spd = 15;
         this.defE = 'normal';
         this.atkE = 'normal';
-        this.exp = 1;
-        this.item = 'Stone';
+        this.exp = 7;
+        this.item = 'Potion';
         this.pjt = './img/farfalle.png';
-        this.rareItem = 0;
+        this.rareItem = 'Chocolate';
         break;
       case 2 :
-        this.hp = 20;
-        this.maxHp = 20;
+        this.hp = 50;
+        this.maxHp = 50;
         this.name = "Rocker";
-        this.atk = 7;
+        this.atk = 28;
         this.color = './img/monster/guitar.png';
-        this.spd = 3;
+        this.spd = 30;
         this.defE = 'thunder';
         this.atkE = 'thunder';
-        this.exp = 3;
-        this.item = 'Potion';
+        this.exp = 10;
+        this.item = 'Super Potion';
         this.pjt = './img/notes.png';
-        this.rareItem = 0;
+        this.rareItem = 'Mythril';
         break;
       case 3 :
-        this.hp = 30;
-        this.maxHp = 30;
+        this.hp = 60;
+        this.maxHp = 60;
         this.name = "Kakigorier";
-        this.atk = 10;
+        this.atk = 25;
         this.color = './img/monster/kakigori.png';
         this.spd = 7;
         this.defE = 'ice';
         this.atkE = 'ice';
-        this.exp = 5
-        this.item = 'Ether';
+        this.exp = 13;
+        this.item = 'Ice Ball';
         this.pjt = './img/iceball.png';
-        this.rareItem = 0;
+        this.rareItem = 'Ether';
         break;
       case 4 :
-        this.hp = 40;
-        this.maxHp = 40;
+        this.hp = 60;
+        this.maxHp = 60;
         this.name = "Dark Dia";
-        this.atk = 20;
+        this.atk = 30;
         this.color = './img/monster/darkdia.png';
-        this.spd = 6;
+        this.spd = 20;
         this.defE = 'dark';
         this.atkE = 'dark';
-        this.exp = 10;
+        this.exp = 18;
         this.item = 'Shuriken';
         this.pjt = './img/darkball.png';
-        this.rareItem = 0;
+        this.rareItem = 'Thunder Ball';
         break;
     }
     this.action = 1;

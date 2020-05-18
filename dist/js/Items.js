@@ -2,19 +2,19 @@ export class Items {
   constructor(){
     this.itemList = [
       {name: 'Potion', stock: 3, use: 'both', type: 'drink', description: '30 HP recovery', message: 'Hero is healed a bit'},
-      {name: 'Super Potion', stock: 3, use: 'both', type: 'drink', description: '50 HP recovery', message: 'Hero is healed a bit'},
+      {name: 'Super Potion', stock: 0, use: 'both', type: 'drink', description: '50 HP recovery', message: 'Hero is healed a bit'},
       {name: 'Ether', stock: 3, use: 'both', type: 'drink', description: '20 MP recovery', message: 'Hero is healed a bit'},
-      {name: 'Stone', stock: 0, use: 'battle', type: 'throw',mdescription: 'You can throw', message: 'Hero threw a stone'},
-      {name: 'Shuriken', stock: 3, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a Shuriken'},
-      {name: 'Chocolate', stock: 1, use: 'battle', type: 'drink', description: 'Gain 5 atk temporary', message: 'Hero feels power!!!'},
+      {name: 'Stone', stock: 3, use: 'battle', type: 'throw',mdescription: 'You can throw', message: 'Hero threw a stone'},
+      {name: 'Shuriken', stock: 0, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a Shuriken'},
+      {name: 'Chocolate', stock: 0, use: 'battle', type: 'drink', description: 'Gain 5 atk temporary', message: 'Hero feels power!!!'},
       {name: 'Whistle', stock: 0, use: 'field', type: 'other', description: 'Use and see what happens'},
-      {name: 'Fire Ball', stock: 1, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a fire ball'},
-      {name: 'Thunder Ball', stock: 1, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a fire ball'},
-      {name: 'Ice Ball', stock: 1, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a fire ball'},
-      {name: 'Leaf Ball', stock: 1, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a leaf ball'},
-      {name: 'Mithril', stock: 1, use: 'material', type: 'none', description: 'This is for Craft', img: './img/mythril.png'},
-      {name: 'Bronze', stock: 1, use: 'material', type: 'none', description: 'This is for Craft', img: './img/bronze.png'},
-      {name: 'Orichalcum', stock: 1, use: 'material', type: 'none', description: 'This is for Craft', img: './img/orichalcum.png'},
+      {name: 'Fire Ball', stock: 0, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a fire ball'},
+      {name: 'Thunder Ball', stock: 0, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a fire ball'},
+      {name: 'Ice Ball', stock: 0, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a fire ball'},
+      {name: 'Leaf Ball', stock: 0, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a leaf ball'},
+      {name: 'Mithril', stock: 0, use: 'material', type: 'none', description: 'This is for Craft', img: './img/mythril.png'},
+      {name: 'Bronze', stock: 0, use: 'material', type: 'none', description: 'This is for Craft', img: './img/bronze.png'},
+      {name: 'Orichalcum', stock: 0, use: 'material', type: 'none', description: 'This is for Craft', img: './img/orichalcum.png'},
     ];
   }
   useItem(itemName, hero){

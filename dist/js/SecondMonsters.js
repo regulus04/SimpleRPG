@@ -4,57 +4,57 @@ export class SecondMonsters {
   constructor(enemyNum){
     switch(enemyNum){
       case 1 :
-        this.hp = 10;
-        this.maxHp = 10;
+        this.hp = 30;
+        this.maxHp = 30;
         this.name = "GO";
-        this.atk = 6;
+        this.atk = 10;
         this.color = './img/monster/go.png';
-        this.spd = 1;
+        this.spd = 10;
         this.defE = 'thunder';
         this.atkE = 'thunder';
-        this.exp = 1;
-        this.item = 'Stone';
+        this.exp = 5;
+        this.item = 'Potion';
         this.pjt = './img/cross.png';
-        this.rareItem = 0;
+        this.rareItem = 'Super Potion';
         break;
       case 2 :
-        this.hp = 20;
-        this.maxHp = 20;
+        this.hp = 35;
+        this.maxHp = 35;
         this.name = "Tenmusu";
-        this.atk = 7;
+        this.atk = 12;
         this.color = './img/monster/tenmusu.png';
         this.spd = 3;
         this.defE = 'normal';
         this.atkE = 'normal';
-        this.exp = 3;
+        this.exp = 7;
         this.item = 'Potion';
         this.pjt = './img/shrimp.png';
-        this.rareItem = 0;
+        this.rareItem = 'Chocolate';
         break;
       case 3 :
-        this.hp = 30;
-        this.maxHp = 30;
+        this.hp = 40;
+        this.maxHp = 40;
         this.name = "The Chord";
-        this.atk = 10;
+        this.atk = 15;
         this.color = './img/monster/chord.png';
         this.spd = 7;
         this.defE = 'normal';
         this.atkE = 'normal';
-        this.exp = 5
+        this.exp = 10;
         this.item = 'Ether';
         this.pjt = './img/oneline.png';
-        this.rareItem = 0;
+        this.rareItem = 'Bronze';
         break;
       case 4 :
-        this.hp = 40;
-        this.maxHp = 40;
+        this.hp = 50;
+        this.maxHp = 50;
         this.name = "Water Man";
         this.atk = 20;
         this.color = './img/monster/waterman.png';
-        this.spd = 6;
+        this.spd = 5;
         this.defE = 'water';
         this.atkE = 'water';
-        this.exp = 10;
+        this.exp = 17;
         this.item = 'Frog Cap';
         this.pjt = './img/waterball.png';
         this.rareItem = 'Rain T';

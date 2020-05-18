@@ -3,12 +3,12 @@ import { BattleSystem } from "./BattleSystem.js";
 
 export class SecondBoss {
   constructor(){
-    this.hp = 100;
-    this.maxHp = 100;
+    this.hp = 200;
+    this.maxHp = 200;
     this.name = 'Purple Cat';
-    this.atk = 10;
+    this.atk = 35;
     this.color = './img/purplecat.png';
-    this.spd = 1;
+    this.spd = 20;
     this.defE = 'normal';
     this.atkE = 'normal';
     this.exp = 150;

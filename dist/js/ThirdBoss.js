@@ -3,16 +3,16 @@ import { BattleSystem } from "./BattleSystem.js";
 
 export class ThirdBoss {
   constructor(){
-    this.hp = 100;
-    this.maxHp = 100;
+    this.hp = 350;
+    this.maxHp = 350;
     this.name = 'Gray Cat';
-    this.atk = 10;
+    this.atk = 47;
     this.color = './img/graycat.png';
-    this.spd = 1;
+    this.spd = 30;
     this.defE = 'ice';
     this.atkE = 'ice';
-    this.exp = 150;
-    this.item = 'Shuriken';
+    this.exp = 200;
+    this.item = 'Mythril';
     this.pjt = './img/iceball.png';
     this.pjt2 = './img/star.png';
     this.message = 'looks gray!!!';

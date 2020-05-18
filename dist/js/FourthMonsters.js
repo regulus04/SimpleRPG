@@ -4,60 +4,60 @@ export class FourthMonsters {
   constructor(enemyNum){
     switch(enemyNum){
       case 1 :
-        this.hp = 10;
-        this.maxHp = 10;
+        this.hp = 70;
+        this.maxHp = 70;
         this.name = "Eele";
-        this.atk = 6;
+        this.atk = 35;
         this.color = './img/monster/ele.png';
-        this.spd = 1;
+        this.spd = 17;
         this.defE = 'thunder';
         this.atkE = 'thunder';
-        this.exp = 1;
-        this.item = 'Stone';
+        this.exp = 10;
+        this.item = 'Thunder Ball';
         this.pjt = './img/thunderball.png';
-        this.rareItem = 0;
+        this.rareItem = 'Mythril';
         break;
       case 2 :
-        this.hp = 20;
-        this.maxHp = 20;
+        this.hp = 80;
+        this.maxHp = 80;
         this.name = "Match Kun";
-        this.atk = 7;
+        this.atk = 40;
         this.color = './img/monster/matchkun.png';
-        this.spd = 3;
+        this.spd = 30;
         this.defE = 'fire';
         this.atkE = 'fire';
-        this.exp = 3;
+        this.exp = 15;
         this.item = 'Potion';
         this.pjt = './img/match.png';
-        this.rareItem = 0;
+        this.rareItem = 'Flame Sword';
         break;
       case 3 :
-        this.hp = 30;
-        this.maxHp = 30;
+        this.hp = 85;
+        this.maxHp = 85;
         this.name = "Arms Pot";
-        this.atk = 10;
+        this.atk = 52;
         this.color = './img/monster/plant.png';
-        this.spd = 7;
+        this.spd = 25;
         this.defE = 'normal';
         this.atkE = 'normal';
-        this.exp = 5
+        this.exp = 22;
         this.item = 'Axe';
         this.pjt = './img/sword.png';
         this.rareItem = 0;
         break;
       case 4 :
-        this.hp = 40;
-        this.maxHp = 40;
+        this.hp = 100;
+        this.maxHp = 100;
         this.name = "Fish Man";
-        this.atk = 20;
+        this.atk = 47;
         this.color = './img/monster/fishman.png';
-        this.spd = 6;
+        this.spd = 29;
         this.defE = 'water';
         this.atkE = 'water';
-        this.exp = 10;
+        this.exp = 26;
         this.item = 'Mixer';
         this.pjt = './img/fish.png';
-        this.rareItem = 0;
+        this.rareItem = 'Water Ball';
         break;
     }
     this.action = 1;

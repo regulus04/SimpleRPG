@@ -7,9 +7,9 @@ export class FirstBoss {
     this.hp = 100;
     this.maxHp = 100;
     this.name = 'Samurai Cat';
-    this.atk = 10;
+    this.atk = 20;
     this.color = './img/samuraicat.png';
-    this.spd = 1;
+    this.spd = 10;
     this.defE = 'normal';
     this.atkE = 'normal';
     this.exp = 150;
