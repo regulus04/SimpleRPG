@@ -34,7 +34,7 @@ export class SecondMonsters {
       case 3 :
         this.hp = 40;
         this.maxHp = 40;
-        this.name = "The Chord";
+        this.name = "The Code";
         this.atk = 28;
         this.color = './img/monster/chord.png';
         this.spd = 7;
