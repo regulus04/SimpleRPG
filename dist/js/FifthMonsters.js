@@ -29,7 +29,7 @@ export class FifthMonsters {
         this.exp = 35;
         this.item = 'Super Potion';
         this.pjt = './img/darkball.png';
-        this.rareItem = 'Mythril';
+        this.rareItem = 'Mithril';
         break;
       case 3 :
         this.hp = 190;

@@ -12,7 +12,7 @@ export class SecondBoss {
     this.defE = 'normal';
     this.atkE = 'normal';
     this.exp = 150;
-    this.item = 'Mythril';
+    this.item = 'Mithril';
     this.pjt = './img/sonic.png';
     this.pjt2 = './img/sonic2.png';
     this.message = 'looks purple!!!';

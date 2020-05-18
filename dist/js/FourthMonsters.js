@@ -15,7 +15,7 @@ export class FourthMonsters {
         this.exp = 10;
         this.item = 'Thunder Ball';
         this.pjt = './img/thunderball.png';
-        this.rareItem = 'Mythril';
+        this.rareItem = 'Mithril';
         break;
       case 2 :
         this.hp = 80;

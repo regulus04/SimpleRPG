@@ -12,7 +12,7 @@ export class ThirdBoss {
     this.defE = 'ice';
     this.atkE = 'ice';
     this.exp = 200;
-    this.item = 'Mythril';
+    this.item = 'Mithril';
     this.pjt = './img/iceball.png';
     this.pjt2 = './img/star.png';
     this.message = 'looks gray!!!';

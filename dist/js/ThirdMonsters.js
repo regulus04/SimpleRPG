@@ -29,7 +29,7 @@ export class ThirdMonsters {
         this.exp = 10;
         this.item = 'Super Potion';
         this.pjt = './img/notes.png';
-        this.rareItem = 'Mythril';
+        this.rareItem = 'Mithril';
         break;
       case 3 :
         this.hp = 60;
