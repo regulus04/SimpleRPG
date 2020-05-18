@@ -92,7 +92,7 @@ export class Hero {
     let hero = this;
     let damage = this.battleAtk;
     damage = Math.floor(Math.random() * (damage * 1.1 + 1 - damage * 0.9) + Math.floor(damage * 0.9));
-    bs.elementHeroAttack(hero, monster, damage)
+    damage = bs.elementHeroAttack(hero, monster, damage)
     monster.hp -= damage;
     return damage;
   }

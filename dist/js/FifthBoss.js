@@ -6,7 +6,7 @@ export class FifthBoss {
     this.hp = 650;
     this.maxHp = 650;
     this.name = 'Dark Cat';
-    this.atk = 92;
+    this.atk = 120;
     this.color = './img/darkcat.png';
     this.spd = 54;
     this.defE = 'dark';
