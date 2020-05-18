@@ -8,6 +8,7 @@ export class ThirdFieldObject {
       {name: 'chest-1', top: 100, left: 400, type: 'chest', status: 'closed', treasure: 'Bronze'},
       {name: 'chest-2', top: 300, left: 200, type: 'chest', status: 'closed', treasure: 'Chocolate'},
       {name: 'chest-3', top: 200, left: 400, type: 'chest', status: 'closed', treasure: 'Super Potion'},
+      {name: 'chest-4', top: 0, left: 100, type: 'chest', status: 'closed', treasure: 'Wooden Stick'},
     ];
   }
 

@@ -43,7 +43,7 @@ export class FifthMonsters {
         this.exp = 38;
         this.item = 'Feather Shoes';
         this.pjt = './img/feather.png';
-        this.rareItem = 'Fire Ball';
+        this.rareItem = 'Orichalcum';
         break;
       case 4 :
         this.hp = 250;

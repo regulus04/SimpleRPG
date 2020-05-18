@@ -27,7 +27,7 @@ export class FourthMonsters {
         this.defE = 'fire';
         this.atkE = 'fire';
         this.exp = 15;
-        this.item = 'Potion';
+        this.item = 'Fire Ball';
         this.pjt = './img/match.png';
         this.rareItem = 'Flame Sword';
         break;
@@ -43,7 +43,7 @@ export class FourthMonsters {
         this.exp = 22;
         this.item = 'Axe';
         this.pjt = './img/sword.png';
-        this.rareItem = 0;
+        this.rareItem = 'Box Cap';
         break;
       case 4 :
         this.hp = 100;

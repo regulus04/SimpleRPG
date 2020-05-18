@@ -232,10 +232,10 @@ a {
 
     #hero-throwing-item {
       position: absolute;
-      top: 100px;
+      top: 90px;
       left: 200px;
-      width: 50px;
-      height: 50px;
+      width: 70px;
+      height: 70px;
       z-index: 5;
       animation-name: heroProjectile;
       animation-duration: 0.7s;
@@ -246,10 +246,10 @@ a {
 
     #monster-throwing-item {
       position: absolute;
-      top: 70px;
+      top: 60px;
       right: 200px;
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
       z-index: 5;
       animation-name: monsterProjectile;
       animation-duration: 0.7s;

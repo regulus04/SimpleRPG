@@ -7,6 +7,7 @@ export class SecondFieldObject {
       {name: 'boss', top: 0, left: 250, type: 'boss', status: 'alive', img: './img/purpleicon.png'},
       {name: 'chest-1', top: 300, left: 100, type: 'chest', status: 'closed', treasure: 'Border T'},
       {name: 'chest-2', top: 400, left: 200, type: 'chest', status: 'closed', treasure: 'Bronze'},
+      {name: 'chest-3', top: 200, left: 200, type: 'chest', status: 'closed', treasure: 'Dagger'},
     ];
   }
 

@@ -27,7 +27,7 @@ export class ThirdMonsters {
         this.defE = 'thunder';
         this.atkE = 'thunder';
         this.exp = 10;
-        this.item = 'Super Potion';
+        this.item = 'Punk Head';
         this.pjt = './img/notes.png';
         this.rareItem = 'Mithril';
         break;
