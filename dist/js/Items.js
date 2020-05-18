@@ -4,7 +4,7 @@ export class Items {
       {name: 'Potion', stock: 10, use: 'both', type: 'drink', description: '30 HP recovery', message: 'Hero is healed a bit'},
       {name: 'Super Potion', stock: 0, use: 'both', type: 'drink', description: '50 HP recovery', message: 'Hero is healed a bit'},
       {name: 'Ether', stock: 3, use: 'both', type: 'drink', description: '20 MP recovery', message: 'Hero is healed a bit'},
-      {name: 'Stone', stock: 3, use: 'battle', type: 'throw',mdescription: 'You can throw', message: 'Hero threw a stone'},
+      {name: 'Stone', stock: 3, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a stone'},
       {name: 'Shuriken', stock: 0, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a Shuriken'},
       {name: 'Chocolate', stock: 0, use: 'battle', type: 'drink', description: 'Gain 5 atk temporary', message: 'Hero feels power!!!'},
       {name: 'Whistle', stock: 0, use: 'field', type: 'other', description: 'Use and see what happens'},
