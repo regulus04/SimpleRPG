@@ -1723,70 +1723,69 @@ function changeIcon(event){
 }
 function readTextFile(event){
   event.preventDefault();
-  if (confirm('Are you sure you want to overwrite this data??')){
-    var f = event.dataTransfer;
-    // var str = f.getData("text");
-    let fileName = f.files[0].name;
+  var f = event.dataTransfer;
+  // var str = f.getData("text");
+  let fileName = f.files[0].name;
+  if(fileName.indexOf('SimpleRPG') != -1){
+    if (confirm('Are you sure you want to overwrite this data??')){
+      // console.log(fileName);
+      var reader = new FileReader();
+      reader.onloadend = function(evt){
+        if (evt.target.readyState == FileReader.DONE){
 
-    // console.log(fileName);
-    var reader = new FileReader();
-    reader.onloadend = function(evt){
-      if (evt.target.readyState == FileReader.DONE){
-
-        // console.log(evt.target.result);  //File content 
-        overWriteOptions(evt.target.result, fileName);
-      }
-    };
-    reader.readAsText(f.files[0]);
-
+          // console.log(evt.target.result);  //File content 
+          overWriteOptions(evt.target.result, fileName);
+        }
+      };
+      reader.readAsText(f.files[0]);
+    }
+  }else{
+    alert(`Please put "SimpleRPG" in the file name.`);
   }
-  
 }
 
 
-function overWriteOptions(e, fileName){
-  if(fileName.indexOf('SimpleRPG') != -1){
-    let sd = JSON.parse(e);
-    // Set data/////
-    hero.loadSavaData(sd['heroData']);
-    levelUpP = sd['lvPData'];
-    
-    items.itemList = sd['itemsData'].itemList;
-    qItems.itemList = sd['qItemsData'].itemList;
-    fo1.loadSaveData(sd['fo1Data']);
-    fo2.loadSaveData(sd['fo2Data']);
-    fo3.loadSaveData(sd['fo3Data']);
-    fo4.loadSaveData(sd['fo4Data']);
-    fo5.loadSaveData(sd['fo5Data']);
+function overWriteOptions(e){
 
-    switch(sd['foData'].name){
-      case 'first floor' :
-        fo = fo1;
-        break;
-      case 'second floor' :
-        fo = fo2;
-        break;
-      case 'third floor' :
-        fo = fo3;
-        break;
-      case 'fourth floor' :
-        fo = fo4;
-        break;
-      case 'fifth floor' :
-        fo = fo5;
-        break;
-    }
-    console.log(hero.xOnField);
-    /////////////////
-    ui.blackFade();
-    setTimeout(() => {
-      ui.loadOff();
-      ui.fieldOn();
-      ui.loadField();
-      ui.makeFieldObject();
-      ui.moveChar(heroOnField, hero.xOnField, hero.yOnField);
-    }, 700);
+  let sd = JSON.parse(e);
+  // Set data/////
+  hero.loadSavaData(sd['heroData']);
+  levelUpP = sd['lvPData'];
+  
+  items.itemList = sd['itemsData'].itemList;
+  qItems.itemList = sd['qItemsData'].itemList;
+  fo1.loadSaveData(sd['fo1Data']);
+  fo2.loadSaveData(sd['fo2Data']);
+  fo3.loadSaveData(sd['fo3Data']);
+  fo4.loadSaveData(sd['fo4Data']);
+  fo5.loadSaveData(sd['fo5Data']);
 
+  switch(sd['foData'].name){
+    case 'first floor' :
+      fo = fo1;
+      break;
+    case 'second floor' :
+      fo = fo2;
+      break;
+    case 'third floor' :
+      fo = fo3;
+      break;
+    case 'fourth floor' :
+      fo = fo4;
+      break;
+    case 'fifth floor' :
+      fo = fo5;
+      break;
   }
+  console.log(hero.xOnField);
+  /////////////////
+  ui.blackFade();
+  setTimeout(() => {
+    ui.loadOff();
+    ui.fieldOn();
+    ui.loadField();
+    ui.makeFieldObject();
+    ui.moveChar(heroOnField, hero.xOnField, hero.yOnField);
+  }, 700);
 
 }
