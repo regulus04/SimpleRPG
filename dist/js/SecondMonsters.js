@@ -101,8 +101,8 @@ export class SecondMonsters {
 
 
   itemDrop(){
-    let rareNum = Math.floor(Math.random() * 10 + 1);
-    if(rareNum >= 10){
+    let rareNum = Math.floor(Math.random() * 5 + 1);
+    if(rareNum >= 5){
       return this.rareItem;
     }else{
       let encountNum = Math.floor(Math.random() * 5 + 1);
