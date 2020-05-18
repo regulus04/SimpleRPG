@@ -7,7 +7,7 @@ export class SecondMonsters {
         this.hp = 30;
         this.maxHp = 30;
         this.name = "GO";
-        this.atk = 10;
+        this.atk = 18;
         this.color = './img/monster/go.png';
         this.spd = 10;
         this.defE = 'thunder';
@@ -21,7 +21,7 @@ export class SecondMonsters {
         this.hp = 35;
         this.maxHp = 35;
         this.name = "Tenmusu";
-        this.atk = 12;
+        this.atk = 22;
         this.color = './img/monster/tenmusu.png';
         this.spd = 3;
         this.defE = 'normal';
@@ -35,7 +35,7 @@ export class SecondMonsters {
         this.hp = 40;
         this.maxHp = 40;
         this.name = "The Chord";
-        this.atk = 15;
+        this.atk = 28;
         this.color = './img/monster/chord.png';
         this.spd = 7;
         this.defE = 'normal';
@@ -49,7 +49,7 @@ export class SecondMonsters {
         this.hp = 50;
         this.maxHp = 50;
         this.name = "Water Man";
-        this.atk = 20;
+        this.atk = 35;
         this.color = './img/monster/waterman.png';
         this.spd = 5;
         this.defE = 'water';
@@ -60,6 +60,7 @@ export class SecondMonsters {
         this.rareItem = 'Rain T';
         break;
     }
+    this.action = 1;
     this.message = 'sprang out!!!';
     this.event = 'none';
     this.grave = './img/grave.png';
