@@ -7,7 +7,7 @@ export class ThirdMonsters {
         this.hp = 60;
         this.maxHp = 60;
         this.name = "Farefalle Bird";
-        this.atk = 25;
+        this.atk = 29;
         this.color = './img/monster/farfallebird.png';
         this.spd = 15;
         this.defE = 'normal';
@@ -21,7 +21,7 @@ export class ThirdMonsters {
         this.hp = 50;
         this.maxHp = 50;
         this.name = "Rocker";
-        this.atk = 28;
+        this.atk = 36;
         this.color = './img/monster/guitar.png';
         this.spd = 30;
         this.defE = 'thunder';
@@ -35,7 +35,7 @@ export class ThirdMonsters {
         this.hp = 60;
         this.maxHp = 60;
         this.name = "Kakigorier";
-        this.atk = 32;
+        this.atk = 38;
         this.color = './img/monster/kakigori.png';
         this.spd = 7;
         this.defE = 'ice';
