@@ -12,6 +12,7 @@ export class Items {
       {name: 'Thunder Ball', stock: 0, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a fire ball'},
       {name: 'Ice Ball', stock: 0, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a fire ball'},
       {name: 'Leaf Ball', stock: 0, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a leaf ball'},
+      {name: 'Water Ball', stock: 0, use: 'battle', type: 'throw', description: 'You can throw', message: 'Hero threw a leaf ball'},
       {name: 'Mithril', stock: 0, use: 'material', type: 'none', description: 'This is for Craft', img: './img/mythril.png'},
       {name: 'Bronze', stock: 0, use: 'material', type: 'none', description: 'This is for Craft', img: './img/bronze.png'},
       {name: 'Orichalcum', stock: 0, use: 'material', type: 'none', description: 'This is for Craft', img: './img/orichalcum.png'},
@@ -63,6 +64,9 @@ export class Items {
         break;
       case 'Leaf Ball' :
         url = './img/leafball.png';
+        break;
+      case 'Water Ball' :
+        url = './img/waterball.png';
         break;
     }
     return url;
@@ -123,6 +127,17 @@ export class Items {
           damage = Math.floor(hero.battleAtk * 2);
           monster.hp -= damage;
         }else if(monster.defE == 'fire'){
+          damage = Math.floor(hero.battleAtk * 0.2);
+        }else{
+          damage = Math.floor(hero.battleAtk * 0.8);
+        }
+        monster.hp -= damage;
+        break;
+      case 'Water Ball' :
+        if(monster.defE == 'fire'){
+          damage = Math.floor(hero.battleAtk * 2);
+          monster.hp -= damage;
+        }else if(monster.defE == 'leaf'){
           damage = Math.floor(hero.battleAtk * 0.2);
         }else{
           damage = Math.floor(hero.battleAtk * 0.8);
